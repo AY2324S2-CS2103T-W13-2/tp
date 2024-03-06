@@ -9,13 +9,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Ahmad Mashfi Ishtiaque
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/miffi.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://decadent.rest)]
+[[github](https://github.com/miffi)]
+[[portfolio](team/miffi.md)]
 
 * Role: Project Advisor
 
