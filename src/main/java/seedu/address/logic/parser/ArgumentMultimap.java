@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 /**
  * Stores mapping of prefixes to their respective arguments.
  * Each key may be associated with multiple argument values.
@@ -53,6 +53,10 @@ public class ArgumentMultimap {
             return new ArrayList<>();
         }
         return new ArrayList<>(argMultimap.get(prefix));
+    }
+
+    public Set<Prefix> getPrefixes() {
+        return argMultimap.keySet();
     }
 
     /**

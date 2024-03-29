@@ -21,11 +21,11 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
      * The available components in a {@link Person} class that can be searched through like a string.
      */
     public enum Component {
-        Name,
-        Address,
-        Email,
-        Tags,
-        Phone,
+        NAME,
+        ADDRESS,
+        EMAIL,
+        TAG,
+        PHONE,
     }
 
     /**
@@ -63,19 +63,19 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
     protected Stream<String> extract(Person person) {
         Stream<String> stream;
         switch (component) {
-        case Name:
+        case NAME:
             stream = Stream.of(person.getName().fullName);
             break;
-        case Email:
+        case EMAIL:
             stream = Stream.of(person.getEmail().value);
             break;
-        case Phone:
+        case PHONE:
             stream = Stream.of(person.getPhone().value);
             break;
-        case Tags:
+        case TAG:
             stream = person.getTags().stream().map(tag -> tag.tagName);
             break;
-        case Address:
+        case ADDRESS:
             stream = Stream.of(person.getAddress().value);
             break;
         default:
