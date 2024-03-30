@@ -21,6 +21,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FilterCommand parse(String args) throws ParseException {
+        assert(args != null);
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -41,6 +42,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
 
     private static ArrayList<ComponentPredicate> getAllPredicates(ArgumentMultimap argMultimap) throws ParseException {
+        assert(argMultimap != null);
         ArrayList<ComponentPredicate> components = new ArrayList<>();
         for (Prefix prefix: argMultimap.getPrefixes()) {
             if (prefix.getLength() == 0) {
@@ -67,6 +69,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
 
     private static ComponentPredicate convertPredicate(Prefix prefix, String arg) throws ParseException {
+        assert(prefix != null && arg != null);
         ComponentStringPredicate.Component component = prefix.extractComponent();
         Modifier modifier = prefix.getModifier();
         ComponentPredicate predicateResult;

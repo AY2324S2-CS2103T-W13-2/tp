@@ -9,7 +9,7 @@ public enum Modifier {
     IS(2),
     ISNT(4),
     WORD(4),
-    NOWORD(5),
+    NOWORD(6),
     STARTSWITH(10),
     ENDSWITH(8),
     NULL(-1);
