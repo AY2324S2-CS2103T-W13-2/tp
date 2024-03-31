@@ -30,15 +30,15 @@ class TagCommandParserTest {
     public void parse_validArgs_returnsTagCommand() {
         var index = INDEX_FIRST_PERSON;
         assertParseSuccess(parser, index.getOneBased() + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
-                new TagCommand(index, TAGS));
+                new TagCommand(List.of(index), TAGS));
 
         // order should not matter
         assertParseSuccess(parser, index.getOneBased() + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new TagCommand(index, TAGS));
+                new TagCommand(List.of(index), TAGS));
 
         // one tag
         assertParseSuccess(parser, index.getOneBased() + TAG_DESC_HUSBAND,
-                new TagCommand(index, List.of(TAG2)));
+                new TagCommand(List.of(index), List.of(TAG2)));
     }
 
     @Test

@@ -46,11 +46,12 @@ class TagCommandTest {
     @Test
     public void execute_indexOutOfBounds_failure() {
         Index index = Index.fromOneBased(999);
-        TagCommand command = new TagCommand(index, TAGS);
+        TagCommand command = new TagCommand(List.of(index), TAGS);
 
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         assertCommandFailure(command, model, new CommandHistory(), expectedMessage);
     }
+
     @Test
     public void showTags_singleTag_returnsSingleTag() {
         // Create a collection containing a single tag
@@ -63,30 +64,28 @@ class TagCommandTest {
         assertEquals("friend", result);
     }
 
-
-
     @Test
     public void equals() {
-        final TagCommand standardCommand = new TagCommand(INDEX_FIRST_PERSON, TAGS);
+        final TagCommand standardCommand = new TagCommand(List.of(INDEX_FIRST_PERSON), TAGS);
 
         // same object -> equal
         assertEquals(standardCommand, standardCommand);
 
         // same values -> equal
-        var commandWithSameValues = new TagCommand(INDEX_FIRST_PERSON, TAGS);
+        var commandWithSameValues = new TagCommand(List.of(INDEX_FIRST_PERSON), TAGS);
         assertEquals(standardCommand, commandWithSameValues);
 
         // tags in different order -> equal
         var tagsInDifferentOrder = List.of(TAG_FRIENDS, TAG_OWES_MONEY);
-        assertEquals(standardCommand, new TagCommand(INDEX_FIRST_PERSON, tagsInDifferentOrder));
+        assertEquals(standardCommand, new TagCommand(List.of(INDEX_FIRST_PERSON), tagsInDifferentOrder));
 
         // null -> not equal
         assertNotEquals(null, standardCommand);
 
         // different index -> not equal
-        assertNotEquals(standardCommand, new TagCommand(INDEX_SECOND_PERSON, TAGS));
+        assertNotEquals(standardCommand, new TagCommand(List.of(INDEX_SECOND_PERSON), TAGS));
 
         // different tags -> not equal
-        assertNotEquals(standardCommand, new TagCommand(INDEX_FIRST_PERSON, List.of(TAG_OWES_MONEY)));
+        assertNotEquals(standardCommand, new TagCommand(List.of(INDEX_FIRST_PERSON), List.of(TAG_OWES_MONEY)));
     }
 }

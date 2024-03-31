@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -33,6 +31,26 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a string containing multiple indices into a list of index objects.
+     * @throws ParseException if the input string is not in the correct format or contains invalid indices.
+     */
+    public static List<Index> parseIndices(String indices) throws ParseException {
+        String[] indexTokens = indices.trim().split("\\s+");
+        List<Index> parsedIndices = new ArrayList<>();
+
+        for (String indexToken : indexTokens) {
+            try {
+                Index index = ParserUtil.parseIndex(indexToken);
+                parsedIndices.add(index);
+            } catch (ParseException e) {
+                throw new ParseException("Invalid index: " + indexToken);
+            }
+        }
+
+        return parsedIndices;
     }
 
     /**

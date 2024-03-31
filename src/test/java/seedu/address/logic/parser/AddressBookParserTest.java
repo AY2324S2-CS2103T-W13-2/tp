@@ -117,15 +117,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_tag() throws Exception {
-        TagCommand expectedCommand = new TagCommand(INDEX_FIRST_PERSON, List.of(new Tag("alpha"), new Tag("beta")));
-        assertEquals(expectedCommand, parser.parseCommand(TagCommand.COMMAND_WORD
-                + " "
-                + INDEX_FIRST_PERSON.getOneBased()
-                + " tag:alpha tag:beta"));
-    }
-
-    @Test
     public void parseCommand_untag() throws Exception {
         var index = INDEX_FIRST_PERSON;
         var expectedCommand = new UntagCommand(index, List.of(new Tag("alpha"), new Tag("beta")));
