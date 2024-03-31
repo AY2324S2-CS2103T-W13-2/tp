@@ -63,7 +63,6 @@ public class TagCommand extends Command {
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        // Construct the command result message with the tag information
         String tagInfo = String.format(MESSAGE_TAG_CONTACT_SUCCESS,
                 showIndices(targetIndices), showTags(tags));
         CommandResult result = new CommandResult(tagInfo);
