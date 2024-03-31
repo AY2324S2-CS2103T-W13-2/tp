@@ -113,10 +113,6 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
                 return false;
             }
             Is otherPredicate = (Is) other;
-            var i = getInput();
-            var ii = otherPredicate.getInput();
-            var c = getComponent();
-            var cc = otherPredicate.getComponent();
             return getInput().equals(otherPredicate.getInput()) && getComponent().equals(otherPredicate.getComponent());
         }
     }
