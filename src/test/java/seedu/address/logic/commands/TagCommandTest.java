@@ -9,14 +9,19 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -59,10 +64,24 @@ class TagCommandTest {
     public void showTags_singleTag_returnsSingleTag() {
         Collection<Tag> tags = Arrays.asList(new Tag("friend"));
 
-        // Call the showTags method
         String result = TagCommand.showTags(tags);
 
         assertEquals("friend", result);
+    }
+
+    @Test
+    public void createCommandResult_tagInfoCorrectlyFormatted() {
+        List<Index> targetIndices = Arrays.asList(Index.fromOneBased(1), Index.fromOneBased(2));
+        Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("friends"), new Tag("colleagues")));
+
+        String expectedTagInfo = "Tagged Contacts: 1, 2 with colleagues, friends";
+        String actualTagInfo = String.format(TagCommand.MESSAGE_TAG_CONTACT_SUCCESS,
+                TagCommand.showIndices(targetIndices), TagCommand.showTags(tags));
+
+        assertEquals(expectedTagInfo, actualTagInfo);
+
+        CommandResult result = new CommandResult(actualTagInfo);
+
     }
 
     @Test
@@ -74,7 +93,6 @@ class TagCommandTest {
                 Index.fromOneBased(3)
         );
 
-        // Call the showIndices method
         String result = TagCommand.showIndices(indices);
 
         String expected = indices.stream()
@@ -82,6 +100,24 @@ class TagCommandTest {
                 .collect(Collectors.joining(", "));
 
         assertEquals(expected, result);
+    }
+
+    @Test
+    public void toString_validTagCommand_returnsExpectedString() {
+        List<Index> indices = List.of(Index.fromOneBased(1), Index.fromOneBased(2), Index.fromOneBased(3));
+        List<Tag> tags = List.of(new Tag("friends"), new Tag("family"), new Tag("colleagues"));
+        TagCommand tagCommand = new TagCommand(indices, tags);
+
+        List<Tag> mutableTags = new ArrayList<>(tags);
+
+        mutableTags.sort(Comparator.comparing(tag -> tag.tagName));
+
+        String expectedString = new ToStringBuilder(tagCommand)
+                .add("targetIndices", indices)
+                .add("tags", mutableTags)
+                .toString();
+
+        assertEquals(expectedString, tagCommand.toString());
     }
 
     @Test
