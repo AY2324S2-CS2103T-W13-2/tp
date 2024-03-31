@@ -19,31 +19,30 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Tags a contact identified using its displayed index in the address book.
+ * Tags contacts identified using their displayed indices in the address book.
  */
 public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Tags the contact identified by the index number"
+            + ": Tags the contacts identified by the index numbers"
             + " used in the displayed contact list with the specified tag.\n"
-            + "Parameters: INDEX (must be a positive integer) tag: TAG\n"
-            + "Example: " + COMMAND_WORD + " 1 tag: friends";
+            + "Parameters: INDEX1 INDEX2... tag: TAG\n"
+            + "Example: " + COMMAND_WORD + " 1 2 3 tag: friends";
 
-    public static final String MESSAGE_TAG_CONTACT_SUCCESS = "Tagged Contact: %1$s with %2$s";
+    public static final String MESSAGE_TAG_CONTACT_SUCCESS = "Tagged Contacts: %1$s with %2$s";
 
-    private final Index targetIndex;
+    private final List<Index> targetIndices;
     private final Set<Tag> tags;
 
     /**
-     * Creates a command to add a {@code tag} to the person at {@code index}.
+     * Creates a command to add a {@code tag} to the persons at {@code indices}.
      */
-    public TagCommand(Index index, Collection<Tag> tags) {
-        this.targetIndex = index;
+    public TagCommand(List<Index> indices, Collection<Tag> tags) {
+        this.targetIndices = indices;
         this.tags = new HashSet<>(tags);
     }
-
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
@@ -52,19 +51,20 @@ public class TagCommand extends Command {
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        for (Index targetIndex : targetIndices) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+
+            Person personToTag = lastShownList.get(targetIndex.getZeroBased());
+            Person taggedPerson = addTag(personToTag);
+            model.setPerson(personToTag, taggedPerson);
         }
 
-        Person personToTag = lastShownList.get(targetIndex.getZeroBased());
-
-        Person taggedPerson = addTag(personToTag);
-        model.setPerson(personToTag, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        // Construct the command result message with the tag information
         String tagInfo = String.format(MESSAGE_TAG_CONTACT_SUCCESS,
-                Messages.format(taggedPerson), showTags(tags));
+                showIndices(targetIndices), showTags(tags));
         CommandResult result = new CommandResult(tagInfo);
 
         // Add the executed command to the command history
@@ -74,16 +74,20 @@ public class TagCommand extends Command {
         return result;
     }
 
+    static String showIndices(List<Index> indices) {
+        return indices.stream()
+                .map(index -> String.valueOf(index.getOneBased()))
+                .collect(Collectors.joining(", "));
+    }
 
     static String showTags(Collection<Tag> tags) {
-        return tags.stream().map((tag) -> tag.tagName)
+        return tags.stream().map(tag -> tag.tagName)
                 .sorted() // making the output order deterministic
                 .collect(Collectors.joining(", "));
     }
 
     private Person addTag(Person personToTag) {
-        HashSet<Tag> personTags = new HashSet<>(personToTag.getTags());
-
+        Set<Tag> personTags = new HashSet<>(personToTag.getTags());
         personTags.addAll(tags);
 
         return new Person(
@@ -105,15 +109,15 @@ public class TagCommand extends Command {
         }
 
         TagCommand otherTagCommand = (TagCommand) other;
-        return targetIndex.equals(otherTagCommand.targetIndex)
+        return targetIndices.equals(otherTagCommand.targetIndices)
                 && tags.equals(otherTagCommand.tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .add("tag", tags)
+                .add("targetIndices", targetIndices)
+                .add("tags", tags)
                 .toString();
     }
 }
