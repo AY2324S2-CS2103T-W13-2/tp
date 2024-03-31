@@ -106,16 +106,16 @@ The message "Empty list" is shown when there is nothing added.
 
 ### Deleting a person : `delete`
 
-Deletes the specified contact from OH.
+Deletes the specified contact(s) from OH.
 
-Format: `delete <id>`
+Format: `delete <id> <id>...`
 
-* Deletes the person at the specified `<id>`.
+* Deletes the person at the specified `<id> ...`.
 * The id refers to the index number shown in the contact list.
 * The id **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `delete 2` deletes the 2nd person of the contact list from OH.
+* `delete 2 3` deletes the 2nd and 3rd person of the contact list from OH.
 
 Output:
 The message "Contact `name` has been deleted. Name: `name`, Phone: `phone number`, Email: `email`, Address: `address`.” will be shown.

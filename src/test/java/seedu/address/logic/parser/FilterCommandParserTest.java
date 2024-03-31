@@ -169,5 +169,24 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, "filter name.is: Alice email.has: james phone.endswith: 678 "
                 + "address.word: india tag.isnt:friends" , expectedFilterCommand);
     }
+    @Test
+    public void parse_invalidComponent_returnErrorMessage() {
+        assertParseFailure(parser, "filter nam",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "filter ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyComponentInput_returnErrorMessage() {
+        assertParseFailure(parser, "filter name: ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidModifier_returnErrorMessage() {
+        assertParseFailure(parser, "filter name.doesnotinclude: ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    }
 
 }

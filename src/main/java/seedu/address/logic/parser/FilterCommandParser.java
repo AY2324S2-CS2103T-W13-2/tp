@@ -55,6 +55,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             }
             components.addAll(componentPredicates);
         }
+        if (components.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
         return components;
     }
 
@@ -70,6 +74,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
     private static ComponentPredicate convertPredicate(Prefix prefix, String arg) throws ParseException {
         assert(prefix != null && arg != null);
+        String trimmedArgs = arg.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
         ComponentStringPredicate.Component component = prefix.extractComponent();
         Modifier modifier = prefix.getModifier();
         ComponentPredicate predicateResult;
