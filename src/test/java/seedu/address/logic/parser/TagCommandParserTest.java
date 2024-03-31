@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 
 class TagCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
@@ -23,22 +24,22 @@ class TagCommandParserTest {
     private static final Tag TAG2 = new Tag("husband");
 
     private static final Collection<Tag> TAGS = List.of(TAG1, TAG2);
-
+    private static final Department DEPARTMENT = new Department("Accounting");
     private final TagCommandParser parser = new TagCommandParser();
 
     @Test
     public void parse_validArgs_returnsTagCommand() {
         var index = INDEX_FIRST_PERSON;
         assertParseSuccess(parser, index.getOneBased() + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
-                new TagCommand(index, TAGS));
+                new TagCommand(index, TAGS, DEPARTMENT));
 
         // order should not matter
         assertParseSuccess(parser, index.getOneBased() + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new TagCommand(index, TAGS));
+                new TagCommand(index, TAGS, DEPARTMENT));
 
         // one tag
         assertParseSuccess(parser, index.getOneBased() + TAG_DESC_HUSBAND,
-                new TagCommand(index, List.of(TAG2)));
+                new TagCommand(index, List.of(TAG2), DEPARTMENT));
     }
 
     @Test

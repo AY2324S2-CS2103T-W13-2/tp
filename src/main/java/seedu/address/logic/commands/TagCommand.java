@@ -3,19 +3,18 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 
 /**
  * Tags a contact identified using its displayed index in the address book.
@@ -27,21 +26,25 @@ public class TagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Tags the contact identified by the index number"
             + " used in the displayed contact list with the specified tag.\n"
-            + "Parameters: INDEX (must be a positive integer) t/ TAG\n"
-            + "Example: " + COMMAND_WORD + " 1 t/ friends";
+            + "Parameters: INDEX (must be a positive integer) tag:TAG department:DEPARTMENT\n"
+            + "Example: " + COMMAND_WORD + " 1 tag:friends department:finance";
 
     public static final String MESSAGE_TAG_CONTACT_SUCCESS = "Tagged Contact: %1$s with %2$s";
 
     private final Index targetIndex;
     private final Set<Tag> tags;
+    private final Department department;
+
 
     /**
      * Creates a command to add a {@code tag} to the person at {@code index}.
      */
-    public TagCommand(Index index, Collection<Tag> tags) {
+    public TagCommand(Index index, Collection<Tag> tags, Department department) {
         this.targetIndex = index;
         this.tags = new HashSet<>(tags);
+        this.department = department;
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -74,12 +77,17 @@ public class TagCommand extends Command {
 
         personTags.addAll(tags);
 
+        Department dep = department;
+
+        if(Objects.isNull(dep)){ dep = personToTag.getDepartment(); }
+
         return new Person(
                 personToTag.getName(),
                 personToTag.getPhone(),
                 personToTag.getEmail(),
                 personToTag.getAddress(),
-                personTags);
+                personTags,
+                dep);
     }
 
     @Override
@@ -102,6 +110,7 @@ public class TagCommand extends Command {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
                 .add("tag", tags)
+                .add("department", department)
                 .toString();
     }
 }

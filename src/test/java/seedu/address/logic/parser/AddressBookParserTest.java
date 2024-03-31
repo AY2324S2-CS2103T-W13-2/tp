@@ -28,6 +28,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -93,7 +94,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_tag() throws Exception {
-        TagCommand expectedCommand = new TagCommand(INDEX_FIRST_PERSON, List.of(new Tag("alpha"), new Tag("beta")));
+        TagCommand expectedCommand = new TagCommand(INDEX_FIRST_PERSON, List.of(new Tag("alpha"),
+                new Tag("beta")), new Department("IT"));
         assertEquals(expectedCommand, parser.parseCommand(TagCommand.COMMAND_WORD
                 + " "
                 + INDEX_FIRST_PERSON.getOneBased()
@@ -103,7 +105,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_untag() throws Exception {
         var index = INDEX_FIRST_PERSON;
-        var expectedCommand = new UntagCommand(index, List.of(new Tag("alpha"), new Tag("beta")));
+        var expectedCommand = new UntagCommand(index, List.of(new Tag("alpha"), new Tag("beta")), new Department(""));
         assertEquals(expectedCommand, parser.parseCommand(UntagCommand.COMMAND_WORD
                 + " "
                 + INDEX_FIRST_PERSON.getOneBased()

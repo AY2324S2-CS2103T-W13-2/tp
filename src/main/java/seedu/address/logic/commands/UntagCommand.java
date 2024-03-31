@@ -1,18 +1,24 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 
 /**
  * Deletes a tag from a person with its displayed index.
@@ -29,13 +35,15 @@ public class UntagCommand extends Command {
 
     private final Index index;
     private final Set<Tag> tags;
+    private final Department department;
 
     /**
      * Creates a command to delete a {@code tag} from the person at {@code index}.
      */
-    public UntagCommand(Index index, Collection<Tag> tags) {
+    public UntagCommand(Index index, Collection<Tag> tags, Department department) {
         this.index = index;
         this.tags = new HashSet<>(tags);
+        this.department = department;
     }
 
     @Override
@@ -63,12 +71,19 @@ public class UntagCommand extends Command {
         validateAllTagsExist(personToUntag, personTags);
         personTags.removeAll(tags);
 
+        var dep = department;
+
+        if(!Objects.isNull(department)){
+            dep = null;
+        }
+
         return new Person(
                 personToUntag.getName(),
                 personToUntag.getPhone(),
                 personToUntag.getEmail(),
                 personToUntag.getAddress(),
-                personTags);
+                personTags,
+                dep);
     }
 
     private void validateAllTagsExist(Person personToUntag, HashSet<Tag> personTags) throws CommandException {

@@ -55,5 +55,9 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        // tags.getChildren().add(new Label(person.getDepartment().tagName));
+        Label departmentLabel = new Label(person.getDepartment().tagName);
+        departmentLabel.setStyle("-fx-text-fill: red;"); // Replace "red" with your desired color
+        tags.getChildren().add(departmentLabel);
     }
 }
