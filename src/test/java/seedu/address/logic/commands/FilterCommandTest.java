@@ -34,7 +34,7 @@ public class FilterCommandTest {
     public void execute_missingKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         ArrayList<ComponentPredicate> predicate = new ArrayList<>(List.of(
-                new ComponentStringPredicate.Word("Alcia", ComponentStringPredicate.Component.Name)));
+                new ComponentStringPredicate.Word("Alcia", ComponentStringPredicate.Component.NAME)));
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(val -> predicate.stream().anyMatch(pred -> pred.test(val)));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -45,7 +45,7 @@ public class FilterCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         ArrayList<ComponentPredicate> predicate = new ArrayList<>(List.of(
-                new ComponentStringPredicate.Word("Kurz Elle Kunz", ComponentStringPredicate.Component.Name)));
+                new ComponentStringPredicate.Word("Kurz Elle Kunz", ComponentStringPredicate.Component.NAME)));
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(val -> predicate.stream().anyMatch(pred -> pred.test(val)));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -55,7 +55,7 @@ public class FilterCommandTest {
     @Test
     public void toStringMethod() {
         ArrayList<ComponentPredicate> predicate = new ArrayList<>(List.of(
-                new ComponentStringPredicate.Is("hello", ComponentStringPredicate.Component.Name)));
+                new ComponentStringPredicate.Is("hello", ComponentStringPredicate.Component.NAME)));
         FilterCommand filterCommand = new FilterCommand(predicate);
         String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, filterCommand.toString());

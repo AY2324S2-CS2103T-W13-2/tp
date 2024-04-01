@@ -21,11 +21,11 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
      * The available components in a {@link Person} class that can be searched through like a string.
      */
     public enum Component {
-        Name,
-        Address,
-        Email,
-        Tags,
-        Phone,
+        NAME,
+        ADDRESS,
+        EMAIL,
+        TAG,
+        PHONE,
     }
 
     /**
@@ -46,6 +46,10 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
         return input;
     }
 
+    protected Component getComponent() {
+        return component;
+    }
+
     protected Pattern makeWordsPattern() {
         String alternatives = Arrays.stream(input.split(" "))
                 .map(Pattern::quote)
@@ -63,19 +67,19 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
     protected Stream<String> extract(Person person) {
         Stream<String> stream;
         switch (component) {
-        case Name:
+        case NAME:
             stream = Stream.of(person.getName().fullName);
             break;
-        case Email:
+        case EMAIL:
             stream = Stream.of(person.getEmail().value);
             break;
-        case Phone:
+        case PHONE:
             stream = Stream.of(person.getPhone().value);
             break;
-        case Tags:
+        case TAG:
             stream = person.getTags().stream().map(tag -> tag.tagName);
             break;
-        case Address:
+        case ADDRESS:
             stream = Stream.of(person.getAddress().value);
             break;
         default:
@@ -97,6 +101,20 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
             String input = getInput();
             return extract(person).anyMatch(str -> str.equals(input));
         }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof ComponentStringPredicate)) {
+                return false;
+            }
+            Is otherPredicate = (Is) other;
+            return getInput().equals(otherPredicate.getInput()) && getComponent().equals(otherPredicate.getComponent());
+        }
     }
 
     /**
@@ -111,6 +129,20 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
         public boolean test(Person person) {
             String input = getInput();
             return extract(person).anyMatch(str -> !str.equals(input));
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof ComponentStringPredicate)) {
+                return false;
+            }
+            Isnt otherPredicate = (Isnt) other;
+            return getInput().equals(otherPredicate.getInput()) && getComponent().equals(otherPredicate.getComponent());
         }
     }
 
@@ -128,6 +160,19 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
             String input = getInput();
             return extract(person).anyMatch(str -> str.contains(input));
         }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            // instanceof handles nulls
+            if (!(other instanceof ComponentStringPredicate)) {
+                return false;
+            }
+            Has otherPredicate = (Has) other;
+            return getInput().equals(otherPredicate.getInput()) && getComponent().equals(otherPredicate.getComponent());
+        }
     }
 
 
@@ -144,6 +189,19 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
             String input = getInput();
             return extract(person).anyMatch(str -> !str.contains(input));
         }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            // instanceof handles nulls
+            if (!(other instanceof ComponentStringPredicate)) {
+                return false;
+            }
+            Hasnt otherPredicate = (Hasnt) other;
+            return getInput().equals(otherPredicate.getInput()) && getComponent().equals(otherPredicate.getComponent());
+        }
     }
 
     /**
@@ -159,6 +217,19 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
             String input = getInput();
             return extract(person).anyMatch(str -> str.startsWith(input));
         }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            // instanceof handles nulls
+            if (!(other instanceof ComponentStringPredicate)) {
+                return false;
+            }
+            StartsWith otherPredicate = (StartsWith) other;
+            return getInput().equals(otherPredicate.getInput()) && getComponent().equals(otherPredicate.getComponent());
+        }
     }
 
     /**
@@ -173,6 +244,19 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
         public boolean test(Person person) {
             String input = getInput();
             return extract(person).anyMatch(str -> str.endsWith(input));
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            // instanceof handles nulls
+            if (!(other instanceof ComponentStringPredicate)) {
+                return false;
+            }
+            EndsWith otherPredicate = (EndsWith) other;
+            return getInput().equals(otherPredicate.getInput()) && getComponent().equals(otherPredicate.getComponent());
         }
     }
 
@@ -190,6 +274,19 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
             var matcher = makeWordsPattern().asPredicate();
             return extract(person).anyMatch(matcher);
         }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            // instanceof handles nulls
+            if (!(other instanceof ComponentStringPredicate)) {
+                return false;
+            }
+            Word otherPredicate = (Word) other;
+            return getInput().equals(otherPredicate.getInput()) && getComponent().equals(otherPredicate.getComponent());
+        }
     }
 
     /**
@@ -205,6 +302,19 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
         public boolean test(Person person) {
             var matcher = makeWordsPattern().asPredicate();
             return extract(person).anyMatch(str -> !matcher.test(str));
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            // instanceof handles nulls
+            if (!(other instanceof ComponentStringPredicate)) {
+                return false;
+            }
+            NoWord otherPredicate = (NoWord) other;
+            return getInput().equals(otherPredicate.getInput()) && getComponent().equals(otherPredicate.getComponent());
         }
     }
 }

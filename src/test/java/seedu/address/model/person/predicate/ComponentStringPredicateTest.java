@@ -29,7 +29,7 @@ import seedu.address.model.person.predicate.ComponentStringPredicate.Word;
 import seedu.address.model.tag.Tag;
 
 class ComponentStringPredicateTest {
-    private static final Component STUBBED_COMPONENT = Component.Address;
+    private static final Component STUBBED_COMPONENT = Component.ADDRESS;
 
     /**
      * A Person stub that is used to check ComponentStringPredicate's general
@@ -89,14 +89,14 @@ class ComponentStringPredicateTest {
 
     @Test
     void getInput_normalInput_success() {
-        var predicate = new Is("wow", Component.Name);
+        var predicate = new Is("wow", Component.NAME);
         assertEquals(predicate.getInput(), "wow");
     }
 
     @Test
     void constructor_emptyInput_assertionErrorThrown() {
-        assertThrows(AssertionError.class, () -> new Is("  ", Component.Name));
-        assertThrows(AssertionError.class, () -> new Is("", Component.Name));
+        assertThrows(AssertionError.class, () -> new Is("  ", Component.NAME));
+        assertThrows(AssertionError.class, () -> new Is("", Component.NAME));
     }
 
 
@@ -110,11 +110,11 @@ class ComponentStringPredicateTest {
         var testPerson = new Person(new Name(name), new Phone(phone), new Email(email),
                 new Address(address), new HashSet<>(List.of(new Tag(tag))));
 
-        assertTrue(new Is(name, Component.Name).test(testPerson));
-        assertTrue(new Is(phone, Component.Phone).test(testPerson));
-        assertTrue(new Is(email, Component.Email).test(testPerson));
-        assertTrue(new Is(address, Component.Address).test(testPerson));
-        assertTrue(new Is(tag, Component.Tags).test(testPerson));
+        assertTrue(new Is(name, Component.NAME).test(testPerson));
+        assertTrue(new Is(phone, Component.PHONE).test(testPerson));
+        assertTrue(new Is(email, Component.EMAIL).test(testPerson));
+        assertTrue(new Is(address, Component.ADDRESS).test(testPerson));
+        assertTrue(new Is(tag, Component.TAG).test(testPerson));
     }
 
     @Nested
