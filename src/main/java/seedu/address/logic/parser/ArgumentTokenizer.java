@@ -43,7 +43,7 @@ public class ArgumentTokenizer {
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
     public static ArgumentMultimap filterTokenize(String argsString) {
-        List<PrefixPosition> positionsAndModifier = findAllPrefixPositionsAndModifier(argsString);
+        List<PrefixPosition> positionsAndModifier = findAllPrefixAndModifierPositions(argsString);
         return extractFilterArguments(argsString, positionsAndModifier);
     }
 
@@ -76,14 +76,14 @@ public class ArgumentTokenizer {
         return positions;
     }
 
-    private static List<PrefixPosition> findAllPrefixPositionsAndModifier(String argsString) {
+    private static List<PrefixPosition> findAllPrefixAndModifierPositions(String argsString) {
         Prefix[] prefixes = {PREFIX_NAME, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_EMAIL, PREFIX_PHONE};
         return Arrays.stream(prefixes)
-                .flatMap(prefix -> findPrefixPositionsAndModifier(argsString, prefix).stream())
+                .flatMap(prefix -> findPrefixAndModifierPositions(argsString, prefix).stream())
                 .collect(Collectors.toList());
     }
 
-    private static List<PrefixPosition> findPrefixPositionsAndModifier(String argsString, Prefix prefix) {
+    private static List<PrefixPosition> findPrefixAndModifierPositions(String argsString, Prefix prefix) {
         List<PrefixPosition> positions = new ArrayList<>();
         String keyword = prefix.getPrefix().substring(0, prefix.getPrefix().length() - 1);
         int prefixPosition = findFilterPrefixPosition(argsString, keyword, 0);

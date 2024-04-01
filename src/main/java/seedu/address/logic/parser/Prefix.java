@@ -27,7 +27,6 @@ public class Prefix {
      * @param prefix the input prefix
      * @param modifier the input modifier
      */
-
     public Prefix(String prefix, Modifier modifier) {
         this.prefix = prefix;
         this.modifier = modifier;

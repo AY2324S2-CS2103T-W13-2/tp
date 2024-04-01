@@ -14,6 +14,7 @@ public enum Modifier {
     ENDSWITH(8),
     NULL(-1);
 
+    //length of the modifier string
     private final int length;
 
     Modifier(int length) {
