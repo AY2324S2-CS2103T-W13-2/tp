@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.List;
+
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -20,6 +22,7 @@ import seedu.address.model.tag.department.Department;
  * Parses input arguments and creates a new TagCommand object
  */
 public class TagCommandParser implements Parser<TagCommand> {
+
     /**
      * Parses the given {@code String} of arguments in the context of the TagCommand
      * and returns an TagCommand object for execution.
@@ -37,8 +40,8 @@ public class TagCommandParser implements Parser<TagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        List<Index> indices = ParserUtil.parseIndices(argMultimap.getPreamble());
 
-        return new TagCommand(index, tags, Optional.ofNullable(department));
+        return new TagCommand(indices, tags, Optional.ofNullable(department));
     }
 }
