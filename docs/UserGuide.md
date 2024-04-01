@@ -14,7 +14,7 @@ OfficeHarbor (OH) is a **desktop app for managing the contacts of a tech firm's 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `officeharbor.jar` from [here](https://github.com/AY2324S2-CS2103T-W13-2/tp/releases).
+2. Download the latest `officeharbor.jar` from [here](https://github.com/AY2324S2-CS2103T-W13-2/tphone:releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your OH.
 
@@ -28,7 +28,7 @@ OfficeHarbor (OH) is a **desktop app for managing the contacts of a tech firm's 
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to OH.
+   * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01` : Adds a contact named `John Doe` to OH.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -47,10 +47,16 @@ OfficeHarbor (OH) is a **desktop app for managing the contacts of a tech firm's 
 **:information_source: Notes about the command format:**<br>
 
 * Words enclosed between diamond brackets `<>`, are the parameters to be supplied by the user.<br>
-  e.g. in `add n/<name>`, `<name>` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add name:<name>`, `<name>` is a parameter which can be used as `add name:John Doe`.
+
+* Space can be added between the prefix and the word.<br>
+  e.g. either `name: <name> phone: <phone number>` or `name:<name> phone:<phone number>` is acceptable.
+
+* In some commands like tag, `[tag/<tag>]...` means that you can have multiple optional prefixes at the end <br>
+  e.g. the command `tag 1 tag:friends tag:colleagues` would add 2 tags directly to the contact at index 1.
 
 * Parameters can be in any order for adding a contact.<br>
-  e.g. if the command specifies `n/<name> p/<phone number>`, `p/<phone number> n/<name>` is also acceptable.
+  e.g. if the command specifies `name:<name> phone:<phone number>`, `phone:<phone number> name:<name>` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -71,15 +77,15 @@ Format: `help`
 
 Adds a contact with the input details to OH.
 
-Format: `add n/<name> p/<phone number> e/<email address> a/<address>`
+Format: `add name:<name> phone:<phone number> email:<email address> address:<address>`
 
 <div markdown="span" class="alert alert-info">
 All components are necessary.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Virat Kohli p/98765432 e/virat@gmail.com a/Altamount Road, block 10, #05-02`
+* `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01`
+* `add name:Virat Kohli phone:98765432 email:virat@gmail.com address:Altamount Road, block 10, #05-02`
 
 Output:
 The message “A new contact `name` has been added to the list. Name: `<name>`, Phone: `<phone number>`, Email: `<email>`, Address: `<address>`.” will be shown. 
@@ -100,16 +106,16 @@ The message "Empty list" is shown when there is nothing added.
 
 ### Deleting a person : `delete`
 
-Deletes the specified contact from OH.
+Deletes the specified contact(s) from OH.
 
-Format: `delete <id>`
+Format: `delete <id> <id>...`
 
-* Deletes the person at the specified `<id>`.
+* Deletes the person at the specified `<id> ...`.
 * The id refers to the index number shown in the contact list.
 * The id **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `delete 2` deletes the 2nd person of the contact list from OH.
+* `delete 2 3` deletes the 2nd and 3rd person of the contact list from OH.
 
 Output:
 The message "Contact `name` has been deleted. Name: `name`, Phone: `phone number`, Email: `email`, Address: `address`.” will be shown.
@@ -130,14 +136,14 @@ The message "Address book has been cleared!" will be shown.
 
 Tags the specified contact with the input tag name.
 
-* Tags the person at the specified `<id>`.
-* The id refers to the index number shown in the displayed person list.
+* Tags the person(s) at the specified `<id> <id> ...`.
+* The id refers to the index number(s) shown in the displayed person list.
 * The id **must be a positive integer** 1, 2, 3, …​
 
-Format: `tag <id> | <tag name>`
+Format: `tag <id> tag:<tag> [tag:tag]...`
 
 Example:
-`tag 2 | friends`
+`tag 2 3 tag: friends`
 
 Output:
 The message "The following contact has been tagged with `<tag name>`: `contact info`.” will be shown, 
@@ -145,7 +151,7 @@ where contact info is all the information of the contact.
 
 ![tag](images/user-guide/tag_mock_output.png)
 
-### Deleting a tag : `delete-tag`
+### Deleting a tag : `untag`
 
 Deletes the specified tag from the specified contact
 
@@ -153,14 +159,84 @@ Deletes the specified tag from the specified contact
 * The id refers to the index number shown in the displayed person list.
 * The id **must be a positive integer** 1, 2, 3, …​
 
-Format: `delete-tag <id> | <tag name>`
+Format: `untag <id> tag:<tag> [tag:tag]...`
 
 Output:
-The message "The tag `<tag name>` has been removed from contact: `contact info`." will be shown,
+The message "The tag `<tag>` has been removed from contact: `contact info`." will be shown,
 where contact info is all the information of the contact. 
 The list entry of the user with <id> will not have the tag anymore.
 
 ![delete-tag](images/user-guide/delete-tag_mock_output.png)
+
+### Filtering contacts : filter
+
+Filters the contacts.
+
+Format: `filter <component>[.<modifier>]:<value> ...`
+
+`component` is one of `name`,`phone`,`email`, or `address` corresponding to the values in add:
+name, phone, email and address respectively.
+
+There can be duplicate components, if there are multiple components, the
+contacts that match any of the components are shown.
+
+In order to filter with values that must all match, the only way to do so right
+now is to run multiple sequential filter commands.
+
+`modifier` is to specify how the filtering should be done, it is optional and
+defaults to `has`. The components are
+- `has`: value has to match part of the component
+- `hasnt`: negation of has
+- `is`: value has to match the component exactly
+- `isnt`: negation of is
+- `word`: value has to match a distinct word in the component, a word is any
+sequence of letters and numbers surrounded by spaces
+- `noword`: negation of word
+- `none`: the component is empty
+- `any`: the component is not empty
+
+Example
+```
+filter address:queenstown
+> The default modifier is has, so this lists every contact with an address that
+> has queenstown in it.
+
+filter phone.is:12345678
+> Returns the contact with the phone number 12345678
+```
+
+### Undoing a command : `undo`
+
+Resets the state of OH to before the execution of the latest command.
+
+Format: `undo`
+
+Output:
+The message "Undo success!" will be shown. 
+The list entry of the user will return to the state before the latest command. 
+If no command has been run at all, an error message "No more commands to undo!" will be shown instead.
+
+Example of undoing a delete command.
+
+Contact after a delete command:
+![delete_operation](images/user-guide/delete_operation-undo-mock.png)
+
+Contact after the delete command is undone:
+![undo](images/user-guide/undo_mock_output.png)
+
+### Redoing a command : `redo`
+
+Resets the state of OH to before the latest undo command.
+
+Format: `redo`
+
+Output:
+The message "Redo success!" will be shown.
+The list entry of the user will return to the state before the latest undo command.
+If no undo command has been run at all, an error message "No more commands to redo!" will be shown instead.
+
+Example of redoing the previous undo command:
+![redo](images/user-guide/redo_mock_output.png)
 
 ### Exiting the program : `exit`
 
@@ -174,16 +250,12 @@ OfficeHarbor data are saved in the hard disk automatically after any command tha
 
 ### Editing the data file
 
-OfficeHarbor data are saved automatically as a JSON file `[JAR file location]/data/officeharbor.json`. Advanced users are welcome to update data directly by editing that data file.
+OfficeHarbor data are saved automatically as a JSON file `[JAR file location]/dataddress:officeharbor.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, OfficeHarbor will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Filtering tags `[coming in v1.3]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -202,12 +274,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                      |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**   | `list`                                                                                                                                                                |
-| **Help**   | `help`                                                                                                                                                                |
+| Action         | Format, Examples                                                                                                                                                                         |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add name:<name> phone:<phone number> email:<email address> address:<address>` <br> e.g., `add name:James Ho phone:22224444 email:jamesho@example.com address:123, Clementi Rd, 1234665` |
+| **Delete**     | `delete <id>`<br> e.g., `delete 3`                                                                                                                                                       |
+| **Clear**      | `clear`                                                                                                                                                                                  |
+| **Tag**        | `tag <id> tag:<tag> [tag:tag]...`  <br> e.g., `tag 2 tag:friends`                                                                                                                        |
+| **Delete Tag** | `untag <id> tag:<tag> [tag:tag]...` <br> e.g., `untag 2 tag:friends`                                                                                                                     |
+| **List**       | `list`                                                                                                                                                                                   |
+| **Undo**       | `undo`                                                                                                                                                                                   |
+| **Redo**       | `redo`                                                                                                                                                                                   |
+| **Help**       | `help`                                                                                                                                                                                   |
