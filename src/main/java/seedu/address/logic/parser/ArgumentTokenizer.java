@@ -1,9 +1,16 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
@@ -26,6 +33,18 @@ public class ArgumentTokenizer {
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
+    }
+
+    /**
+     * Tokenizes an arguments string of the filer command and returns an {@code ArgumentMultimap} object that maps
+     * prefixes to their respective argument values.
+     *
+     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * @return           ArgumentMultimap object that maps prefixes to their arguments
+     */
+    public static ArgumentMultimap filterTokenize(String argsString) {
+        List<PrefixPosition> positionsAndModifier = findAllPrefixAndModifierPositions(argsString);
+        return extractFilterArguments(argsString, positionsAndModifier);
     }
 
     /**
@@ -57,6 +76,39 @@ public class ArgumentTokenizer {
         return positions;
     }
 
+    private static List<PrefixPosition> findAllPrefixAndModifierPositions(String argsString) {
+        Prefix[] prefixes = {PREFIX_NAME, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_EMAIL, PREFIX_PHONE};
+        return Arrays.stream(prefixes)
+                .flatMap(prefix -> findPrefixAndModifierPositions(argsString, prefix).stream())
+                .collect(Collectors.toList());
+    }
+
+    private static List<PrefixPosition> findPrefixAndModifierPositions(String argsString, Prefix prefix) {
+        List<PrefixPosition> positions = new ArrayList<>();
+        String keyword = prefix.getPrefix().substring(0, prefix.getPrefix().length() - 1);
+        int prefixPosition = findFilterPrefixPosition(argsString, keyword, 0);
+        while (prefixPosition != -1) {
+            Prefix prefixWithModifier = getPrefixWithModifier(argsString, keyword, prefixPosition);
+            PrefixPosition extendedPrefix = new PrefixPosition(prefixWithModifier, prefixPosition);
+            positions.add(extendedPrefix);
+            prefixPosition = findFilterPrefixPosition(argsString, keyword, prefixPosition);
+        }
+
+        return positions;
+    }
+
+    private static Prefix getPrefixWithModifier(String argsString, String prefix, int fromIndex) {
+        Modifier modifier = determinePrefixModifier(argsString, prefix, fromIndex);
+        return new Prefix(prefix, modifier);
+    }
+
+    private static Modifier determinePrefixModifier(String argsString, String prefix, int fromIndex) {
+        int colonIndex = argsString.indexOf(":", fromIndex);
+        int addIndexForPoint = argsString.charAt(fromIndex + prefix.length()) == '.' ? 1 : 0;
+        String arg = argsString.substring(fromIndex + prefix.length() + addIndexForPoint, colonIndex);
+        return Modifier.getModifier(arg.trim());
+    }
+
     /**
      * Returns the index of the first occurrence of {@code prefix} in
      * {@code argsString} starting from index {@code fromIndex}. An occurrence
@@ -73,6 +125,16 @@ public class ArgumentTokenizer {
         int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
         return prefixIndex == -1 ? -1
                 : prefixIndex + 1; // +1 as offset for whitespace
+    }
+
+    private static int findFilterPrefixPosition(String argsString, String prefix, int fromIndex) {
+        int prefixIndexWithColon = argsString.indexOf(" " + prefix + ":", fromIndex);
+        int prefixIndexWithPoint = argsString.indexOf(" " + prefix + ".", fromIndex);
+        return prefixIndexWithColon != -1
+                ? prefixIndexWithColon + 1
+                : prefixIndexWithPoint != -1
+                ? prefixIndexWithPoint + 1
+                : -1;
     }
 
     /**
@@ -109,19 +171,71 @@ public class ArgumentTokenizer {
         return argMultimap;
     }
 
-    /**
-     * Returns the trimmed value of the argument in the arguments string specified by {@code currentPrefixPosition}.
-     * The end position of the value is determined by {@code nextPrefixPosition}.
-     */
     private static String extractArgumentValue(String argsString,
                                         PrefixPosition currentPrefixPosition,
                                         PrefixPosition nextPrefixPosition) {
         Prefix prefix = currentPrefixPosition.getPrefix();
 
-        int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
+        int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getLength();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
 
         return value.trim();
+    }
+
+    /**
+     * Takes in the argument string and the prefix positions and extract out a prefix to input value mapping for
+     * all the prefixes in the argument.
+     *
+     * @param argsString the input argument string.
+     * @param prefixPositions the list of positions of the prefix.
+     * @return prefix to input value mapping of the argument string and prefixes.
+     */
+    private static ArgumentMultimap extractFilterArguments(String argsString, List<PrefixPosition> prefixPositions) {
+
+        prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
+
+        PrefixPosition preambleMarker = new PrefixPosition(new Prefix(""), 0);
+        prefixPositions.add(0, preambleMarker);
+
+        PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());
+        prefixPositions.add(endPositionMarker);
+
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        for (int i = 0; i < prefixPositions.size() - 1; i++) {
+            Prefix argPrefix = prefixPositions.get(i).getPrefix();
+            String argValue = extractFilterArguments(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
+            argMultimap.put(argPrefix, argValue);
+        }
+
+        return argMultimap;
+    }
+
+    /**
+     * Extracts out the value that is going to be mapped to the input prefix at the input current prefix position,
+     * by calling substring on the input argument string all the way to the next prefix's position.
+     *
+     * @param argsString the input argument string where the value is.
+     * @param currentPrefixPosition the position of the target prefix.
+     * @param nextPrefixPosition the position of the next prefix.
+     * @return
+     */
+    private static String extractFilterArguments(String argsString,
+                                               PrefixPosition currentPrefixPosition,
+                                               PrefixPosition nextPrefixPosition) {
+
+        int valueStartPos = currentPrefixPosition.getStartPosition()
+                + actualPrefixLength(argsString, currentPrefixPosition);
+        String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
+
+        return value.trim();
+    }
+
+    private static int actualPrefixLength(String argsString, PrefixPosition prefix) {
+        int prefixLength = prefix.getPrefix().getPrefix().length();
+        if (argsString.charAt(prefix.getStartPosition() + prefixLength) == ':') {
+            return prefixLength + 1;
+        }
+        return prefix.getPrefix().getLength() + 1;
     }
 
     /**
