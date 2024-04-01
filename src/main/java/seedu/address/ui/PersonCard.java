@@ -55,10 +55,10 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        // tags.getChildren().add(new Label(person.getDepartment().tagName));
+
         if(person.getDepartment().isPresent() && !person.getDepartment().get().tagName.toUpperCase().equals("EMPTYDEP")) {
             Label departmentLabel = new Label(person.getDepartment().get().tagName);
-            departmentLabel.setStyle("-fx-text-fill: red;"); // Replace "red" with your desired color
+            departmentLabel.setStyle("-fx-text-fill: #b300ff; -fx-font-weight: bold; -fx-background-color: yellow;");
             tags.getChildren().add(departmentLabel);
         }
     }
