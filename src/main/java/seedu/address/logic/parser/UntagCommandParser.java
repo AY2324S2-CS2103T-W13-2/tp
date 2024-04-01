@@ -10,6 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.department.Department;
 
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Parses input arguments and creates an UntagCommand.
@@ -20,14 +21,21 @@ public class UntagCommandParser implements Parser<UntagCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_TAG, PREFIX_DEPARTMENT);
 
         var tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Department department = ParserUtil.parseDepartment(argMultimap.getValue(PREFIX_DEPARTMENT).get());
+
+        Optional<String> maybeDepartment = argMultimap.getValue(PREFIX_DEPARTMENT);
+        Optional<Department> department;
+        if (maybeDepartment.isPresent()){
+            department = Optional.of(ParserUtil.parseDepartment(maybeDepartment.get()));
+        } else {
+            department = Optional.empty();
+        }
 
         if (tags.isEmpty()) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
         }
 
-        if(department.tagName.isEmpty()){
+        if(department.isEmpty()){
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
         }

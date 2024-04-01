@@ -8,11 +8,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Department extends Tag {
 
     public Department(String departmentName) {
-        super(String.format("<b>%s</b>", departmentName.toUpperCase()));
+        super(String.format("%s", departmentName.toUpperCase()));
     }
 
     public String toString() {
-        return String.format("<b>[%s]</b>", super.tagName);
+        return String.format("[%s]", super.tagName);
     }
 
 }

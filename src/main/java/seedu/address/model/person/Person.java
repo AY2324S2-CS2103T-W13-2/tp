@@ -2,10 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -26,12 +23,12 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
-    private final Department department;
+    private final Optional<Department> department;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Department department) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Optional<Department> department) {
         requireAllNonNull(name, phone, email, address, tags, department);
         this.name = name;
         this.phone = phone;
@@ -70,7 +67,7 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
 
-    public Department getDepartment() {
+    public Optional<Department> getDepartment() {
         return department;
     }
     

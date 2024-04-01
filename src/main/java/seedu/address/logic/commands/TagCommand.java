@@ -33,13 +33,13 @@ public class TagCommand extends Command {
 
     private final Index targetIndex;
     private final Set<Tag> tags;
-    private final Department department;
+    private final Optional<Department> department;
 
 
     /**
      * Creates a command to add a {@code tag} to the person at {@code index}.
      */
-    public TagCommand(Index index, Collection<Tag> tags, Department department) {
+    public TagCommand(Index index, Collection<Tag> tags, Optional<Department> department) {
         this.targetIndex = index;
         this.tags = new HashSet<>(tags);
         this.department = department;
@@ -77,9 +77,9 @@ public class TagCommand extends Command {
 
         personTags.addAll(tags);
 
-        Department dep = department;
+        Optional<Department> dep = department;
 
-        if(Objects.isNull(dep)){ dep = personToTag.getDepartment(); }
+
 
         return new Person(
                 personToTag.getName(),

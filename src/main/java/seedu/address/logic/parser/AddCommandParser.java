@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -41,7 +42,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Department department = ParserUtil.parseDepartment(argMultimap.getValue(PREFIX_DEPARTMENT).get());
+        Optional<String> maybeDepartment = argMultimap.getValue(PREFIX_DEPARTMENT);
+        Optional<Department> department;
+        if (maybeDepartment.isPresent()){
+            department = Optional.of(ParserUtil.parseDepartment(maybeDepartment.get()));
+        } else {
+            department = Optional.empty();
+        }
+
 
         Person person = new Person(name, phone, email, address, tagList, department);
 

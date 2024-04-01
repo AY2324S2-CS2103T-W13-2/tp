@@ -1,9 +1,6 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.DeflaterOutputStream;
 
@@ -61,7 +58,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        department = source.getDepartment().tagName;
+        department = source.getDepartment().orElse(new Department("EmptyDep")).tagName;
     }
 
     /**
@@ -117,7 +114,7 @@ class JsonAdaptedPerson {
         }
         final Department modelDepartment = new Department(department);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelDepartment);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, Optional.of(modelDepartment));
     }
 
 }
