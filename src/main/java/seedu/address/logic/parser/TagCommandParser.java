@@ -31,14 +31,14 @@ public class TagCommandParser implements Parser<TagCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_DEPARTMENT);
 
         Collection<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Department department = ParserUtil.parseDepartment(argMultimap.getValue(PREFIX_DEPARTMENT).get());
+        Optional<Department> department = Optional.of(ParserUtil.parseDepartment(argMultimap.getValue(PREFIX_DEPARTMENT).get()));
 
-        if (tags.isEmpty()) {
+        if (tags.isEmpty() && department.get().tagName.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
-        return new TagCommand(index, tags, Optional.ofNullable(department));
+        return new TagCommand(index, tags, department);
     }
 }
