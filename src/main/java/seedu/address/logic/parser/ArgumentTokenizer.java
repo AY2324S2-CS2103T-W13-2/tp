@@ -182,6 +182,14 @@ public class ArgumentTokenizer {
         return value.trim();
     }
 
+    /**
+     * Takes in the argument string and the prefix positions and extract out a prefix to input value mapping for
+     * all the prefixes in the argument.
+     *
+     * @param argsString the input argument string.
+     * @param prefixPositions the list of positions of the prefix.
+     * @return prefix to input value mapping of the argument string and prefixes.
+     */
     private static ArgumentMultimap extractFilterArguments(String argsString, List<PrefixPosition> prefixPositions) {
 
         prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
@@ -202,6 +210,15 @@ public class ArgumentTokenizer {
         return argMultimap;
     }
 
+    /**
+     * Extracts out the value that is going to be mapped to the input prefix at the input current prefix position,
+     * by calling substring on the input argument string all the way to the next prefix's position.
+     *
+     * @param argsString the input argument string where the value is.
+     * @param currentPrefixPosition the position of the target prefix.
+     * @param nextPrefixPosition the position of the next prefix.
+     * @return
+     */
     private static String extractFilterArguments(String argsString,
                                                PrefixPosition currentPrefixPosition,
                                                PrefixPosition nextPrefixPosition) {
