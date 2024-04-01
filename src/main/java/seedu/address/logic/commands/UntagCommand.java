@@ -70,10 +70,10 @@ public class UntagCommand extends Command {
         validateAllTagsExist(personToUntag, personTags);
         personTags.removeAll(tags);
 
-        var dep = department;
+        Optional<Department> dep = department;
 
-        if(!Objects.isNull(department)){
-            dep = null;
+        if(!dep.get().tagName.isEmpty()){
+            dep = Optional.empty();
         }
 
         return new Person(
