@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
+import static java.util.Objects.requireNonNull;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Lists all email of contacts associated with the tag.
