@@ -22,7 +22,7 @@ public class MailCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsMailCommand() {
         // no leading and trailing whitespaces
         MailCommand expectedMailCommand =
                 new MailCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends")));
