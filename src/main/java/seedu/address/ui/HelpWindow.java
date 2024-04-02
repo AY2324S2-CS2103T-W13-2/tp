@@ -37,6 +37,15 @@ public class HelpWindow extends UiPart<Stage> {
         helpMessage.setText(HELP_MESSAGE);
     }
 
+    public HelpWindow(Stage root, String carryOver) {
+        super(FXML, root);
+        helpMessage.setText(HELP_MESSAGE + "\n\n\n" + carryOver);
+    }
+
+    public HelpWindow(String carryOver) {
+        this(new Stage(), carryOver);
+    }
+
     /**
      * Creates a new HelpWindow.
      */
