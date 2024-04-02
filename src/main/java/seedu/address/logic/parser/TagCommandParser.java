@@ -32,9 +32,10 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         Collection<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Optional<Department> department = Optional.of(ParserUtil.parseDepartment(argMultimap
-                .getValue(PREFIX_DEPARTMENT).get()));
+                .getValue(PREFIX_DEPARTMENT)
+                .orElse("EMPTYDEP")));
 
-        if (tags.isEmpty() && department.get().tagName.isEmpty()) {
+        if (tags.isEmpty() && (department.get().tagName.isEmpty() || department.get().tagName.equals("EMPTYDEP"))) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
