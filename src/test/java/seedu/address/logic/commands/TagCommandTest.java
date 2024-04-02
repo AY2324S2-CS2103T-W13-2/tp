@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 
 /**
  * Contains integration tests (interactions with the Model) and unit tests for TagCommand.
@@ -46,7 +48,7 @@ class TagCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new TagCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new TagCommand(null, null, null));
     }
 
 
@@ -54,7 +56,7 @@ class TagCommandTest {
     @Test
     public void execute_indexOutOfBounds_failure() {
         Index index = Index.fromOneBased(999);
-        TagCommand command = new TagCommand(List.of(index), TAGS);
+        TagCommand command = new TagCommand(List.of(index), TAGS, Optional.of(new Department("IT")));
 
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         assertCommandFailure(command, model, new CommandHistory(), expectedMessage);
@@ -106,7 +108,8 @@ class TagCommandTest {
     public void toString_validTagCommand_returnsExpectedString() {
         List<Index> indices = List.of(Index.fromOneBased(1), Index.fromOneBased(2), Index.fromOneBased(3));
         List<Tag> tags = List.of(new Tag("friends"), new Tag("family"), new Tag("colleagues"));
-        TagCommand tagCommand = new TagCommand(indices, tags);
+        Optional<Department> department = Optional.of(new Department("Accounting"));
+        TagCommand tagCommand = new TagCommand(indices, tags, department);
 
         List<Tag> mutableTags = new ArrayList<>(tags);
 
@@ -115,6 +118,7 @@ class TagCommandTest {
         String expectedString = new ToStringBuilder(tagCommand)
                 .add("targetIndices", indices)
                 .add("tags", mutableTags)
+                .add("department", department)
                 .toString();
 
         assertEquals(expectedString, tagCommand.toString());
@@ -141,24 +145,29 @@ class TagCommandTest {
 
     @Test
     public void equals() {
-        final TagCommand standardCommand = new TagCommand(List.of(INDEX_FIRST_PERSON), TAGS);
+        final TagCommand standardCommand = new TagCommand(List.of(INDEX_FIRST_PERSON), TAGS,
+                Optional.of(new Department("IT")));
 
         // same object -> equal
         assertEquals(standardCommand, standardCommand);
 
         // same values -> equal
-        var commandWithSameValues = new TagCommand(List.of(INDEX_FIRST_PERSON), TAGS);
+        var commandWithSameValues = new TagCommand(List.of(INDEX_FIRST_PERSON), TAGS,
+                Optional.of(new Department("IT")));
         assertEquals(standardCommand, commandWithSameValues);
 
         var tagsInDifferentOrder = List.of(TAG_FRIENDS, TAG_OWES_MONEY);
-        assertEquals(standardCommand, new TagCommand(List.of(INDEX_FIRST_PERSON), tagsInDifferentOrder));
+        assertEquals(standardCommand, new TagCommand(List.of(INDEX_FIRST_PERSON), tagsInDifferentOrder,
+                Optional.of(new Department("IT"))));
 
         // null -> not equal
         assertNotEquals(null, standardCommand);
 
-        assertNotEquals(standardCommand, new TagCommand(List.of(INDEX_SECOND_PERSON), TAGS));
+        assertNotEquals(standardCommand, new TagCommand(List.of(INDEX_SECOND_PERSON), TAGS,
+                Optional.of(new Department("IT"))));
 
         // different tags -> not equal
-        assertNotEquals(standardCommand, new TagCommand(List.of(INDEX_FIRST_PERSON), List.of(TAG_OWES_MONEY)));
+        assertNotEquals(standardCommand, new TagCommand(List.of(INDEX_FIRST_PERSON), List.of(TAG_OWES_MONEY),
+                Optional.of(new Department("IT"))));
     }
 }

@@ -2,7 +2,11 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.department.Department;
@@ -27,7 +31,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Optional<Department> department) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  Optional<Department> department) {
         requireAllNonNull(name, phone, email, address, tags, department);
         this.name = name;
         this.phone = phone;
@@ -61,15 +66,14 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Optional<Department> getDepartment() {
+        return department;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-
-    public Optional<Department> getDepartment() {
-        return department;
-    }
-    
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
             return true;

@@ -2,9 +2,9 @@ package seedu.address.model.tag.department;
 
 import seedu.address.model.tag.Tag;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
+/**
+ * Stores the department of a person in the addressbook. Has to be alphanumerical
+ */
 public class Department extends Tag {
 
     public Department(String departmentName) {

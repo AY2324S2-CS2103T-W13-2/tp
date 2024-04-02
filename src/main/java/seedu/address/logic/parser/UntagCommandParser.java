@@ -3,14 +3,13 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.department.Department;
-
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Parses input arguments and creates an UntagCommand.
@@ -24,7 +23,7 @@ public class UntagCommandParser implements Parser<UntagCommand> {
 
         Optional<String> maybeDepartment = argMultimap.getValue(PREFIX_DEPARTMENT);
         Optional<Department> department;
-        if (maybeDepartment.isPresent()){
+        if (maybeDepartment.isPresent()) {
             department = Optional.of(ParserUtil.parseDepartment(maybeDepartment.get()));
         } else {
             department = Optional.empty();

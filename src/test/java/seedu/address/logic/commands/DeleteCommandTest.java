@@ -119,10 +119,10 @@ public class DeleteCommandTest {
         List<Person> deletedPersons = new ArrayList<>();
         Person person1 = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
                 .withEmail("alice@example.com").withAddress("123, Jurong West Ave 6, #08-111")
-                .withTags("friends").build();
+                .withTags("friends").withDepartment("HR").build();
         Person person2 = new PersonBuilder().withName("Benson Meier").withPhone("98765432")
                 .withEmail("johnd@example.com").withAddress("311, Clementi Ave 2, #02-25")
-                .withTags("owesMoney", "friends").build();
+                .withTags("owesMoney", "friends").withDepartment("HR").build();
         deletedPersons.add(person1);
         deletedPersons.add(person2);
 
@@ -143,9 +143,12 @@ public class DeleteCommandTest {
                 + "Deleted Person: Alice Pauline\n"
                 + "Alice Pauline Phone: 94351253 Email: alice@example.com Address: 123, Jurong West Ave 6, #08-111"
                 + " Tags:"
-                + " [friends]\n" + "Deleted Person: Benson Meier\n"
+                + " [friends]"
+                + " Department:"
+                + " Optional[[HR]]\n"
+                + "Deleted Person: Benson Meier\n"
                 + "Benson Meier Phone: 98765432 Email: johnd@example.com Address: 311, Clementi Ave 2, #02-25 Tags:"
-                + " [owesMoney][friends]";
+                + " [owesMoney][friends] " + "Department: Optional[[HR]]";
 
         // Assert that the generated message matches the expected message
         assertEquals(expectedMessage, successMessage);

@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MailCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -120,22 +122,25 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_tag() throws Exception {
-        TagCommand expectedCommand = new TagCommand(INDEX_FIRST_PERSON, List.of(new Tag("alpha"),
-                new Tag("beta")), new Department("IT"));
+        TagCommand expectedCommand = new TagCommand(List.of(INDEX_FIRST_PERSON), List.of(new Tag("alpha"),
+                new Tag("beta")), Optional.of(new Department("IT")));
         assertEquals(expectedCommand, parser.parseCommand(TagCommand.COMMAND_WORD
                 + " "
                 + INDEX_FIRST_PERSON.getOneBased()
-                + " tag:alpha tag:beta"));
+                + " tag:alpha tag:beta "
+                + " department:IT"));
     }
 
     @Test
     public void parseCommand_untag() throws Exception {
         var index = INDEX_FIRST_PERSON;
-        var expectedCommand = new UntagCommand(index, List.of(new Tag("alpha"), new Tag("beta")), new Department(""));
+        var expectedCommand = new UntagCommand(index, List.of(new Tag("alpha"), new Tag("beta")),
+                Optional.of(new Department("Accounting")));
         assertEquals(expectedCommand, parser.parseCommand(UntagCommand.COMMAND_WORD
                 + " "
                 + INDEX_FIRST_PERSON.getOneBased()
-                + " tag:alpha tag:beta"));
+                + " tag:alpha tag:beta "
+                + " department:Accounting"));
     }
 
     @Test

@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,15 +32,15 @@ class TagCommandParserTest {
     public void parse_validArgs_returnsTagCommand() {
         var index = INDEX_FIRST_PERSON;
         assertParseSuccess(parser, index.getOneBased() + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
-                new TagCommand(List.of(index), TAGS));
+                new TagCommand(List.of(index), TAGS, Optional.of(new Department(""))));
 
         // order should not matter
         assertParseSuccess(parser, index.getOneBased() + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new TagCommand(List.of(index), TAGS));
+                new TagCommand(List.of(index), TAGS, Optional.of(new Department(""))));
 
         // one tag
         assertParseSuccess(parser, index.getOneBased() + TAG_DESC_HUSBAND,
-                new TagCommand(List.of(index), List.of(TAG2)));
+                new TagCommand(List.of(index), List.of(TAG2), Optional.of(new Department(""))));
     }
 
     @Test

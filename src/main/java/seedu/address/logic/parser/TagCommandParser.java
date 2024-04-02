@@ -5,14 +5,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
-import java.util.Optional;
 import java.util.List;
-
+import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.TagCommand;
-import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.department.Department;
@@ -34,7 +31,8 @@ public class TagCommandParser implements Parser<TagCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_DEPARTMENT);
 
         Collection<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Optional<Department> department = Optional.of(ParserUtil.parseDepartment(argMultimap.getValue(PREFIX_DEPARTMENT).get()));
+        Optional<Department> department = Optional.of(ParserUtil.parseDepartment(argMultimap
+                .getValue(PREFIX_DEPARTMENT).get()));
 
         if (tags.isEmpty() && department.get().tagName.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
