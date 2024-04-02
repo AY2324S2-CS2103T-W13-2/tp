@@ -24,6 +24,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MailCommand;
+import seedu.address.logic.commands.PhoneCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UntagCommand;
@@ -133,6 +134,14 @@ public class AddressBookParserTest {
         MailCommand expectedCommand = (MailCommand) parser.parseCommand(
                 MailCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new MailCommand(new TagContainsKeywordsPredicate(keywords)), expectedCommand);
+    }
+
+    @Test
+    public void parseCommand_phone() throws Exception {
+        List<String> keywords = List.of("friends", "owesMoney");
+        PhoneCommand expectedCommand = (PhoneCommand) parser.parseCommand(
+                PhoneCommand.COMMAND_WORD + " " + String.join(" ", keywords));
+        assertEquals(new PhoneCommand(new TagContainsKeywordsPredicate(keywords)), expectedCommand);
     }
 
     @Test
