@@ -145,10 +145,10 @@ public class DeleteCommandTest {
                 + " Tags:"
                 + " [friends]"
                 + " Department:"
-                + " Optional[[HR]]\n"
+                + " Optional[HR]\n"
                 + "Deleted Person: Benson Meier\n"
                 + "Benson Meier Phone: 98765432 Email: johnd@example.com Address: 311, Clementi Ave 2, #02-25 Tags:"
-                + " [owesMoney][friends] " + "Department: Optional[[HR]]";
+                + " [owesMoney][friends] " + "Department: Optional[HR]";
 
         // Assert that the generated message matches the expected message
         assertEquals(expectedMessage, successMessage);
