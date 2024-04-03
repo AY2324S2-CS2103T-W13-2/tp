@@ -12,7 +12,7 @@ public class Department extends Tag {
     }
 
     public String toString() {
-        return String.format("[%s]", super.tagName);
+        return String.format("%s", super.tagName);
     }
 
 }
