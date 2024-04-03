@@ -57,6 +57,23 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseIndices_invalidIndexToken_throwsParseException() {
+        // Define a string containing an invalid index token
+        String invalidIndicesString = "1 a 3";
+
+        // Call the parseIndices method inside a lambda function to handle the exception
+        assertThrows(ParseException.class, () -> {
+            try {
+                ParserUtil.parseIndices(invalidIndicesString);
+            } catch (ParseException e) {
+                // Verify that the exception message is correct
+                assertEquals("Invalid index: a", e.getMessage());
+                throw e;
+            }
+        });
+    }
+
+    @Test
     public void parseName_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
     }

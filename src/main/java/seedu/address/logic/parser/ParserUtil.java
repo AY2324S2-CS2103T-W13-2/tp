@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -14,6 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -33,6 +36,26 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a string containing multiple indices into a list of index objects.
+     * @throws ParseException if the input string is not in the correct format or contains invalid indices.
+     */
+    public static List<Index> parseIndices(String indices) throws ParseException {
+        String[] indexTokens = indices.trim().split("\\s+");
+        List<Index> parsedIndices = new ArrayList<>();
+
+        for (String indexToken : indexTokens) {
+            try {
+                Index index = ParserUtil.parseIndex(indexToken);
+                parsedIndices.add(index);
+            } catch (ParseException e) {
+                throw new ParseException("Invalid index: " + indexToken);
+            }
+        }
+
+        return parsedIndices;
     }
 
     /**
@@ -120,5 +143,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String department} into a {@code Department}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code department} is invalid.
+     */
+    public static Department parseDepartment(String department) throws ParseException {
+        requireNonNull(department);
+        String trimmedDepartment = department.trim();
+        if (!Department.isValidTagName(trimmedDepartment)) {
+            throw new ParseException(Department.MESSAGE_CONSTRAINTS);
+        }
+        return new Department(trimmedDepartment);
     }
 }

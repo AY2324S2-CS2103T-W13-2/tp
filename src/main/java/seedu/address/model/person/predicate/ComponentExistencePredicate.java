@@ -12,7 +12,8 @@ public abstract class ComponentExistencePredicate implements ComponentPredicate 
      * The type of nullable components in {@link Person}
      */
     public enum Component {
-        Tags
+        Tags,
+        Department
     }
 
     public ComponentExistencePredicate(Component component) {
@@ -23,6 +24,8 @@ public abstract class ComponentExistencePredicate implements ComponentPredicate 
         switch (component) {
         case Tags:
             return !person.getTags().isEmpty();
+        case Department:
+            return person.getDepartment().isPresent();
         default:
             throw new IllegalStateException("Unexpected value: " + component);
         }

@@ -136,14 +136,14 @@ The message "Address book has been cleared!" will be shown.
 
 Tags the specified contact with the input tag name.
 
-* Tags the person at the specified `<id>`.
-* The id refers to the index number shown in the displayed person list.
+* Tags the person(s) at the specified `<id> <id> ...`.
+* The id refers to the index number(s) shown in the displayed person list.
 * The id **must be a positive integer** 1, 2, 3, …​
 
 Format: `tag <id> tag:<tag> [tag:tag]...`
 
 Example:
-`tag 2 friends`
+`tag 2 3 tag: friends`
 
 Output:
 The message "The following contact has been tagged with `<tag name>`: `contact info`.” will be shown, 

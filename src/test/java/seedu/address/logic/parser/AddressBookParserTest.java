@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +25,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MailCommand;
+import seedu.address.logic.commands.PhoneCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -32,6 +34,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -120,21 +123,25 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_tag() throws Exception {
-        TagCommand expectedCommand = new TagCommand(INDEX_FIRST_PERSON, List.of(new Tag("alpha"), new Tag("beta")));
+        TagCommand expectedCommand = new TagCommand(List.of(INDEX_FIRST_PERSON), List.of(new Tag("alpha"),
+                new Tag("beta")), Optional.of(new Department("IT")));
         assertEquals(expectedCommand, parser.parseCommand(TagCommand.COMMAND_WORD
                 + " "
                 + INDEX_FIRST_PERSON.getOneBased()
-                + " tag:alpha tag:beta"));
+                + " tag:alpha tag:beta "
+                + " department:IT"));
     }
 
     @Test
     public void parseCommand_untag() throws Exception {
         var index = INDEX_FIRST_PERSON;
-        var expectedCommand = new UntagCommand(index, List.of(new Tag("alpha"), new Tag("beta")));
+        var expectedCommand = new UntagCommand(index, List.of(new Tag("alpha"), new Tag("beta")),
+                Optional.of(new Department("Accounting")));
         assertEquals(expectedCommand, parser.parseCommand(UntagCommand.COMMAND_WORD
                 + " "
                 + INDEX_FIRST_PERSON.getOneBased()
-                + " tag:alpha tag:beta"));
+                + " tag:alpha tag:beta "
+                + " department:Accounting"));
     }
 
     @Test
@@ -143,6 +150,14 @@ public class AddressBookParserTest {
         MailCommand expectedCommand = (MailCommand) parser.parseCommand(
                 MailCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new MailCommand(new TagContainsKeywordsPredicate(keywords)), expectedCommand);
+    }
+
+    @Test
+    public void parseCommand_phone() throws Exception {
+        List<String> keywords = List.of("friends", "owesMoney");
+        PhoneCommand expectedCommand = (PhoneCommand) parser.parseCommand(
+                PhoneCommand.COMMAND_WORD + " " + String.join(" ", keywords));
+        assertEquals(new PhoneCommand(new TagContainsKeywordsPredicate(keywords)), expectedCommand);
     }
 
     @Test

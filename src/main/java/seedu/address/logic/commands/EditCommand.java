@@ -28,6 +28,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -104,7 +105,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        Optional<Department> department = editPersonDescriptor.getDepartment();
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, department);
     }
 
     @Override
@@ -141,6 +144,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Department department;
 
         public EditPersonDescriptor() {}
 
@@ -211,6 +215,12 @@ public class EditCommand extends Command {
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
+
+        public void setDepartment(Department department) {
+            this.department = department; }
+
+        public Optional<Department> getDepartment() {
+            return Optional.ofNullable(department); }
 
         @Override
         public boolean equals(Object other) {

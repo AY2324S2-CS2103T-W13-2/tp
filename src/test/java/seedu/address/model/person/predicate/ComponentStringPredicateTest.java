@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Nested;
@@ -27,6 +28,7 @@ import seedu.address.model.person.predicate.ComponentStringPredicate.NoWord;
 import seedu.address.model.person.predicate.ComponentStringPredicate.StartsWith;
 import seedu.address.model.person.predicate.ComponentStringPredicate.Word;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 
 class ComponentStringPredicateTest {
     private static final Component STUBBED_COMPONENT = Component.ADDRESS;
@@ -43,7 +45,8 @@ class ComponentStringPredicateTest {
          */
         public PersonStub(String address) {
             super(new Name("something"), new Phone("123"), new Email("unnecessary@unnecessary.com"),
-                    new Address(address), new HashSet<Tag>(List.of(new Tag("unnecessary"))));
+                    new Address(address), new HashSet<Tag>(List.of(new Tag("unnecessary"))),
+                    Optional.of(new Department("HR")));
         }
 
         @Override
@@ -108,7 +111,7 @@ class ComponentStringPredicateTest {
         final var address = "somewhere";
         final var tag = "unnecessary";
         var testPerson = new Person(new Name(name), new Phone(phone), new Email(email),
-                new Address(address), new HashSet<>(List.of(new Tag(tag))));
+                new Address(address), new HashSet<>(List.of(new Tag(tag))), Optional.of(new Department("HR")));
 
         assertTrue(new Is(name, Component.NAME).test(testPerson));
         assertTrue(new Is(phone, Component.PHONE).test(testPerson));
