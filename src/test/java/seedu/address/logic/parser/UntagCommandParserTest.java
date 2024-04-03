@@ -9,11 +9,13 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 
 class UntagCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
@@ -30,15 +32,15 @@ class UntagCommandParserTest {
     public void parse_validArgs_returnsUntagCommand() {
         var index = INDEX_FIRST_PERSON;
         assertParseSuccess(parser, index.getOneBased() + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
-                new UntagCommand(index, TAGS));
+                new UntagCommand(index, TAGS, Optional.of(new Department("IT"))));
 
         // order should not matter
         assertParseSuccess(parser, index.getOneBased() + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new UntagCommand(index, TAGS));
+                new UntagCommand(index, TAGS, Optional.of(new Department("IT"))));
 
         // one tag
         assertParseSuccess(parser, index.getOneBased() + TAG_DESC_HUSBAND,
-                new UntagCommand(index, List.of(TAG2)));
+                new UntagCommand(index, List.of(TAG2), Optional.of(new Department("IT"))));
     }
 
     @Test

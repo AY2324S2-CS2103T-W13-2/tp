@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 
 /**
  * Deletes a tag from a person with its displayed index.
@@ -30,13 +32,15 @@ public class UntagCommand extends Command {
 
     private final Index index;
     private final Set<Tag> tags;
+    private final Optional<Department> department;
 
     /**
      * Creates a command to delete a {@code tag} from the person at {@code index}.
      */
-    public UntagCommand(Index index, Collection<Tag> tags) {
+    public UntagCommand(Index index, Collection<Tag> tags, Optional<Department> department) {
         this.index = index;
         this.tags = new HashSet<>(tags);
+        this.department = department;
     }
 
     @Override
@@ -65,12 +69,19 @@ public class UntagCommand extends Command {
         validateAllTagsExist(personToUntag, personTags);
         personTags.removeAll(tags);
 
+        Optional<Department> dep = department;
+
+        if (!dep.get().tagName.isEmpty()) {
+            dep = Optional.empty();
+        }
+
         return new Person(
                 personToUntag.getName(),
                 personToUntag.getPhone(),
                 personToUntag.getEmail(),
                 personToUntag.getAddress(),
-                personTags);
+                personTags,
+                dep);
     }
 
     private void validateAllTagsExist(Person personToUntag, HashSet<Tag> personTags) throws CommandException {
