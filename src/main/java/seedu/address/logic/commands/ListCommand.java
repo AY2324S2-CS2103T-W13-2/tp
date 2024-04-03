@@ -15,7 +15,8 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all contacts";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all contacts";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "\n: Lists all contacts"
+            + "\n Parameters: Does not take in any parameter";
 
     public static final String MESSAGE_EMPTY = "The list is empty";
     @Override

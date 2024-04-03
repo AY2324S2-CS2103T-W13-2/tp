@@ -10,7 +10,8 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "\n: Shows program usage instructions.\n"
+            + "Parameters: COMMANDWORD for more information of that particular command";
     private String helpMessage;
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
@@ -26,7 +27,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        return new CommandResult(helpMessage, true, false);
+        return new CommandResult(helpMessage + "\n\n", true, false);
     }
 
     public HelpCommand() {

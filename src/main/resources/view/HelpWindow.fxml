@@ -24,12 +24,12 @@
         <children>
           <Label fx:id="helpMessage" text="Label">
           </Label>
-          <HBox alignment="CENTER">
+          <HBox fx:id="urlBox">
             <Label fx:id="userGuideURL" text="Label">
-            </Label>
               <HBox.margin>
                 <Insets right="5.0" />
               </HBox.margin>
+            </Label>
             <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
               <HBox.margin>
                 <Insets left="5.0" />

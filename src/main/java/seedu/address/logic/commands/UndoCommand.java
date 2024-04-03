@@ -20,7 +20,8 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Undo success!";
     public static final String MESSAGE_FAILURE = "No more commands to undo!";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo the latest command";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "\n: Undo the latest command"
+            + "\n Parameters: Does not take in any parameter";
     private final Logger logger = LogsCenter.getLogger(UndoCommand.class);
 
     @Override
