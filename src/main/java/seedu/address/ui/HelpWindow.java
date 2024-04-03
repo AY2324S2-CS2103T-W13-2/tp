@@ -28,7 +28,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Label helpMessage;
 
     @FXML
-    private Label userGuideURL;
+    private Label userGuideUrl;
 
     /**
      * Creates a new HelpWindow.
@@ -40,10 +40,17 @@ public class HelpWindow extends UiPart<Stage> {
         helpMessage.setText(HELP_MESSAGE);
     }
 
+    /**
+     * Creates a new HelpWindow.
+     *
+     * @param root Stage to use as the root of the HelpWindow.
+     * @param helpMessage the message to be displayed.
+     */
+
     public HelpWindow(Stage root, String helpMessage) {
         super(FXML, root);
         this.helpMessage.setText(helpMessage);
-        this.userGuideURL.setText(HELP_MESSAGE);
+        this.userGuideUrl.setText(HELP_MESSAGE);
     }
 
     public HelpWindow(String helpMessage) {

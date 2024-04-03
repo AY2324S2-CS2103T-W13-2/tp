@@ -1,4 +1,4 @@
-#copyButton, #helpMessage, #userGuideURL {
+#copyButton, #helpMessage, #userGuideUrl {
     -fx-text-fill: white;
 }
 

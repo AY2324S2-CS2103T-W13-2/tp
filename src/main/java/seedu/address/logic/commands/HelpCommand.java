@@ -12,9 +12,7 @@ public class HelpCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "\n: Shows program usage instructions.\n"
             + "Parameters: COMMANDWORD for more information of that particular command";
-    private String helpMessage;
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
-
     public static final String GENERAL_HELP_MESSAGE = "OfficeHarbor has a number of commands to help you organize "
             + "your contact information: \n\n " + "1. add: adds a contact \n 2. list: list out all added contacts \n "
             + "3. delete: deletes a contact \n 4. clear: deletes all contacts 5. edit: edits a contact \n "
@@ -25,16 +23,16 @@ public class HelpCommand extends Command {
             + ", where [command] can be replaced by the command you want know more about. \n For eg. 'help add' "
             + "gives you the correct format more information and about the add command.";
 
-    @Override
-    public CommandResult execute(Model model, CommandHistory history) {
-        return new CommandResult(helpMessage + "\n\n", true, false);
-    }
+    private String helpMessage;
 
     public HelpCommand() {
         this.helpMessage = GENERAL_HELP_MESSAGE;
     }
-
-    public HelpCommand(String helpMessage){
+    public HelpCommand(String helpMessage) {
         this.helpMessage = helpMessage;
+    }
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) {
+        return new CommandResult(helpMessage + "\n\n", true, false);
     }
 }
