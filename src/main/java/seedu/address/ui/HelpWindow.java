@@ -16,7 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2324s2-cs2103t-w13-2.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "Refer to the user guide more even more information: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -26,6 +26,9 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private Label userGuideURL;
 
     /**
      * Creates a new HelpWindow.
@@ -37,13 +40,14 @@ public class HelpWindow extends UiPart<Stage> {
         helpMessage.setText(HELP_MESSAGE);
     }
 
-    public HelpWindow(Stage root, String carryOver) {
+    public HelpWindow(Stage root, String helpMessage) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE + "\n\n\n" + carryOver);
+        this.helpMessage.setText(helpMessage);
+        this.userGuideURL.setText(HELP_MESSAGE);
     }
 
-    public HelpWindow(String carryOver) {
-        this(new Stage(), carryOver);
+    public HelpWindow(String helpMessage) {
+        this(new Stage(), helpMessage);
     }
 
     /**
