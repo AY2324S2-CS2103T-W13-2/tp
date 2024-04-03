@@ -23,7 +23,7 @@ OfficeHarbor (OH) is a **desktop app for managing the contacts of a tech firm's 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing **| Enter &#9166; |** will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -46,7 +46,7 @@ OfficeHarbor (OH) is a **desktop app for managing the contacts of a tech firm's 
 
 **:information_source: Notes about the command format:**<br>
 
-* Words enclosed between diamond brackets `<>`, are the parameters to be supplied by the user.<br>
+* Words :warning: enclosed between diamond brackets `<>`, are the parameters to be supplied by the user.<br>
   e.g. in `add name:<name>`, `<name>` is a parameter which can be used as `add name:John Doe`.
 
 * Space can be added between the prefix and the word.<br>
@@ -276,11 +276,11 @@ Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected wa
 
 | Action         | Format, Examples                                                                                                                                                                         |
 |----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add name:<name> phone:<phone number> email:<email address> address:<address>` <br> e.g., `add name:James Ho phone:22224444 email:jamesho@example.com address:123, Clementi Rd, 1234665` |
+| **Add**        | `add name:<name> phone:<phone number> email:<email address> address:<address> [tag:tag]... [department:<department>]` <br> e.g., `add name:James Ho phone:22224444 email:jamesho@example.com address:123, Clementi Rd, 1234665 tag:Friend department:Marketing` |
 | **Delete**     | `delete <id>`<br> e.g., `delete 3`                                                                                                                                                       |
 | **Clear**      | `clear`                                                                                                                                                                                  |
-| **Tag**        | `tag <id> tag:<tag> [tag:tag]...`  <br> e.g., `tag 2 tag:friends`                                                                                                                        |
-| **Delete Tag** | `untag <id> tag:<tag> [tag:tag]...` <br> e.g., `untag 2 tag:friends`                                                                                                                     |
+| **Tag**        | `tag <id> tag:<tag> [tag:tag]... [department:<department>]`  <br> e.g., `tag 2 tag:friends department:HR`                                                                                                                        |
+| **Delete Tag** | `untag <id> tag:<tag> [tag:tag]... [department:<department>]` <br> e.g., `untag 2 tag:friends department:HR`                                                                                                                     |
 | **List**       | `list`                                                                                                                                                                                   |
 | **Undo**       | `undo`                                                                                                                                                                                   |
 | **Redo**       | `redo`                                                                                                                                                                                   |

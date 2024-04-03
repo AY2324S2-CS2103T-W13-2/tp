@@ -11,7 +11,7 @@ You can reach us at the email `mashfi.i@u.nus.edu`
 
 ### Mashfi Ishtiaque
 
-<img src="/images/miffi.png" width="200px">
+<img src="images/miffi.png" width="200px">
 
 [[homepage](https://decadent.rest)]
 [[github](https://github.com/miffi)]
@@ -24,7 +24,7 @@ You can reach us at the email `mashfi.i@u.nus.edu`
 
 ### Leong Jia Hao, Derek
 
-<img src="/images/derekljh.png" width="200px">
+<img src="images/derekljh.png" width="200px">
 
 [[github](http://github.com/derekljh)]
 [[portfolio](team/derekljh.md)]
@@ -37,7 +37,7 @@ You can reach us at the email `mashfi.i@u.nus.edu`
 
 ### Mahindroo Aashim
 
-<img src="/images/radeon2525.png" width="200px">
+<img src="images/radeon2525.png" width="200px">
 
 [[github](http://github.com/radeon2525)] 
 [[portfolio](team/radeon2525.md)]
@@ -49,7 +49,7 @@ You can reach us at the email `mashfi.i@u.nus.edu`
 
 ### Kyaw Swar Myint
 
-<img src="/images/jukeboxk.png" width="200px">
+<img src="images/jukeboxk.png" width="200px">
 
 [[github](http://github.com/jukeboxk)]
 [[portfolio](team/jukeboxk.md)]
@@ -62,7 +62,7 @@ You can reach us at the email `mashfi.i@u.nus.edu`
 
 ### Dude Lorenz Leonardo Crescenzio
 
-<img src="/images/the-dudeski.png" width="200px">
+<img src="images/the-dudeski.png" width="200px">
 
 [[github](http://github.com/the-dudeski)]
 [[portfolio](team/the-dudeski.md)]
