@@ -26,6 +26,7 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
         EMAIL,
         TAG,
         PHONE,
+        DEPARTMENT
     }
 
     /**
@@ -81,6 +82,9 @@ public abstract class ComponentStringPredicate implements ComponentPredicate {
             break;
         case ADDRESS:
             stream = Stream.of(person.getAddress().value);
+            break;
+        case DEPARTMENT:
+            stream = person.getDepartment().stream().map(department -> department.tagName);
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + component);

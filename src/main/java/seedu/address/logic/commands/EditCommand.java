@@ -38,7 +38,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "\n: Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -49,6 +49,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]..."
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
+            + "[department: DEPARTMENT]"
+            + "\nExample: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
