@@ -61,7 +61,7 @@ public class UntagCommand extends Command {
         return new CommandResult(String.format(
                 MESSAGE_DELETE_TAG_SUCCESS,
                 Messages.format(untaggedPerson),
-                showTags(tags)));
+                showTags(tags), department.toString()));
     }
 
     private Person untag(Person personToUntag) throws CommandException {
@@ -72,8 +72,11 @@ public class UntagCommand extends Command {
 
         Optional<Department> dep = department;
 
-        if (!dep.orElse(new Department("EMPTYDEP")).tagName.isEmpty()) {
-            dep = personToUntag.getDepartment();
+
+        if (dep.isPresent()) {
+            if (dep.get().tagName.isEmpty()) {
+                dep = personToUntag.getDepartment();
+            }
         }
 
 

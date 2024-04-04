@@ -19,10 +19,7 @@ public class UntagCommandParser implements Parser<UntagCommand> {
     public UntagCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_TAG, PREFIX_DEPARTMENT);
 
-        if (argMultimap.getAllValues(PREFIX_DEPARTMENT).size() > 1) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
-        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DEPARTMENT);
 
         var tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 

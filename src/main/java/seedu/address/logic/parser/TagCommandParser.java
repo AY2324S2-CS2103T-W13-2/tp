@@ -9,9 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.TagCommand;
-import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.department.Department;
@@ -32,10 +30,7 @@ public class TagCommandParser implements Parser<TagCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_DEPARTMENT);
 
-        if (argMultimap.getAllValues(PREFIX_DEPARTMENT).size() > 1) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
-        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DEPARTMENT);
 
         Collection<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Optional<Department> department = Optional.of(ParserUtil.parseDepartment(argMultimap

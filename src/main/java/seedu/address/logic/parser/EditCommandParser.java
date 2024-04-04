@@ -65,7 +65,8 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
-        if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
+        if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent() && !argMultimap.getValue(PREFIX_DEPARTMENT).get()
+                .equals("Optional.empty")) {
             Optional<String> maybeDepartment = argMultimap.getValue(PREFIX_DEPARTMENT);
 
             Optional<Department> department;
