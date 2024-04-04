@@ -73,7 +73,7 @@ public class UntagCommand extends Command {
         Optional<Department> dep = department;
 
         if (!dep.orElse(new Department("EMPTYDEP")).tagName.isEmpty()) {
-            dep = Optional.empty();
+            dep = personToUntag.getDepartment();
         }
 
 
