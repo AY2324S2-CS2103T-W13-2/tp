@@ -14,7 +14,8 @@ OfficeHarbor (OH) is a **desktop app for managing the contacts of a tech firm's 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `officeharbor.jar` from [here](https://github.com/AY2324S2-CS2103T-W13-2/tphone:releases).
+2. Download the latest `OfficeHarbor.jar` from
+   [here](https://github.com/AY2324S2-CS2103T-W13-2/tp/releases/latest).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your OH.
 
@@ -52,10 +53,15 @@ OfficeHarbor (OH) is a **desktop app for managing the contacts of a tech firm's 
 * Space can be added between the prefix and the word.<br>
   e.g. either `name: <name> phone: <phone number>` or `name:<name> phone:<phone number>` is acceptable.
 
-* In some commands like tag, `[tag/<tag>]...` means that you can have multiple optional prefixes at the end <br>
-  e.g. the command `tag 1 tag:friends tag:colleagues` would add 2 tags directly to the contact at index 1.
+* Any component of a command surrounded in `[]` are optional.<br>
+  e.g. the command (`add`)[#adding-a-person-add] has an optional
+  `[department:<department>]` field, so it can be invoked with or without a
+  department.
 
-* Parameters can be in any order for adding a contact.<br>
+* Any component with `...` after it means that it can be specified multiple times after the first one.
+  e.g. In [`delete`](#deleting-a-person--delete), `<id>...` means that at least one id should be specified. In [`tag`](#tagging-a-contact--tag), `[tag:<tag>]...` means that zero or more tags should be specified.
+
+* The input fields for a command can be in any order.<br>
   e.g. if the command specifies `name:<name> phone:<phone number>`, `phone:<phone number> name:<name>` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -69,7 +75,7 @@ OfficeHarbor (OH) is a **desktop app for managing the contacts of a tech firm's 
 Shows either a general summary of the available command or a more detail help message for the input command if there is 
 any. All help window also has a url link at the bottom.
 
-Format: `help [command: command]`
+Format: `help [command]`
 
 `command` is optional and is where you input the command that you want to know about.
 
@@ -90,11 +96,7 @@ The message "Opened help window" in the output box, along with a separate window
 
 Adds a contact with the input details to OH.
 
-Format: `add name:<name> phone:<phone number> email:<email address> address:<address>`
-
-<div markdown="span" class="alert alert-info">
-All components are necessary.
-</div>
+Format: `add name:<name> phone:<phone number> email:<email address> address:<address> [tag:<tag>]... [department:<department>]`
 
 Examples:
 * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01`
@@ -121,7 +123,7 @@ The message "Empty list" is shown when there is nothing added.
 
 Deletes the specified contact(s) from OH.
 
-Format: `delete <id> <id>...`
+Format: `delete <id>...`
 
 * Deletes the person at the specified `<id> ...`.
 * The id refers to the index number shown in the contact list.
@@ -149,11 +151,17 @@ The message "Address book has been cleared!" will be shown.
 
 Tags the specified contact with the input tag name.
 
-* Tags the person(s) at the specified `<id> <id> ...`.
+* Tags the person(s) at the specified `<id>...`.
 * The id refers to the index number(s) shown in the displayed person list.
-* The id **must be a positive integer** 1, 2, 3, …​
+* The id **must be a positive integer** 1, 2, 3, …
 
-Format: `tag <id> tag:<tag> [tag:tag]...`
+Format: `tag <id>... [tag:<tag>]... [department:<department>]`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+There must be at least the department specified or at least one tag. The command
+cannot only have an id
+</div>
 
 Example:
 `tag 2 3 tag: colleagues`
@@ -171,9 +179,17 @@ Deletes the specified tag from the specified contact
 
 * Delete the specified tag of the person at the specified `<id>`.
 * The id refers to the index number shown in the displayed person list.
-* The id **must be a positive integer** 1, 2, 3, …​
+* The id **must be a positive integer** 1, 2, 3, …
+* All the specified tags and the department (if specified) must match the ones
+  stored in the id.
 
-Format: `untag <id> tag:<tag> [tag:tag]...`
+Format: `untag <id> [tag:<tag>]... [department:<department>]`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+`untag` currently doesn't support multiple `<id>` like `tag` and `delete`. It is
+planned for a future release.
+</div>
 
 Output:
 The message "The tag `<tag>` has been removed from contact: `contact info`." will be shown,
@@ -188,14 +204,15 @@ Filters the contacts.
 
 Format: `filter <component>[.<modifier>]:<value> ...`
 
-`component` is one of `name`,`phone`,`email`, or `address` corresponding to the values in add:
+`component` is one of `name`, `phone`, `email`, `department`, or `address` corresponding to the values in add:
 name, phone, email and address respectively.
 
 There can be duplicate components, if there are multiple components, the
 contacts that match any of the components are shown.
 
 In order to filter with values that must all match, the only way to do so right
-now is to run multiple sequential filter commands.
+now is to run the filter command multiple times. The first command filters the
+whole list, the second command filters the previous filtered list, and so on.
 
 `modifier` is to specify how the filtering should be done, it is optional and
 defaults to `has`. The components are
@@ -206,22 +223,28 @@ defaults to `has`. The components are
 - `word`: value has to match a distinct word in the component, a word is any
 sequence of letters and numbers surrounded by spaces
 - `noword`: negation of word
-- `none`: the component is empty
-- `any`: the component is not empty
 
 Example
-```
-filter address:queenstown
-> The default modifier is has, so this lists every contact with an address that
+`filter address:queenstown`
+> The default modifier is `has`, so this lists every contact with an address that
 > has queenstown in it.
 
-filter phone.is:12345678
+`filter phone.is:12345678`
 > Returns the contact with the phone number 12345678
-```
+
+Output:
+If 10 contacts match the list, the output message is "10 persons listed"
 
 ### Undoing a command : `undo`
 
 Resets the state of OH to before the execution of the latest command.
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+OfficeHarbor can undo up to 5 times, and only commands run from the command's
+startup. We recommend you to keep regular backups of your [data](#the-data-file) in case you want
+to change something you did beforehand.
+</div>
 
 Format: `undo`
 
@@ -296,7 +319,7 @@ Format: `exit`
 
 OfficeHarbor data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### The data file
 
 OfficeHarbor data are saved automatically as a JSON file `[JAR file location]/dataddress:officeharbor.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -327,9 +350,11 @@ Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected wa
 | **Add**        | `add name:<name> phone:<phone number> email:<email address> address:<address> [tag:tag]... [department:<department>]` <br> e.g., `add name:James Ho phone:22224444 email:jamesho@example.com address:123, Clementi Rd, 1234665 tag:Friend department:Marketing` |
 | **Delete**     | `delete <id>`<br> e.g., `delete 3`                                                                                                                                                       |
 | **Clear**      | `clear`                                                                                                                                                                                  |
-| **Tag**        | `tag <id> tag:<tag> [tag:tag]... [department:<department>]`  <br> e.g., `tag 2 tag:friends department:HR`                                                                                                                        |
-| **Delete Tag** | `untag <id> tag:<tag> [tag:tag]... [department:<department>]` <br> e.g., `untag 2 tag:friends department:HR`                                                                                                                     |
+| **Tag**        | `tag <id> [tag:<tag>]... [department:<department>]`  <br> e.g., `tag 2 tag:friends department:HR`                                                                                                                        |
+| **Delete Tag** | `untag <id> [tag:<tag>]... [department:<department>]` <br> e.g., `untag 2 tag:friends department:HR`                                                                                                                     |
 | **List**       | `list`                                                                                                                                                                                   |
 | **Undo**       | `undo`                                                                                                                                                                                   |
 | **Redo**       | `redo`                                                                                                                                                                                   |
 | **Help**       | `help`                                                                                                                                                                                   |
+| **Mail**       | `mail <tag>`
+| **Phone**      | `phone <tag>`
