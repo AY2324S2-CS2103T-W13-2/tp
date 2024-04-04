@@ -66,12 +66,25 @@ OfficeHarbor (OH) is a **desktop app for managing the contacts of a tech firm's 
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows either a general summary of the available command or a more detail help message for the input command if there is 
+any. All help window also has a url link at the bottom.
 
+Format: `help [command: command]`
+
+`command` is optional and is where you input the command that you want to know about.
+
+Examples:
+* `help`
+* `help add`
+
+Output:
+
+The message "Opened help window" in the output box, along with a separate window will be shown.
+
+*help command without input command*
 ![Help.PNG](images%2Fuser-guide%2FHelp.PNG)
-
-Format: `help`
-
+*help command for `add` command*
+![HelpAdd.PNG](images/user-guide/help_add_output.png)
 
 ### Adding a person: `add`
 
