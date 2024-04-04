@@ -28,6 +28,7 @@ public class UntagCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) tag: TAG... (can take multiple tags)\n"
             + "Example: " + COMMAND_WORD + "1 tag: friends";
 
+
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted tag %2$s from %1$s";
 
     private final Index index;
@@ -60,7 +61,7 @@ public class UntagCommand extends Command {
         return new CommandResult(String.format(
                 MESSAGE_DELETE_TAG_SUCCESS,
                 Messages.format(untaggedPerson),
-                showTags(tags)));
+                showTags(tags), department.toString()));
     }
 
     private Person untag(Person personToUntag) throws CommandException {
@@ -71,9 +72,13 @@ public class UntagCommand extends Command {
 
         Optional<Department> dep = department;
 
-        if (!dep.get().tagName.isEmpty()) {
-            dep = Optional.empty();
+
+        if (dep.isPresent()) {
+            if (dep.get().tagName.isEmpty()) {
+                dep = personToUntag.getDepartment();
+            }
         }
+
 
         return new Person(
                 personToUntag.getName(),

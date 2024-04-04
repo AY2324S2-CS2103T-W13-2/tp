@@ -30,6 +30,8 @@ public class TagCommandParser implements Parser<TagCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_DEPARTMENT);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DEPARTMENT);
+
         Collection<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Optional<Department> department = Optional.of(ParserUtil.parseDepartment(argMultimap
                 .getValue(PREFIX_DEPARTMENT)
