@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -77,7 +78,7 @@ public class ArgumentTokenizer {
     }
 
     private static List<PrefixPosition> findAllPrefixAndModifierPositions(String argsString) {
-        Prefix[] prefixes = {PREFIX_NAME, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_EMAIL, PREFIX_PHONE};
+        Prefix[] prefixes = {PREFIX_NAME, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_DEPARTMENT};
         return Arrays.stream(prefixes)
                 .flatMap(prefix -> findPrefixAndModifierPositions(argsString, prefix).stream())
                 .collect(Collectors.toList());

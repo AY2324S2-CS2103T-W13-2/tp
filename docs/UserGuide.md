@@ -66,12 +66,25 @@ OfficeHarbor (OH) is a **desktop app for managing the contacts of a tech firm's 
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows either a general summary of the available command or a more detail help message for the input command if there is 
+any. All help window also has a url link at the bottom.
 
-![help message](images/helpMessage.png)
+Format: `help [command: command]`
 
-Format: `help`
+`command` is optional and is where you input the command that you want to know about.
 
+Examples:
+* `help`
+* `help add`
+
+Output:
+
+The message "Opened help window" in the output box, along with a separate window will be shown.
+
+*help command without input command*
+![Help.PNG](images%2Fuser-guide%2FHelp.PNG)
+*help command for `add` command*
+![HelpAdd.PNG](images/user-guide/help_add_output.png)
 
 ### Adding a person: `add`
 
@@ -143,13 +156,14 @@ Tags the specified contact with the input tag name.
 Format: `tag <id> tag:<tag> [tag:tag]...`
 
 Example:
-`tag 2 3 tag: friends`
+`tag 2 3 tag: colleagues`
 
 Output:
-The message "The following contact has been tagged with `<tag name>`: `contact info`.” will be shown, 
-where contact info is all the information of the contact.
+The message "Tagged Contacts: `contact index` with `tag name`.” will be shown, 
+where contact index is the number representing where the current contact is
+on the currently displayed list.
 
-![tag](images/user-guide/tag_mock_output.png)
+![tag.PNG](images%2Fuser-guide%2Ftag.PNG)
 
 ### Deleting a tag : `untag`
 
@@ -237,6 +251,40 @@ If no undo command has been run at all, an error message "No more commands to re
 
 Example of redoing the previous undo command:
 ![redo](images/user-guide/redo_mock_output.png)
+
+### Mailing to a list of people : `mail`
+
+Composes an email to the people tagged with the selected tag.
+
+Format: `mail <tag>`
+
+Output: The message "Here is the list of emails:
+`email1`,`email2`,`email3`..." will be shown, where `email1` is the
+email of the first person currently displayed in the contact list.
+Additionally, the system default mailing app will open and a mail will
+be drafted. The recipients field will be automatically filled up with
+the emails shown earlier.
+
+Example of mail command: `mail colleague`
+![mail.PNG](images%2Fuser-guide%2Fmail.PNG)
+![mail2.PNG](images%2Fuser-guide%2Fmail2.PNG)
+
+
+### Copying phone numbers : `phone`
+
+Copies the phone numbers of people tagged with the selected tag to
+your clipboard.
+
+Format: `phone <tag>`
+
+Output: The message "Here is the list of phone numbers: 
+`phone1`,`phone2`,`phone3`...
+
+They have been copied to your clipboard."
+
+Example of phone command: `phone colleague`
+![phone.PNG](images%2Fuser-guide%2Fphone.PNG)
+
 
 ### Exiting the program : `exit`
 

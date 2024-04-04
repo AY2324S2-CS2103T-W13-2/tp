@@ -20,9 +20,9 @@ public class MailCommand extends Command {
     public static final String COMMAND_WORD = "mail";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists the email of contacts containing the inputted tag\n"
+            + "\n: Opens the default email app with the emails of the listed tag\n"
             + "Parameters: TAG\n"
-            + "Example: " + COMMAND_WORD + "friends";
+            + "Example: " + COMMAND_WORD + " friends";
 
     public static final String MESSAGE_EMAIL_CONTACT_SUCCESS = "Here is the list of emails: %1$s";
     public static final String MESSAGE_EMAIL_CONTACT_EMPTY = "There are no contacts associated with that tag.";
