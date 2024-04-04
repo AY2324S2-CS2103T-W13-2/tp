@@ -21,6 +21,8 @@ public class Messages {
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_MISSING_TAG =
             "Tags [%2$s] not found for %1$s";
+    public static final String MESSAGE_MISSING_DEPARTMENT =
+            "Department %2$s not found for %1$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
