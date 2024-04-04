@@ -24,9 +24,9 @@ public class UntagCommand extends Command {
     public static final String COMMAND_WORD = "untag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the tag from contact identified by the index number used in the displayed contact list.\n"
-            + "Parameters: INDEX (must be a positive integer) tag: TAG... (can take multiple tags)\n"
-            + "Example: " + COMMAND_WORD + "1 tag: friends";
+            + ": Deletes the tag/department from contact identified by the index number used in the displayed contact list.\n"
+            + "Parameters: INDEX (must be a positive integer) tag: TAG... department: DEPARTMENT (can take multiple tags)\n"
+            + "Example: " + COMMAND_WORD + "1 tag: friends department: IT";
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted tag %2$s from %1$s";
 
@@ -71,9 +71,10 @@ public class UntagCommand extends Command {
 
         Optional<Department> dep = department;
 
-        if (!dep.get().tagName.isEmpty()) {
+        if (!dep.orElse(new Department("EMPTYDEP")).tagName.isEmpty()) {
             dep = Optional.empty();
         }
+
 
         return new Person(
                 personToUntag.getName(),

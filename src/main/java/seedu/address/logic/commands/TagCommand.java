@@ -71,8 +71,23 @@ public class TagCommand extends Command {
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        String tagInfo = String.format(MESSAGE_TAG_CONTACT_SUCCESS,
-                showIndices(targetIndices), showTags(tags));
+        String tagInfo = " ";
+
+        if (!tags.isEmpty() && (!department.isEmpty() && !department.get().tagName.equals("EMPTYDEP"))) {
+            tagInfo = String.format(MESSAGE_TAG_CONTACT_SUCCESS,
+                    showIndices(targetIndices), showTags(tags) + ", " + department.get());
+        }
+
+        if (!tags.isEmpty() && (department.isEmpty() || department.get().tagName.equals("EMPTYDEP"))) {
+            tagInfo = String.format(MESSAGE_TAG_CONTACT_SUCCESS,
+                    showIndices(targetIndices), showTags(tags));
+        }
+
+        if (tags.isEmpty() && (!department.isEmpty() && !department.get().tagName.equals("EMPTYDEP"))) {
+            tagInfo = String.format(MESSAGE_TAG_CONTACT_SUCCESS,
+                    showIndices(targetIndices), department.get());
+        }
+
         CommandResult result = new CommandResult(tagInfo);
 
         // Add the executed command to the command history
@@ -100,7 +115,9 @@ public class TagCommand extends Command {
 
         Optional<Department> dep = department;
 
-
+        if (dep.get().tagName.isEmpty() || dep.get().tagName.equals("EMPTYDEP")) {
+            dep = personToTag.getDepartment();
+        }
 
         return new Person(
                 personToTag.getName(),
