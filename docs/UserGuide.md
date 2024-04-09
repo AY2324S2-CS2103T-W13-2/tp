@@ -155,7 +155,7 @@ Tags the specified contact with the input tag name.
 * The id refers to the index number(s) shown in the displayed person list.
 * The id **must be a positive integer** 1, 2, 3, …
 
-Format: `tag <id>... [tag:<tag>]... [department:<department>]`
+Format: `tag <id>... tag:<tag>... [tag:<tag>]... [department:<department>]`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -164,14 +164,15 @@ cannot only have an id
 </div>
 
 Example:
-`tag 2 3 tag: colleagues`
+`tag 2 3 tag: colleagues`, `tag 2 3 department: FINANCE`
 
 Output:
-The message "Tagged Contacts: `contact index` with `tag name`.” will be shown, 
+The message "Tagged Contacts: `contact index` with `tag name` and/or `department name`.” will be shown, 
 where contact index is the number representing where the current contact is
 on the currently displayed list.
 
-![tag.PNG](images%2Fuser-guide%2Ftag.PNG)
+![TagCommand.png](images/user-guide/TagCommand.png)
+![TagCommand2.png](images/user-guide/TagCommand2.png)
 
 ### Deleting a tag : `untag`
 
