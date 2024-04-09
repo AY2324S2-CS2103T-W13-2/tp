@@ -226,14 +226,14 @@ sequence of letters and numbers surrounded by spaces
 - `noword`: negation of word
 
 Example
-`filter address:queenstown`
+`filter address:serangoon`
 > The default modifier is `has`, so this lists every contact with an address that
 > has queenstown in it.
 
 ![filter1.PNG](images/user-guide/filter1.PNG)
 
-`filter phone.is:12345678`
-> Returns the contact with the phone number 12345678
+`filter phone.is:93210283`
+> Returns the contact with the phone number 93210283
 
 ![filter2.PNG](images/user-guide/filter2.PNG)
 
@@ -293,7 +293,7 @@ Additionally, the system default mailing app will open and a mail will
 be drafted. The recipients field will be automatically filled up with
 the emails shown earlier.
 
-Example of mail command: `mail colleague`
+Example of mail command: `mail colleagues`
 ![mail.PNG](images/user-guide/mail.PNG)
 ![mail2.PNG](images/user-guide/mail2.PNG)
 
