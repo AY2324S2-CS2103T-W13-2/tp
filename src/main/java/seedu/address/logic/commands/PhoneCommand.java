@@ -21,7 +21,7 @@ public class PhoneCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists the phone numbers of contacts containing the inputted tag\n"
             + "Parameters: TAG\n"
-            + "Example: " + COMMAND_WORD + "friends";
+            + "Example: " + COMMAND_WORD + " friends";
 
     public static final String MESSAGE_PHONE_CONTACT_SUCCESS = "Here is the list of phone numbers: %1$s" + ".\n"
             + "They have been copied to your clipboard.";
