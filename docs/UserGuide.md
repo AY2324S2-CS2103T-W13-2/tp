@@ -149,7 +149,7 @@ The message "Address book has been cleared!" will be shown.
 
 ### Tagging a Contact : `tag`
 
-Tags the specified contact with the input tag name.
+Tags the specified contact with the input tag name and/or input department name.
 
 * Tags the person(s) at the specified `<id>...`.
 * The id refers to the index number(s) shown in the displayed person list.
@@ -160,11 +160,11 @@ Format: `tag <id>... tag:<tag>... [tag:<tag>]... [department:<department>]`
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
 There must be at least the department specified or at least one tag. The command
-cannot only have an id
+cannot only have an id.
 </div>
 
 Example:
-`tag 2 3 tag: colleagues`, `tag 2 3 department: FINANCE`
+`tag 2 3 tag: colleagues`, `tag 2 3 department: FINANCE`, `tag 2 3 tag: colleagues department: FINANCE`
 
 Output:
 The message "Tagged Contacts: `contact index` with `tag name` and/or `department name`.” will be shown, 
