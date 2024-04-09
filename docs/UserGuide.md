@@ -198,7 +198,7 @@ The list entry of the user with <id> will not have the tag anymore.
 
 ![delete-tag](images/user-guide/delete-tag_mock_output.png)
 
-### Filtering contacts : filter
+### Filtering contacts : `filter`
 
 Filters the contacts.
 
@@ -345,16 +345,18 @@ Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected wa
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                                                         |
-|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add name:<name> phone:<phone number> email:<email address> address:<address> [tag:tag]... [department:<department>]` <br> e.g., `add name:James Ho phone:22224444 email:jamesho@example.com address:123, Clementi Rd, 1234665 tag:Friend department:Marketing` |
-| **Delete**     | `delete <id>`<br> e.g., `delete 3`                                                                                                                                                       |
-| **Clear**      | `clear`                                                                                                                                                                                  |
-| **Tag**        | `tag <id> [tag:<tag>]... [department:<department>]`  <br> e.g., `tag 2 tag:friends department:HR`                                                                                                                        |
-| **Delete Tag** | `untag <id> [tag:<tag>]... [department:<department>]` <br> e.g., `untag 2 tag:friends department:HR`                                                                                                                     |
-| **List**       | `list`                                                                                                                                                                                   |
-| **Undo**       | `undo`                                                                                                                                                                                   |
-| **Redo**       | `redo`                                                                                                                                                                                   |
-| **Help**       | `help`                                                                                                                                                                                   |
-| **Mail**       | `mail <tag>`
-| **Phone**      | `phone <tag>`
+| Action         | Format, Examples                                                                                                                                                                                                                                                  |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add name:<name> phone:<phone number> email:<email address> address:<address> [tag:<tag>]... [department:<department>]` <br> e.g., `add name:James Ho phone:22224444 email:jamesho@example.com address:123, Clementi Rd, 1234665 tag:Friend department:Marketing` |
+| **Delete**     | `delete <id>`<br> e.g., `delete 3`                                                                                                                                                                                                                                |
+| **Clear**      | `clear`                                                                                                                                                                                                                                                           |
+| **Tag**        | `tag <id> [tag:<tag>]... [department:<department>]`  <br> e.g., `tag 2 tag:friends department:HR`                                                                                                                                                                 |
+| **Delete Tag** | `untag <id> [tag:<tag>]... [department:<department>]` <br> e.g., `untag 2 tag:friends department:HR`                                                                                                                                                              |
+| **List**       | `list`                                                                                                                                                                                                                                                            |
+| **Undo**       | `undo`                                                                                                                                                                                                                                                            |
+| **Redo**       | `redo`                                                                                                                                                                                                                                                            |
+| **Help**       | `help`                                                                                                                                                                                                                                                            |
+| **Mail**       | `mail <tag>`                                                                                                                                                                                                                                                      |
+| **Phone**      | `phone <tag>`                                                                                                                                                                                                                                                     |
+| **Filter**     | `filter <component>[.<modifier>]:<value> ` <br> e.g., `filter name.has: Alex`                                                                                                                                                                                     |
+| **Exit**       | `exit`                                                                                                                                                                                                                                                            |
