@@ -88,7 +88,7 @@ Output:
 The message "Opened help window" in the output box, along with a separate window will be shown.
 
 *help command without input command*
-![Help.PNG](images%2Fuser-guide%2FHelp.PNG)
+![Help.PNG](images/user-guide/Help.PNG)
 *help command for `add` command*
 ![HelpAdd.PNG](images/user-guide/help_add_output.png)
 
@@ -106,7 +106,7 @@ Output:
 The message “A new contact `name` has been added to the list. Name: `<name>`, Phone: `<phone number>`, Email: `<email>`, Address: `<address>`.” will be shown. 
 A new contact entry with the given user will be displayed in the list.
 
-![add](images/user-guide/add_mock_output.png)
+![Add.png](images/user-guide/Add.png)
 
 ### Listing all persons : `list`
 
@@ -136,7 +136,7 @@ Output:
 The message "Contact `name` has been deleted. Name: `name`, Phone: `phone number`, Email: `email`, Address: `address`.” will be shown.
 The entry with the given id will disappear from the list.
 
-![delete](images/user-guide/delete_mock_output.png)
+![Delete.png](images/user-guide/Delete.png)
 
 ### Clearing all entries : `clear`
 
@@ -149,29 +149,30 @@ The message "Address book has been cleared!" will be shown.
 
 ### Tagging a Contact : `tag`
 
-Tags the specified contact with the input tag name.
+Tags the specified contact with the input tag name and/or input department name.
 
 * Tags the person(s) at the specified `<id>...`.
 * The id refers to the index number(s) shown in the displayed person list.
 * The id **must be a positive integer** 1, 2, 3, …
 
-Format: `tag <id>... [tag:<tag>]... [department:<department>]`
+Format: `tag <id>... tag:<tag>... [tag:<tag>]... [department:<department>]`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
 There must be at least the department specified or at least one tag. The command
-cannot only have an id
+cannot only have an id.
 </div>
 
 Example:
-`tag 2 3 tag: colleagues`
+`tag 2 3 tag: colleagues`, `tag 2 3 department: FINANCE`, `tag 2 3 tag: colleagues department: FINANCE`
 
 Output:
-The message "Tagged Contacts: `contact index` with `tag name`.” will be shown, 
+The message "Tagged Contacts: `contact index` with `tag name` and/or `department name`.” will be shown, 
 where contact index is the number representing where the current contact is
 on the currently displayed list.
 
-![tag.PNG](images%2Fuser-guide%2Ftag.PNG)
+![TagCommand.png](images/user-guide/TagCommand.png)
+![TagCommand2.png](images/user-guide/TagCommand2.png)
 
 ### Deleting a tag : `untag`
 
@@ -196,7 +197,7 @@ The message "The tag `<tag>` has been removed from contact: `contact info`." wil
 where contact info is all the information of the contact. 
 The list entry of the user with <id> will not have the tag anymore.
 
-![delete-tag](images/user-guide/delete-tag_mock_output.png)
+![untag.png](images/user-guide/untag.png)
 
 ### Filtering contacts : `filter`
 
@@ -225,12 +226,16 @@ sequence of letters and numbers surrounded by spaces
 - `noword`: negation of word
 
 Example
-`filter address:queenstown`
+`filter address:serangoon`
 > The default modifier is `has`, so this lists every contact with an address that
 > has queenstown in it.
 
-`filter phone.is:12345678`
-> Returns the contact with the phone number 12345678
+![filter1.PNG](images/user-guide/filter1.PNG)
+
+`filter phone.is:93210283`
+> Returns the contact with the phone number 93210283
+
+![filter2.PNG](images/user-guide/filter2.PNG)
 
 Output:
 If 10 contacts match the list, the output message is "10 persons listed"
@@ -256,10 +261,10 @@ If no command has been run at all, an error message "No more commands to undo!" 
 Example of undoing a delete command.
 
 Contact after a delete command:
-![delete_operation](images/user-guide/delete_operation-undo-mock.png)
+![deleteUndo.PNG](images/user-guide/deleteUndo.PNG)
 
 Contact after the delete command is undone:
-![undo](images/user-guide/undo_mock_output.png)
+![undosuccess.PNG](images/user-guide/undosuccess.PNG)
 
 ### Redoing a command : `redo`
 
@@ -273,7 +278,7 @@ The list entry of the user will return to the state before the latest undo comma
 If no undo command has been run at all, an error message "No more commands to redo!" will be shown instead.
 
 Example of redoing the previous undo command:
-![redo](images/user-guide/redo_mock_output.png)
+![redosuccess.PNG](images/user-guide/redosuccess.PNG)\
 
 ### Mailing to a list of people : `mail`
 
@@ -288,9 +293,9 @@ Additionally, the system default mailing app will open and a mail will
 be drafted. The recipients field will be automatically filled up with
 the emails shown earlier.
 
-Example of mail command: `mail colleague`
-![mail.PNG](images%2Fuser-guide%2Fmail.PNG)
-![mail2.PNG](images%2Fuser-guide%2Fmail2.PNG)
+Example of mail command: `mail colleagues`
+![mail.PNG](images/user-guide/mail.PNG)
+![mail2.PNG](images/user-guide/mail2.PNG)
 
 
 ### Copying phone numbers : `phone`
@@ -306,7 +311,7 @@ Output: The message "Here is the list of phone numbers:
 They have been copied to your clipboard."
 
 Example of phone command: `phone colleague`
-![phone.PNG](images%2Fuser-guide%2Fphone.PNG)
+![phone.PNG](images/user-guide/phone.PNG)
 
 
 ### Exiting the program : `exit`
