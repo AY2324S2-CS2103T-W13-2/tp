@@ -244,6 +244,7 @@ If 10 contacts match the list, the output message is "10 persons listed"
 
 Resets the state of OH to before the execution of the latest command.
 However, the undo command does not work for closing and then relaunching the app.
+All commands except 'filter' can be undone.
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -271,6 +272,7 @@ Contact after the delete command is undone:
 
 Resets the state of OH to before the latest undo command.
 However, the redo command does not work for closing and then relaunching the app.
+All commands except 'filter' can be redone.
 
 Format: `redo`
 
