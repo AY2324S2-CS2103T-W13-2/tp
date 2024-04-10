@@ -228,6 +228,7 @@ Contact after the delete command is undone:
 ### Redoing a command : `redo`
 
 Resets the state of OH to before the latest undo command.
+However, the redo command does not work for closing and then relaunching the app.
 
 Format: `redo`
 
