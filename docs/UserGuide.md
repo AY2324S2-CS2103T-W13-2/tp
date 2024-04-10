@@ -208,6 +208,7 @@ filter phone.is:12345678
 ### Undoing a command : `undo`
 
 Resets the state of OH to before the execution of the latest command.
+However, the undo command does not work for closing and then relaunching the app.
 
 Format: `undo`
 
