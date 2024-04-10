@@ -243,6 +243,7 @@ If 10 contacts match the list, the output message is "10 persons listed"
 ### Undoing a command : `undo`
 
 Resets the state of OH to before the execution of the latest command.
+However, the undo command does not work for closing and then relaunching the app.
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
