@@ -210,6 +210,7 @@ filter phone.is:12345678
 Resets the state of OH to before the execution of the latest command.
 However, the undo command does not work for closing and then relaunching the app.
 All commands except 'filter' can be undone.
+
 Format: `undo`
 
 Output:
@@ -230,6 +231,7 @@ Contact after the delete command is undone:
 Resets the state of OH to before the latest undo command.
 However, the redo command does not work for closing and then relaunching the app.
 All commands except 'filter' can be redone.
+
 Format: `redo`
 
 Output:
