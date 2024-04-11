@@ -23,12 +23,14 @@ to find the app information that they are looking for.
 
 ## Navigating the guide
 
-For quickly finding the information that you are looking, you can make use of the [Table of Contents](#--table-of-contents) 
+For quickly finding the information that you are looking, you can make use of the [Table of Contents](#table-of-contents) 
 below, which has a list of all the information, by clicking on the items, you will be directly to the content that you just clicked.
 
 Throughout the guide, there are also some icons which represents information outside just technicalities.
 
 * :bulb: **Tip**: This icon indicates a tip, suggestion, or piece of advice to help you use OH more effectively.
+
+* :page_facing_up: **Note**: This icon tells you about some details of the app usage that you could missed out on.
 
 * :warning: **Warning**: This icon alerts you about potential issues that you may face when using the app.
 
@@ -36,9 +38,11 @@ Throughout the guide, there are also some icons which represents information out
 
 When reading through the guide, you can look for these icons for extra information.
 
+*The usage of these special icons are inspired by section 1.4 of the user guide for the app SweetRewards [link](https://ay2324s2-cs2103t-t13-4.github.io/tp/UserGuide.html#14-navigating-this-guide)*
+
 --------------------------------------------------------------------------------------------------------------------
 
-# * Table of Contents
+# Table of Contents
   {:toc}
 
 
