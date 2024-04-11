@@ -155,13 +155,13 @@ Tags the specified contact with the input tag name and/or input department name.
 * The id refers to the index number(s) shown in the displayed person list.
 * The id **must be a positive integer** 1, 2, 3, …
 
-Format: `tag <id>... tag:<tag>... [tag:<tag>]... [department:<department>]`
-
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
 There must be at least the department specified or at least one tag. The command
 cannot only have an id.
 </div>
+
+Format: `tag <id>... tag:<tag>... [tag:<tag>]... [department:<department>]`
 
 Example:
 `tag 2 3 tag: colleagues`, `tag 2 3 department: FINANCE`, `tag 2 3 tag: colleagues department: FINANCE`
@@ -184,13 +184,13 @@ Deletes the specified tag from the specified contact
 * All the specified tags and the department (if specified) must match the ones
   stored in the id.
 
-Format: `untag <id> [tag:<tag>]... [department:<department>]`
-
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
 `untag` currently doesn't support multiple `<id>` like `tag` and `delete`. It is
 planned for a future release.
 </div>
+
+Format: `untag <id> [tag:<tag>]... [department:<department>]`
 
 Output:
 The message "The tag `<tag>` has been removed from contact: `contact info`." will be shown,
@@ -201,41 +201,62 @@ The list entry of the user with <id> will not have the tag anymore.
 
 ### Filtering contacts : `filter`
 
-Filters the contacts.
+Filters the entire list of contacts.
 
 Format: `filter <component>[.<modifier>]:<value> ...`
 
 `component` is one of `name`, `phone`, `email`, `department`, or `address` corresponding to the values in add:
 name, phone, email and address respectively.
 
-There can be duplicate components, if there are multiple components, the
+This command is case insensitive: it treats uppercase and lowercase letters the
+same.
+
+There can be duplicate components. If there are multiple components, the
 contacts that match any of the components are shown.
 
-In order to filter with values that must all match, the only way to do so right
-now is to run the filter command multiple times. The first command filters the
-whole list, the second command filters the previous filtered list, and so on.
+The `modifier` specifies how filter should match the value to the component,
+it is optional and defaults to `has`. The modifiers are
+- `has`: value has to match any part of the component
 
-`modifier` is to specify how the filtering should be done, it is optional and
-defaults to `has`. The components are
-- `has`: value has to match part of the component
-- `hasnt`: negation of has
+  Example: `filter address:serangoon`
+  > The default modifier is `has`, so this lists every contact with an address that
+  > has serangoon in it.
+
+  ![filter1.PNG](images/user-guide/filter1.PNG)
+
+  Another example: `filter name.has:will`
+  > Returns the contacts whose name has "will" anywhere in them.
+  > For example, names like "Will Pherell", "William Smith", "Bruce Willis", "Fred
+  > Mcwilliams"
+
+- `hasnt`: value should not match any part of the component
+  Example: `filter tag.hasnt:senior`
+  > Returns all the contacts whose name does not have "senior" anywhere in them.
+
 - `is`: value has to match the component exactly
-- `isnt`: negation of is
+
+  Example: `filter phone.is:93210283`
+  > Returns the contact with the phone number 93210283
+
+  ![filter2.PNG](images/user-guide/filter2.PNG)
+
+- `isnt`: value should not match the component exactly
+  Example: `filter department.isnt:finance`
+  > Returns the contacts who are not in the "finance" department.
+
 - `word`: value has to match a distinct word in the component, a word is any
 sequence of letters and numbers surrounded by spaces
-- `noword`: negation of word
+  Example: `filter name.word:will`
+  > Returns the contacts who has "will" as a word.
+  > For example, names like "Will Pherell" but not ones containing "will"
+  > somewhere in the middle of the word like "Fred Mcwilliams".
 
-Example
-`filter address:serangoon`
-> The default modifier is `has`, so this lists every contact with an address that
-> has queenstown in it.
-
-![filter1.PNG](images/user-guide/filter1.PNG)
-
-`filter phone.is:93210283`
-> Returns the contact with the phone number 93210283
-
-![filter2.PNG](images/user-guide/filter2.PNG)
+- `noword`: value should not match a distinct word in the component.
+  Example: `filter name.noword:will`
+  > Returns the contacts who do not have "will" as a word.
+  > For example, any name that does not contain "will" like "Bernice Yu" and
+  > names containing "will" in the middle of a name like "Fred Mcwilliams" but
+  > not "Will Pherell".
 
 Output:
 If 10 contacts match the list, the output message is "10 persons listed"
