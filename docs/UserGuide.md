@@ -30,15 +30,15 @@ Throughout the guide, there are also some icons which represents information out
 
 * :bulb: **Tip**: This icon indicates a tip, suggestion, or piece of advice to help you use OH more effectively.
 
-* :page_facing_up: **Note**: This icon tells you about some details of the app usage that you could missed out on.
+* :information_source: **Note**: This icon tells you about some key details of the app usage that you could miss.
 
 * :warning: **Warning**: This icon alerts you about potential issues that you may face when using the app.
 
-* :star: **Benefit**: This icon signifies the benefits and relevance of the above OH feature.
+* :star: **Benefit**: This icon signifies the benefits and relevance of an OH feature.
 
 When reading through the guide, you can look for these icons for extra information.
 
-*The usage of these special icons are inspired by section 1.4 of the user guide for the app SweetRewards [link](https://ay2324s2-cs2103t-t13-4.github.io/tp/UserGuide.html#14-navigating-this-guide)*
+*The usage of these special icons is inspired by section 1.4 of the user guide of the app SweetRewards [link](https://ay2324s2-cs2103t-t13-4.github.io/tp/UserGuide.html#14-navigating-this-guide)*
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ When reading through the guide, you can look for these icons for extra informati
    An app similar to the below image should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing **| Enter &#9166; |** will open the help window.<br>
+5. Type the command in the command box and press Enter to run it. e.g. typing **`help`** and pressing **| Enter &#9166; |** will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all contacts.
@@ -88,14 +88,14 @@ When reading through the guide, you can look for these icons for extra informati
 * Space can be added between the keyword and the word in `<>` bracket.<br>
   e.g. either `name: <name> phone: <phone number>` or `name:<name> phone:<phone number>` is acceptable.
 
-* Any part of a command surrounded in `[]` bracket are optional.<br>
+* Any component of a command surrounded in `[]` bracket are optional.<br>
   e.g. the command [`add`](#22-adding-a-person--add) has an optional `[department:<department>]` part, so it can be 
   executed with or without a department.
 
-* Any part of a command with `...` after it means that it can be specified multiple times after the first one.
+* Any component of a command with `...` after it means that it can be specified multiple times after the first one.
   e.g. In [`delete`](#24-deleting-a-person--delete), `<id>...` means that more ids can be entered after the first one.
 
-* The required part of a command can be in any order.<br>
+* The required component of a command can be in any order.<br>
   e.g. if the command needs `name:<name> phone:<phone number>`, `phone:<phone number> name:<name>` is also acceptable.
 
 * Extra parameters for commands that do not take in parameters (such as [`list`](#23-listing-all-persons--list), 
@@ -140,11 +140,17 @@ Output:
 The message “A new contact `<name>` has been added to the list. Name: `<name>`, Phone: `<phone number>`, Email: `<email>`, Address: `<address>`.” will be shown. 
 A new contact entry with the given user will be displayed in the list.
 
-:bulb: **Tip**: You can add the contact of a certain employee directly with tags and department with the `add` command.
-
-:bulb: **Tip**: Notice how the tag details are specified as `[tag:<tag>]...`, this means that more tags can be entered
-the first one, but since the first tag is in `[]` brackets, it will be optional and it meant that the add command accepts 
+<div markdown="block" class="alert alert-info">
+**:bulb: Tip:**<br>
+You can add the contact of a certain employee directly with tags and department with the `add` command.
+</div>
+<br>
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+Notice how the tag details are specified as `[tag:<tag>]...`, this means that more tags can be entered
+after the first one, however since the first tag is in `[]` brackets, it will be optional, that means that the add command accepts 
 zero or more tags.
+</div>
 
 ![Add.png](images/user-guide/Add.png)
 
@@ -177,8 +183,11 @@ Output:
 The message "Contact `name` has been deleted. Name: `name`, Phone: `phone number`, Email: `email`, Address: `address`.” will be shown.
 The entry with the given id will disappear from the list.
 
-:warning: **Warning**: Due to a problem in the app, try not to delete duplicate contact, for e.g. `delete 1 1`, the specified 
+<div markdown="block" class="alert alert-warning">
+**:warning: Warning:**<br>
+Due to a problem in the app, try not to delete duplicate contact, for e.g. `delete 1 1`, the specified 
 contact will be deleted, but there will be no output message, and you will not be able to undo the deletion. 
+</div>
 
 ![Delete.png](images/user-guide/Delete.png)
 
@@ -267,8 +276,11 @@ sequence of letters and numbers surrounded by spaces
 
 Example
 `filter address:serangoon`
-> The default modifier is `has`, so this lists every contact with an address that
-> has queenstown in it.
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+The default modifier is `has`, so this lists every contact with an address that
+has queenstown in it.
+</div>
 
 ![filter1.PNG](images/user-guide/filter1.PNG)
 
@@ -372,7 +384,7 @@ OfficeHarbor data are saved in the hard disk automatically after any command tha
 
 OfficeHarbor data are saved automatically as a JSON file `[JAR file location]/dataddress:officeharbor.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">**:warning: Caution:**
 If your changes to the data file makes its format invalid, OfficeHarbor will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
