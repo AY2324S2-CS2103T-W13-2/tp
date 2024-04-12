@@ -7,6 +7,7 @@ import static seedu.address.model.person.predicate.ComponentExistencePredicate.N
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Nested;
@@ -19,6 +20,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.predicate.ComponentExistencePredicate.Some;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 
 class ComponentExistencePredicateTest {
     private static final Component STUBBED_COMPONENT = Component.Tags;
@@ -35,7 +37,7 @@ class ComponentExistencePredicateTest {
          */
         public PersonStub(Set<Tag> tags) {
             super(new Name("something"), new Phone("123"), new Email("unnecessary@unnecessary.com"),
-                    new Address("somewhere"), tags);
+                    new Address("somewhere"), tags, Optional.of(new Department("HR")));
         }
 
         @Override

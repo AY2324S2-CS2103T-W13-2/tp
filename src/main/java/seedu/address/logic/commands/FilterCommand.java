@@ -20,13 +20,12 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons whose components contain any of "
-            + "the specified keywords (case-insensitive) according to the different modifiers and"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "\n: Filters all persons whose components contain any of "
+            + "the specified keywords (case-insensitive) according to the different modifiers and "
             + "displays them as a list with index numbers.\n"
             + "Parameters: [component[.attribute]:<value>...]...\n"
-            + "Where component is any one of: name, address, phone, tag, email\n"
-            + "And attribute is any one of: is, isnt, has, hasnt, word, noword, none, any\n"
-            + "Refer to the user guide for more details\n"
+            + "Where component is any one of: name, address, phone, tag, email "
+            + "and attribute is any one of: is, isnt, has, hasnt, word, noword, none, any\n"
             + "Example: " + COMMAND_WORD + " address.has:Kent Ridge";
 
     private final ArrayList<ComponentPredicate> predicates;

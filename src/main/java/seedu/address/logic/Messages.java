@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.department.Department;
 
 /**
  * Container for user visible messages.
@@ -20,6 +21,8 @@ public class Messages {
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_MISSING_TAG =
             "Tags [%2$s] not found for %1$s";
+    public static final String MESSAGE_MISSING_DEPARTMENT =
+            "Department %2$s not found for %1$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -47,6 +50,8 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Department: ")
+                .append(person.getDepartment().orElse(new Department("EMPTYDEP")));
         return builder.toString();
     }
 

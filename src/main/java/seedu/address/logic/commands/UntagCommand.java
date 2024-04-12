@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.department.Department;
 
 /**
  * Deletes a tag from a person with its displayed index.
@@ -22,21 +25,24 @@ public class UntagCommand extends Command {
     public static final String COMMAND_WORD = "untag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the tag from contact identified by the index number used in the displayed contact list.\n"
+            + "\n: Deletes the tag from contact identified by the index number used in the displayed contact list.\n"
             + "Parameters: INDEX (must be a positive integer) tag: TAG... (can take multiple tags)\n"
-            + "Example: " + COMMAND_WORD + "1 tag: friends";
+            + "Example: " + COMMAND_WORD + " 1 tag: friends";
+
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted tag %2$s from %1$s";
 
     private final Index index;
     private final Set<Tag> tags;
+    private final Optional<Department> department;
 
     /**
      * Creates a command to delete a {@code tag} from the person at {@code index}.
      */
-    public UntagCommand(Index index, Collection<Tag> tags) {
+    public UntagCommand(Index index, Collection<Tag> tags, Optional<Department> department) {
         this.index = index;
         this.tags = new HashSet<>(tags);
+        this.department = department.isEmpty() ? Optional.of(new Department("EMPTYDEP")) : department;
     }
 
     @Override
@@ -56,7 +62,7 @@ public class UntagCommand extends Command {
         return new CommandResult(String.format(
                 MESSAGE_DELETE_TAG_SUCCESS,
                 Messages.format(untaggedPerson),
-                showTags(tags)));
+                showTags(tags), department.toString()));
     }
 
     private Person untag(Person personToUntag) throws CommandException {
@@ -65,12 +71,31 @@ public class UntagCommand extends Command {
         validateAllTagsExist(personToUntag, personTags);
         personTags.removeAll(tags);
 
+        var dep = personToUntag.getDepartment();
+        if (!Objects.equals(department.get().tagName, "EMPTYDEP")) {
+            validateDepartmentExists(personToUntag, department.get());
+            dep = Optional.of(new Department("EMPTYDEP"));
+        }
+
         return new Person(
                 personToUntag.getName(),
                 personToUntag.getPhone(),
                 personToUntag.getEmail(),
                 personToUntag.getAddress(),
-                personTags);
+                personTags,
+                dep);
+    }
+
+    private void validateDepartmentExists(Person personToUntag, Department department) throws CommandException {
+        if (!personToUntag.getDepartment().map(department::equals).orElse(false)) {
+            throw new CommandException(
+                    String.format(
+                            Messages.MESSAGE_MISSING_DEPARTMENT,
+                            personToUntag.getName(),
+                            department.tagName
+                    )
+            );
+        }
     }
 
     private void validateAllTagsExist(Person personToUntag, HashSet<Tag> personTags) throws CommandException {
