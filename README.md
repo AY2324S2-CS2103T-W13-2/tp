@@ -1,4 +1,5 @@
 [![CI Status](https://github.com/AY2324S2-CS2103T-W13-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S2-CS2103T-W13-2/tp/actions/workflows/gradle.yml)
+[![codecov](https://codecov.io/gh/AY2324S2-CS2103T-W13-2/tp/graph/badge.svg?token=ZEIZBUOZMK)](https://codecov.io/gh/AY2324S2-CS2103T-W13-2/tp)
 
 ![Ui](docs/images/Ui.png)
 
