@@ -141,15 +141,19 @@ The message “A new contact `<name>` has been added to the list. Name: `<name>`
 A new contact entry with the given user will be displayed in the list.
 
 <div markdown="block" class="alert alert-info">
+
 **:bulb: Tip:**<br>
 You can add the contact of a certain employee directly with tags and department with the `add` command.
+
 </div>
 <br>
 <div markdown="block" class="alert alert-info">
+
 **:information_source: Note:**<br>
 Notice how the tag details are specified as `[tag:<tag>]...`, this means that more tags can be entered
 after the first one, however since the first tag is in `[]` brackets, it will be optional, that means that the add command accepts 
 zero or more tags.
+
 </div>
 
 ![Add.png](images/user-guide/Add.png)
@@ -184,9 +188,11 @@ The message "Contact `name` has been deleted. Name: `name`, Phone: `phone number
 The entry with the given id will disappear from the list.
 
 <div markdown="block" class="alert alert-warning">
+
 **:warning: Warning:**<br>
 Due to a problem in the app, try not to delete duplicate contact, for e.g. `delete 1 1`, the specified 
 contact will be deleted, but there will be no output message, and you will not be able to undo the deletion. 
+
 </div>
 
 ![Delete.png](images/user-guide/Delete.png)
@@ -211,9 +217,11 @@ Tags the specified contact with the input tag name and/or input department name.
 Format: `tag <id>... tag:<tag>... [tag:<tag>]... [department:<department>]`
 
 <div markdown="block" class="alert alert-info">
+
 **:information_source: Note:**<br>
 There must be at least the department specified or at least one tag. The command
 cannot only have an id.
+
 </div>
 
 Example:
@@ -240,9 +248,11 @@ Deletes the specified tag from the specified contact
 Format: `untag <id> [tag:<tag>]... [department:<department>]`
 
 <div markdown="block" class="alert alert-info">
+
 **:information_source: Note:**<br>
 `untag` currently doesn't support multiple `<id>` like `tag` and `delete`. It is
 planned for a future release.
+
 </div>
 
 Output:
@@ -277,9 +287,11 @@ sequence of letters and numbers surrounded by spaces
 Example
 `filter address:serangoon`
 <div markdown="block" class="alert alert-info">
+
 **:information_source: Note:**<br>
 The default modifier is `has`, so this lists every contact with an address that
 has queenstown in it.
+
 </div>
 
 ![filter1.PNG](images/user-guide/filter1.PNG)
@@ -332,11 +344,13 @@ Resets the state of OH to before the execution of the latest command.
 However, the undo command does not work for closing and then relaunching the app.
 All commands except 'filter' can be undone.
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Note:**<br>
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Warning:**<br>
 OfficeHarbor can undo up to 5 times, and only commands run from the command's
 startup. We recommend you to keep regular backups of your [data](#the-data-file) in case you want
 to change something you did beforehand.
+
 </div>
 
 Format: `undo`
@@ -384,9 +398,12 @@ OfficeHarbor data are saved in the hard disk automatically after any command tha
 
 OfficeHarbor data are saved automatically as a JSON file `[JAR file location]/dataddress:officeharbor.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">**:warning: Caution:**
+<div markdown="span" class="alert alert-warning">
+
+**:warning: Caution:**
 If your changes to the data file makes its format invalid, OfficeHarbor will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
