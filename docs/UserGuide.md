@@ -10,12 +10,11 @@ efficiently managing the contacts of the tech teams. The app is optimized primar
 workflow. Additionally, it also has a dynamic on-screen feedback to keep the users informed of their operation throughout 
 the interaction. If you can type fast, OH can get your contact management tasks done faster than traditional mouse-based apps.
 
-## Target Audience
-
-The user guide is mainly intended for secretaries of a large tech firm. We assumed that they will have some experience in
-typing but is unfamiliar with **Command Line Interface (CLI)** and other technical details. 
-
 ## Purpose of this Guide
+
+The user guide is mainly intended for secretaries of a large tech firm. The program is managed almost entirely by commands from 
+keyboard, so a moderately fast typing speed is necessary to be efficient with it. Experience in a command based program is 
+not necessary and is explained in this document.
 
 The primary purpose of the user guide is to quickly help novice users to familiarize with the keyboard-based environment 
 and learn how to use the basic function of the app. The secondary purpose is to provide a fast way for the experienced users
@@ -58,6 +57,14 @@ When reading through the guide, you can look for these icons for extra informati
 4. Double-click on the `officeharbor.jar` file to run the application.
    An app similar to the below image should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+    
+    <div markdown="block" class="alert alert-info">
+
+    **:information_source: Note for Advance User:**<br>
+    You can also call the jar file via the `java -jar officeharbor.jar` command in the terminal, 
+    after the `cd` to the main folder.
+
+    </div>
 
 5. Type the command in the command box and press Enter to run it. e.g. typing **`help`** and pressing **| Enter &#9166; |** will open the help window.<br>
    Some example commands you can try:
