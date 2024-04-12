@@ -321,6 +321,18 @@ sequence of letters and numbers surrounded by spaces
   > names containing "will" in the middle of a name like "Fred Mcwilliams" but
   > not "Will Pherell".
 
+- `startswith`: value must match the very beginning of the component.
+  Example: `filter name.startswith:Jack`
+  > Returns the contacts who start with "Jack".
+  > For example, names like "Jack Doe" but not ones starting with "John" 
+  > like "John Doe".
+
+- `endswith`: value must match the very end of the component.
+   Example: `filter name.endswith:Daniel`
+   >Returns the contacts who end with "Daniel".
+   >For example, names like "John Daniel" but not ones ending with "Doe"
+   >like "John Doe".
+
 Output:
 If 10 contacts match the list, the output message is "10 persons listed"
 
