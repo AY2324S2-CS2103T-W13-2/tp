@@ -208,8 +208,7 @@ filter phone.is:12345678
 ### Undoing a command : `undo`
 
 Resets the state of OH to before the execution of the latest command.
-However, the undo command does not work for closing and then relaunching the app.
-All commands except 'filter' can be undone.
+However, the undo command does not work for exiting and then relaunching the app.
 
 Format: `undo`
 
@@ -219,6 +218,13 @@ The list entry of the user will return to the state before the latest command.
 If no command has been run at all, an error message "No more commands to undo!" will be shown instead.
 
 Undo command supports add, delete, clear, tag, and untag commands.
+The undo command will basically not take into account any of the "unsupported" commands and will just undo
+the last command that was supported.
+Example: 
+1. delete 1
+2. list
+3. undo
+This will undo the delete command and the list will show the contact that was deleted.
 
 Example of undoing a delete command.
 
@@ -242,6 +248,14 @@ The list entry of the user will return to the state before the latest undo comma
 If no undo command has been run at all, an error message "No more commands to redo!" will be shown instead.
 
 Redo command supports add, delete, clear, tag, and untag commands.
+The redo command will basically not take into account any of the "unsupported" commands and will just undo
+the last command that was supported.
+Example:
+1. delete 1
+2. list
+3. undo
+4. redo
+This will redo the delete command and will again delete the contact.
 
 Example of redoing the previous undo command:
 ![redo](images/user-guide/redo_mock_output.png)
