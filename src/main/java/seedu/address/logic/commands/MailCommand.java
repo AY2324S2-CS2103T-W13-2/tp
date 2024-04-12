@@ -6,6 +6,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -41,28 +42,27 @@ public class MailCommand extends Command {
         if (model.getFilteredPersonList().isEmpty()) {
             return new CommandResult(String.format(MESSAGE_EMAIL_CONTACT_EMPTY));
         }
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < model.getFilteredPersonList().size(); i++) {
-            if (i == model.getFilteredPersonList().size() - 1) {
-                builder.append(model.getFilteredPersonList().get(i).getEmail());
-            } else {
-                builder.append(model.getFilteredPersonList().get(i).getEmail()).append(",");
-            }
-        }
+        String emailList = model.getFilteredPersonList().stream()
+                .map(person -> person.getEmail().toString())
+                .collect(Collectors.joining(","));
         try {
-            Desktop desktop;
-            if (Desktop.isDesktopSupported()
-                    && (desktop = Desktop.getDesktop()).isSupported(Desktop.Action.MAIL)) {
-                URI mailto = new URI("mailto:" + builder);
-                desktop.mail(mailto);
-            } else {
-                throw new RuntimeException("Desktop doesn't support mailto");
-            }
+            openMailApp(emailList);
         } catch (URISyntaxException | IOException e) {
-            throw new RuntimeException("Error");
+            throw new RuntimeException(e.getMessage());
         }
         return new CommandResult(
-                String.format(MESSAGE_EMAIL_CONTACT_SUCCESS, builder));
+                String.format(MESSAGE_EMAIL_CONTACT_SUCCESS, emailList));
+    }
+
+    private void openMailApp(String emailList) throws URISyntaxException, IOException {
+        Desktop desktop;
+        if (Desktop.isDesktopSupported()
+                && (desktop = Desktop.getDesktop()).isSupported(Desktop.Action.MAIL)) {
+            URI mailto = new URI("mailto:" + emailList);
+            desktop.mail(mailto);
+        } else {
+            throw new RuntimeException("Desktop doesn't support mailto");
+        }
     }
 
     @Override
