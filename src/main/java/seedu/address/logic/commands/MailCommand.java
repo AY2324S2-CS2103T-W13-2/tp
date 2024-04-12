@@ -38,7 +38,7 @@ public class MailCommand extends Command {
         requireNonNull(model);
 
         model.updateFilteredPersonList(predicate);
-        if (model.getFilteredPersonList().isEmpty()) {
+        if (model.isFilteredPersonListEmpty()) {
             return new CommandResult(String.format(MESSAGE_EMAIL_CONTACT_EMPTY));
         }
         StringBuilder builder = new StringBuilder();
@@ -49,6 +49,7 @@ public class MailCommand extends Command {
                 builder.append(model.getFilteredPersonList().get(i).getEmail()).append(",");
             }
         }
+
         try {
             Desktop desktop;
             if (Desktop.isDesktopSupported()

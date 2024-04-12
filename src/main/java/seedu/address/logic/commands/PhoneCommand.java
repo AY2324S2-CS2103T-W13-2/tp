@@ -38,7 +38,7 @@ public class PhoneCommand extends Command {
         requireNonNull(model);
 
         model.updateFilteredPersonList(predicate);
-        if (model.getFilteredPersonList().isEmpty()) {
+        if (model.isFilteredPersonListEmpty()) {
             return new CommandResult(String.format(MESSAGE_PHONE_CONTACT_EMPTY));
         }
         StringBuilder builder = new StringBuilder();
