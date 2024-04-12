@@ -41,11 +41,11 @@ When reading through the guide, you can look for these icons for extra informati
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Table of Contents
+* Table of Contents
   {:toc}
 
 
-## 1. Getting started
+## Getting started
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -82,7 +82,7 @@ When reading through the guide, you can look for these icons for extra informati
 6. Refer to the [Features](#2-features) below for details of each command.
 
 
-## 2. Features
+## Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -113,7 +113,7 @@ When reading through the guide, you can look for these icons for extra informati
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### 2.1 Viewing help : `help`
+### Viewing help : `help`
 
 Shows either a general summary of the available command or a more detailed help message for the entered command if there is 
 any. All help window also has a url link to the user guide at the bottom.
@@ -133,7 +133,7 @@ Example of help command without input command
 Example of help command for `add` command
 ![HelpAdd.PNG](images/user-guide/help_add_output.png)
 
-### 2.2 Adding a person: `add`
+### Adding a person: `add`
 
 Adds a contact with the input details to OH.
 
@@ -165,7 +165,7 @@ A new contact entry with the given user will be displayed in the list.
 
 ![Add.png](images/user-guide/Add.png)
 
-### 2.3 Listing all persons : `list`
+### Listing all persons : `list`
 
 Shows a list of all contacts in OH.
 
@@ -177,7 +177,7 @@ The contacts are listed in the order in which they are added.
 The message "Listed all contacts" is shown in the message box if there is any contact, or else the message is
 "The list is empty".
 
-### 2.4 Deleting a person : `delete`
+### Deleting a person : `delete`
 
 Deletes the specified contact(s) from OH.
 
@@ -204,7 +204,7 @@ contact will be deleted, but there will be no output message, and you will not b
 
 ![Delete.png](images/user-guide/Delete.png)
 
-### 2.5 Clearing all entries : `clear`
+### Clearing all entries : `clear`
 
 Clears all entries from OH.
 
@@ -213,7 +213,7 @@ Format: `clear`
 Output:
 The message "Address book has been cleared!" will be shown.
 
-### 2.6 Tagging a Contact : `tag`
+### Tagging a Contact : `tag`
 
 Tags the specified contact with the input tag name and/or input department name.
 
@@ -242,7 +242,7 @@ on the currently displayed list.
 ![TagCommand.png](images/user-guide/TagCommand.png)
 ![TagCommand2.png](images/user-guide/TagCommand2.png)
 
-### 2.7 Deleting a tag : `untag`
+### Deleting a tag : `untag`
 
 Deletes the specified tag from the specified contact
 
@@ -269,7 +269,7 @@ The list entry of the user with <id> will not have the tag anymore.
 
 ![untag.png](images/user-guide/untag.png)
 
-### 2.8 Filtering contacts : `filter`
+### Filtering contacts : `filter`
 
 Filters the entire list of contacts.
 
@@ -343,7 +343,7 @@ sequence of letters and numbers surrounded by spaces
 Output:
 If 10 contacts match the list, the output message is "10 persons listed"
 
-### 2.9 Mailing to a list of people : `mail`
+### Mailing to a list of people : `mail`
 
 Composes an email to the people tagged with the selected tag.
 
@@ -377,7 +377,7 @@ Example of phone command: `phone colleague`
 ![phone.PNG](images/user-guide/phone.PNG)
 
 
-### 2.11 Undoing a command : `undo`
+### Undoing a command : `undo`
 
 Resets the state of OH to before the execution of the latest command.
 However, the undo command does not work for exiting and then relaunching the app.
@@ -423,7 +423,7 @@ Contact after a delete command:
 Contact after the delete command is undone:
 ![undosuccess.PNG](images/user-guide/undosuccess.PNG)
 
-### 2.12 Redoing a command : `redo`
+### Redoing a command : `redo`
 
 Resets the state of OH to before the latest undo command.
 However, the redo command does not work for closing and then relaunching the app.
@@ -457,13 +457,13 @@ Just like [Undo](#211-undoing-a-command--undo), Redo command only supports [add]
 Example of redoing the previous undo command:
 ![redosuccess.PNG](images/user-guide/redosuccess.PNG)
 
-### 2.13 Exiting the program : `exit`
+### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 2.14 Saving the data
+### Saving the data
 
 OfficeHarbor data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
