@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.department.Department;
@@ -16,6 +17,17 @@ import seedu.address.model.tag.department.Department;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+    /**
+     * The available components in a {@link Person} class.
+     */
+    public enum Component {
+        NAME,
+        ADDRESS,
+        EMAIL,
+        TAG,
+        PHONE,
+        DEPARTMENT
+    }
 
     // Identity fields
     private final Name name;
@@ -68,6 +80,36 @@ public class Person {
 
     public Optional<Department> getDepartment() {
         return department;
+    }
+
+    /**
+     * Returns the value of the component specified.
+     */
+    public Stream<String> getComponent(Person.Component component) {
+        Stream<String> stream;
+        switch (component) {
+        case NAME:
+            stream = Stream.of(name.fullName);
+            break;
+        case EMAIL:
+            stream = Stream.of(email.value);
+            break;
+        case PHONE:
+            stream = Stream.of(phone.value);
+            break;
+        case TAG:
+            stream = tags.stream().map(tag -> tag.tagName);
+            break;
+        case ADDRESS:
+            stream = Stream.of(address.value);
+            break;
+        case DEPARTMENT:
+            stream = department.stream().map(department -> department.tagName);
+            break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + component);
+        }
+        return stream;
     }
 
     /**
