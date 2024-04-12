@@ -260,6 +260,8 @@ The message "Undo success!" will be shown.
 The list entry of the user will return to the state before the latest command. 
 If no command has been run at all, an error message "No more commands to undo!" will be shown instead.
 
+Undo command supports add, delete, clear, tag, and untag commands.
+
 Example of undoing a delete command.
 
 Contact after a delete command:
@@ -280,6 +282,8 @@ Output:
 The message "Redo success!" will be shown.
 The list entry of the user will return to the state before the latest undo command.
 If no undo command has been run at all, an error message "No more commands to redo!" will be shown instead.
+
+Redo command supports add, delete, clear, tag, and untag commands.
 
 Example of redoing the previous undo command:
 ![redosuccess.PNG](images/user-guide/redosuccess.PNG)\
