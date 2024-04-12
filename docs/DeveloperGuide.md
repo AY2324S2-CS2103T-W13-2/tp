@@ -398,6 +398,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | secretary | delete a tag of an individual contact | make sure that the tag only is for the necessary users |
 | `*`      | user      | undo my command                       | save time on undoing the effects of a wrong command    |
 | `*`      | user      | redo my undo                          | save time on undoing the effects of a wrong undo       |
+| `*`      | user      | mail to everyone in a department      | contact everyone in a certain department               |
+| `*`      | user      | message everyone in a department      | contact everyone in a certain department               |
 *{More to be added}*
 
 ### Use cases
@@ -522,7 +524,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**UC06: Redoing an Undo Command**
+**UC07: Redoing an Undo Command**
 
 **MSS**
 
@@ -539,6 +541,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**UC08: Mail Command**
+
+**MSS**
+
+1. User requests to mail contacts of a tag.
+2. OH lists all contacts tagged with the keyword.
+3. OH opens up the mailing app.
+4. OH composes a mail to the emails of the listed contacts.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No contacts are associated with the tag.
+
+    * 2a1. OH shows an error message.
+
+      Use case ends.
+
+**UC09: Phone Command**
+
+**MSS**
+
+1. User requests to phone contacts of a tag.
+2. OH lists all contacts tagged with the keyword.
+3. OH copies the phone numbers of listed contacts to the clipboard.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No contacts are associated with the tag.
+
+    * 2a1. OH shows an error message.
+
+      Use case ends.
 
 *{More to be added}*
 

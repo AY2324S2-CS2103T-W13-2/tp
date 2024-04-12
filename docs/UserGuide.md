@@ -3,81 +3,122 @@ layout: page
 title: User Guide
 ---
 
-OfficeHarbor (OH) is a **desktop app for managing the contacts of a tech firm's teams, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, OH can get your contact management tasks done faster than traditional GUI apps.
+# Welcome Message
 
-* Table of Contents
-{:toc}
+Welcome to the user guide of OfficeHarbor (OH). OH is a desktop app designed to assist secretaries of large teach firms in
+efficiently managing the contacts of the tech teams. The app is optimized primarily for keyboard use, allowing for a fast 
+workflow. Additionally, it also has a dynamic on-screen feedback to keep the users informed of their operation throughout 
+the interaction. If you can type fast, OH can get your contact management tasks done faster than traditional mouse-based apps.
+
+## Purpose of this Guide
+
+The user guide is mainly intended for secretaries of a large tech firm. The program is managed almost entirely by commands from 
+keyboard, so a moderately fast typing speed is necessary to be efficient with it. Experience in a command based program is 
+not necessary and is explained in this document.
+
+The primary purpose of the user guide is to quickly help novice users to familiarize with the keyboard-based environment 
+and learn how to use the basic function of the app. The secondary purpose is to provide a fast way for the experienced users
+to find the app information that they are looking for.
+
+## Navigating the guide
+
+For quickly finding the information that you are looking, you can make use of the [Table of Contents](#table-of-contents) 
+below, which has a list of all the information, by clicking on the items, you will be directly to the content that you just clicked.
+
+Throughout the guide, there are also some icons which represents information outside just technicalities.
+
+* :bulb: **Tip**: This icon indicates a tip, suggestion, or piece of advice to help you use OH more effectively.
+
+* :information_source: **Note**: This icon tells you about some key details of the app usage that you could miss.
+
+* :warning: **Warning**: This icon alerts you about potential issues that you may face when using the app.
+
+* :star: **Benefit**: This icon signifies the benefits and relevance of an OH feature.
+
+When reading through the guide, you can look for these icons for extra information.
+
+*The usage of these special icons is inspired by section 1.4 of the user guide of the app SweetRewards [link](https://ay2324s2-cs2103t-t13-4.github.io/tp/UserGuide.html#14-navigating-this-guide)*
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Table of Contents
+  {:toc}
+
+
+## 1. Getting started
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
 2. Download the latest `OfficeHarbor.jar` from
    [here](https://github.com/AY2324S2-CS2103T-W13-2/tp/releases/latest).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your OH.
+3. Copy the file to the folder you want to store and use your OH.
 
-4. (a) Double-click on the `officeharbor.jar` file to run the application.
-   (b) (Or) Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar officeharbor.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click on the `officeharbor.jar` file to run the application.
+   An app similar to the below image should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+    
+    <div markdown="block" class="alert alert-info">
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing **| Enter &#9166; |** will open the help window.<br>
+    **:information_source: Note for Advance User:**<br>
+    You can also call the jar file via the `java -jar officeharbor.jar` command in the terminal, 
+    after the `cd` to the main folder.
+
+    </div>
+
+5. Type the command in the command box and press Enter to run it. e.g. typing **`help`** and pressing **| Enter &#9166; |** will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01` : Adds a contact named `John Doe` to OH.
+    * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01` : Adds a contact named `John Doe` to OH.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#2-features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 2. Features
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
-* Words :warning: enclosed between diamond brackets `<>`, are the parameters to be supplied by the user.<br>
-  e.g. in `add name:<name>`, `<name>` is a parameter which can be used as `add name:John Doe`.
+* Words enclosed between diamond brackets `<>`, are the information to be entered by the user.<br>
+  e.g. in `add name:<name>`, `<name>` is which you enter the name information, so `add name:John Doe`, will enter exactly
+  `John Doe` as the name, including the space in between.
 
-* Space can be added between the prefix and the word.<br>
+* Space can be added between the keyword and the word in `<>` bracket.<br>
   e.g. either `name: <name> phone: <phone number>` or `name:<name> phone:<phone number>` is acceptable.
 
-* Any component of a command surrounded in `[]` are optional.<br>
-  e.g. the command (`add`)[#adding-a-person-add] has an optional
-  `[department:<department>]` field, so it can be invoked with or without a
-  department.
+* Any component of a command surrounded in `[]` bracket are optional.<br>
+  e.g. the command [`add`](#22-adding-a-person--add) has an optional `[department:<department>]` part, so it can be 
+  executed with or without a department.
 
-* Any component with `...` after it means that it can be specified multiple times after the first one.
-  e.g. In [`delete`](#deleting-a-person--delete), `<id>...` means that at least one id should be specified. In [`tag`](#tagging-a-contact--tag), `[tag:<tag>]...` means that zero or more tags should be specified.
+* Any component of a command with `...` after it means that it can be specified multiple times after the first one.
+  e.g. In [`delete`](#24-deleting-a-person--delete), `<id>...` means that more ids can be entered after the first one.
 
-* The input fields for a command can be in any order.<br>
-  e.g. if the command specifies `name:<name> phone:<phone number>`, `phone:<phone number> name:<name>` is also acceptable.
+* The required component of a command can be in any order.<br>
+  e.g. if the command needs `name:<name> phone:<phone number>`, `phone:<phone number> name:<name>` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extra parameters for commands that do not take in parameters (such as [`list`](#23-listing-all-persons--list), 
+  [`exit`](#213-exiting-the-program--exit) and [`clear`](#25-clearing-all-entries--clear)) will be ignored.<br>
+  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines 
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### 2.1 Viewing help : `help`
 
-Shows either a general summary of the available command or a more detail help message for the input command if there is 
-any. All help window also has a url link at the bottom.
+Shows either a general summary of the available command or a more detailed help message for the entered command if there is 
+any. All help window also has a url link to the user guide at the bottom.
 
 Format: `help [command]`
-
-`command` is optional and is where you input the command that you want to know about.
 
 Examples:
 * `help`
@@ -85,30 +126,46 @@ Examples:
 
 Output:
 
-The message "Opened help window" in the output box, along with a separate window will be shown.
+The message "Opened help window" in the output box. A separate help window will also be shown.
 
-*help command without input command*
+Example of help command without input command
 ![Help.PNG](images/user-guide/Help.PNG)
-*help command for `add` command*
+Example of help command for `add` command
 ![HelpAdd.PNG](images/user-guide/help_add_output.png)
 
-### Adding a person: `add`
+### 2.2 Adding a person: `add`
 
 Adds a contact with the input details to OH.
 
 Format: `add name:<name> phone:<phone number> email:<email address> address:<address> [tag:<tag>]... [department:<department>]`
+
+<div markdown="block" class="alert alert-info">
+
+**:bulb: Tip:**<br>
+You can add the contact of a certain employee directly with tags and department with the `add` command.
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+Notice how the tag details are specified as `[tag:<tag>]...`, this means that more tags can be entered
+after the first one, however since the first tag is in `[]` brackets, it will be optional, that means that the add command accepts
+zero or more tags.
+
+</div>
 
 Examples:
 * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01`
 * `add name:Virat Kohli phone:98765432 email:virat@gmail.com address:Altamount Road, block 10, #05-02`
 
 Output:
-The message “A new contact `name` has been added to the list. Name: `<name>`, Phone: `<phone number>`, Email: `<email>`, Address: `<address>`.” will be shown. 
+The message “A new contact `<name>` has been added to the list. Name: `<name>`, Phone: `<phone number>`, Email: `<email>`, Address: `<address>`.” will be shown. 
 A new contact entry with the given user will be displayed in the list.
 
 ![Add.png](images/user-guide/Add.png)
 
-### Listing all persons : `list`
+### 2.3 Listing all persons : `list`
 
 Shows a list of all contacts in OH.
 
@@ -117,9 +174,10 @@ Format: `list`
 Output:
 A list of added contacts if any in the form of a scrollable pane will be shown. 
 The contacts are listed in the order in which they are added.
-The message "Empty list" is shown when there is nothing added.
+The message "Listed all contacts" is shown in the message box if there is any contact, or else the message is
+"The list is empty".
 
-### Deleting a person : `delete`
+### 2.4 Deleting a person : `delete`
 
 Deletes the specified contact(s) from OH.
 
@@ -136,9 +194,17 @@ Output:
 The message "Contact `name` has been deleted. Name: `name`, Phone: `phone number`, Email: `email`, Address: `address`.” will be shown.
 The entry with the given id will disappear from the list.
 
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Warning:**<br>
+Due to a problem in the app, try not to delete duplicate contact, for e.g. `delete 1 1`, the specified 
+contact will be deleted, but there will be no output message, and you will not be able to undo the deletion. 
+
+</div>
+
 ![Delete.png](images/user-guide/Delete.png)
 
-### Clearing all entries : `clear`
+### 2.5 Clearing all entries : `clear`
 
 Clears all entries from OH.
 
@@ -147,7 +213,7 @@ Format: `clear`
 Output:
 The message "Address book has been cleared!" will be shown.
 
-### Tagging a Contact : `tag`
+### 2.6 Tagging a Contact : `tag`
 
 Tags the specified contact with the input tag name and/or input department name.
 
@@ -156,9 +222,11 @@ Tags the specified contact with the input tag name and/or input department name.
 * The id **must be a positive integer** 1, 2, 3, …
 
 <div markdown="block" class="alert alert-info">
+
 **:information_source: Note:**<br>
 There must be at least the department specified or at least one tag. The command
 cannot only have an id.
+
 </div>
 
 Format: `tag <id>... tag:<tag>... [tag:<tag>]... [department:<department>]`
@@ -174,7 +242,7 @@ on the currently displayed list.
 ![TagCommand.png](images/user-guide/TagCommand.png)
 ![TagCommand2.png](images/user-guide/TagCommand2.png)
 
-### Deleting a tag : `untag`
+### 2.7 Deleting a tag : `untag`
 
 Deletes the specified tag from the specified contact
 
@@ -185,9 +253,11 @@ Deletes the specified tag from the specified contact
   stored in the id.
 
 <div markdown="block" class="alert alert-info">
+
 **:information_source: Note:**<br>
 `untag` currently doesn't support multiple `<id>` like `tag` and `delete`. It is
 planned for a future release.
+
 </div>
 
 Format: `untag <id> [tag:<tag>]... [department:<department>]`
@@ -199,7 +269,7 @@ The list entry of the user with <id> will not have the tag anymore.
 
 ![untag.png](images/user-guide/untag.png)
 
-### Filtering contacts : `filter`
+### 2.8 Filtering contacts : `filter`
 
 Filters the entire list of contacts.
 
@@ -232,7 +302,7 @@ it is optional and defaults to `has`. The modifiers are
 - `hasnt`: value should not match any part of the component
   Example: `filter tag.hasnt:senior`
   > Returns all the contacts whose name does not have "senior" anywhere in them.
-
+  
 - `is`: value has to match the component exactly
 
   Example: `filter phone.is:93210283`
@@ -250,7 +320,7 @@ sequence of letters and numbers surrounded by spaces
   > Returns the contacts who has "will" as a word.
   > For example, names like "Will Pherell" but not ones containing "will"
   > somewhere in the middle of the word like "Fred Mcwilliams".
-
+  
 - `noword`: value should not match a distinct word in the component.
   Example: `filter name.noword:will`
   > Returns the contacts who do not have "will" as a word.
@@ -258,58 +328,22 @@ sequence of letters and numbers surrounded by spaces
   > names containing "will" in the middle of a name like "Fred Mcwilliams" but
   > not "Will Pherell".
 
+- `startswith`: value must match the very beginning of the component.
+  Example: `filter name.startswith:Jack`
+  > Returns the contacts who start with "Jack".
+  > For example, names like "Jack Doe" but not ones starting with "John" 
+  > like "John Doe".
+
+- `endswith`: value must match the very end of the component.
+   Example: `filter name.endswith:Daniel`
+   >Returns the contacts who end with "Daniel".
+   >For example, names like "John Daniel" but not ones ending with "Doe"
+   >like "John Doe".
+
 Output:
 If 10 contacts match the list, the output message is "10 persons listed"
 
-### Undoing a command : `undo`
-
-Resets the state of OH to before the execution of the latest command.
-However, the undo command does not work for closing and then relaunching the app.
-All commands except 'filter' can be undone.
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Note:**<br>
-OfficeHarbor can undo up to 5 times, and only commands run from the command's
-startup. We recommend you to keep regular backups of your [data](#the-data-file) in case you want
-to change something you did beforehand.
-</div>
-
-Format: `undo`
-
-Output:
-The message "Undo success!" will be shown. 
-The list entry of the user will return to the state before the latest command. 
-If no command has been run at all, an error message "No more commands to undo!" will be shown instead.
-
-Undo command supports add, delete, clear, tag, and untag commands.
-
-Example of undoing a delete command.
-
-Contact after a delete command:
-![deleteUndo.PNG](images/user-guide/deleteUndo.PNG)
-
-Contact after the delete command is undone:
-![undosuccess.PNG](images/user-guide/undosuccess.PNG)
-
-### Redoing a command : `redo`
-
-Resets the state of OH to before the latest undo command.
-However, the redo command does not work for closing and then relaunching the app.
-All commands except 'filter' can be redone.
-
-Format: `redo`
-
-Output:
-The message "Redo success!" will be shown.
-The list entry of the user will return to the state before the latest undo command.
-If no undo command has been run at all, an error message "No more commands to redo!" will be shown instead.
-
-Redo command supports add, delete, clear, tag, and untag commands.
-
-Example of redoing the previous undo command:
-![redosuccess.PNG](images/user-guide/redosuccess.PNG)\
-
-### Mailing to a list of people : `mail`
+### 2.9 Mailing to a list of people : `mail`
 
 Composes an email to the people tagged with the selected tag.
 
@@ -327,14 +361,14 @@ Example of mail command: `mail colleagues`
 ![mail2.PNG](images/user-guide/mail2.PNG)
 
 
-### Copying phone numbers : `phone`
+## 2.10 Copying phone numbers : `phone`
 
 Copies the phone numbers of people tagged with the selected tag to
 your clipboard for ease of messaging.
 
 Format: `phone <tag>`
 
-Output: The message "Here is the list of phone numbers: 
+Output: The message "Here is the list of phone numbers:
 `phone1`,`phone2`,`phone3`...
 
 They have been copied to your clipboard."
@@ -343,23 +377,106 @@ Example of phone command: `phone colleague`
 ![phone.PNG](images/user-guide/phone.PNG)
 
 
-### Exiting the program : `exit`
+### 2.11 Undoing a command : `undo`
+
+Resets the state of OH to before the execution of the latest command.
+However, the undo command does not work for exiting and then relaunching the app.
+
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Warning:**<br>
+OfficeHarbor can undo up to 5 times, and only commands run from the command's
+startup. We recommend you to keep regular backups of your [data](#the-data-file) in case you want
+to change something you did beforehand.
+
+</div>
+
+Format: `undo`
+
+Output:
+The message "Undo success!" will be shown.
+The list entry of the user will return to the state before the latest command.
+If no command has been run at all, an error message "No more commands to undo!" will be shown instead.
+
+Undo command supports add, delete, clear, tag, and untag commands.
+The undo command will basically not take into account any of the "unsupported" commands and will just undo
+the last command that was supported.
+Example: 
+1. delete 1
+2. list
+3. undo
+This will undo the delete command and the list will show the contact that was deleted.
+<div markdown="block" >
+
+**:information_source: Note:**<br>
+Undo command only supports [add](#22-adding-a-person--add), [delete](#24-deleting-a-person--delete), 
+[clear](#25-clearing-all-entries--clear), [tag](#26-tagging-a-contact--tag), and 
+[untag](#27-deleting-a-tag--untag) commands.
+
+</div>
+
+Example of undoing a delete command.
+
+Contact after a delete command:
+![deleteUndo.PNG](images/user-guide/deleteUndo.PNG)
+
+Contact after the delete command is undone:
+![undosuccess.PNG](images/user-guide/undosuccess.PNG)
+
+### 2.12 Redoing a command : `redo`
+
+Resets the state of OH to before the latest undo command.
+However, the redo command does not work for closing and then relaunching the app.
+All commands except 'filter' can be redone.
+
+Format: `redo`
+
+Output:
+The message "Redo success!" will be shown.
+The list entry of the user will return to the state before the latest undo command.
+If no undo command has been run at all, an error message "No more commands to redo!" will be shown instead.
+
+Redo command supports add, delete, clear, tag, and untag commands.
+The redo command will basically not take into account any of the "unsupported" commands and will just undo
+the last command that was supported.
+Example:
+1. delete 1
+2. list
+3. undo
+4. redo
+This will redo the delete command and will again delete the contact.
+<div markdown="block" >
+
+**:information_source: Note:**<br>
+Just like [Undo](#211-undoing-a-command--undo), Redo command only supports [add](#22-adding-a-person--add), 
+[delete](#24-deleting-a-person--delete), [clear](#25-clearing-all-entries--clear), 
+[tag](#26-tagging-a-contact--tag), and [untag](#27-deleting-a-tag--untag) commands.
+
+</div>
+
+Example of redoing the previous undo command:
+![redosuccess.PNG](images/user-guide/redosuccess.PNG)
+
+### 2.13 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+### 2.14 Saving the data
 
 OfficeHarbor data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### The data file
+#### The data file
 
 OfficeHarbor data are saved automatically as a JSON file `[JAR file location]/dataddress:officeharbor.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+
+**:warning: Caution:**
 If your changes to the data file makes its format invalid, OfficeHarbor will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -371,7 +488,7 @@ Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected wa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues :warning:
+## Other Known issues :warning:
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
@@ -379,18 +496,18 @@ Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected wa
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                                                                                                                                  |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add name:<name> phone:<phone number> email:<email address> address:<address> [tag:<tag>]... [department:<department>]` <br> e.g., `add name:James Ho phone:22224444 email:jamesho@example.com address:123, Clementi Rd, 1234665 tag:Friend department:Marketing` |
-| **Delete**     | `delete <id>`<br> e.g., `delete 3`                                                                                                                                                                                                                                |
-| **Clear**      | `clear`                                                                                                                                                                                                                                                           |
-| **Tag**        | `tag <id> [tag:<tag>]... [department:<department>]`  <br> e.g., `tag 2 tag:friends department:HR`                                                                                                                                                                 |
-| **Delete Tag** | `untag <id> [tag:<tag>]... [department:<department>]` <br> e.g., `untag 2 tag:friends department:HR`                                                                                                                                                              |
-| **List**       | `list`                                                                                                                                                                                                                                                            |
-| **Undo**       | `undo`                                                                                                                                                                                                                                                            |
-| **Redo**       | `redo`                                                                                                                                                                                                                                                            |
-| **Help**       | `help`                                                                                                                                                                                                                                                            |
-| **Mail**       | `mail <tag>`                                                                                                                                                                                                                                                      |
-| **Phone**      | `phone <tag>`                                                                                                                                                                                                                                                     |
-| **Filter**     | `filter <component>[.<modifier>]:<value> ` <br> e.g., `filter name.has: Alex`                                                                                                                                                                                     |
-| **Exit**       | `exit`                                                                                                                                                                                                                                                            |
+| Action         | Format, Examples                                                                                                                                                                                                                                           |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add name:<name> phone:<phone> email:<email address> address:<address> [tag:<tag>]... [department:<department>]` <br> e.g., `add name:James Ho phone:22224444 email:jamesho@example.com address:123, Clementi Rd, 1234665 tag:Friend department:Marketing` |
+| **Clear**      | `clear`                                                                                                                                                                                                                                                    |
+| **Delete**     | `delete <id>...`<br> e.g., `delete 3`                                                                                                                                                                                                                      |
+| **Delete Tag** | `untag <id> [tag:<tag>]... [department:<department>]` <br> e.g., `untag 2 tag:friends department:HR`                                                                                                                                                       |
+| **Exit**       | `exit`                                                                                                                                                                                                                                                     |
+| **Filter**     | `filter <component>[.<modifier>]:<value>... ` <br> e.g., `filter name.has: Alex`                                                                                                                                                                           |
+| **Help**       | `help [<command>]`                                                                                                                                                                                                                                         |
+| **List**       | `list`                                                                                                                                                                                                                                                     |
+| **Mail**       | `mail <tag>`                                                                                                                                                                                                                                               |
+| **Phone**      | `phone <tag>`                                                                                                                                                                                                                                              |
+| **Redo**       | `redo`                                                                                                                                                                                                                                                     |
+| **Tag**        | `tag <id>... tag:<tag>... [department:<department>]`  <br> e.g., `tag 2 tag:friends department:HR`                                                                                                                                                         |
+| **Undo**       | `undo`                                                                                                                                                                                                                                                     |
