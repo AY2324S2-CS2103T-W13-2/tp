@@ -301,7 +301,7 @@ Example of mail command: `mail colleagues`
 ### Copying phone numbers : `phone`
 
 Copies the phone numbers of people tagged with the selected tag to
-your clipboard.
+your clipboard for ease of messaging.
 
 Format: `phone <tag>`
 
