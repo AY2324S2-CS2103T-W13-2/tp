@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.department.Department;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -119,10 +121,11 @@ public class DeleteCommandTest {
         List<Person> deletedPersons = new ArrayList<>();
         Person person1 = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
                 .withEmail("alice@example.com").withAddress("123, Jurong West Ave 6, #08-111")
-                .withTags("friends").withDepartment("HR").build();
+                .withTags("friends").withDepartment(Optional.of(new Department("HR"))).build();
         Person person2 = new PersonBuilder().withName("Benson Meier").withPhone("98765432")
                 .withEmail("johnd@example.com").withAddress("311, Clementi Ave 2, #02-25")
-                .withTags("owesMoney", "friends").withDepartment("HR").build();
+                .withTags("owesMoney", "friends").withDepartment(Optional.of(new Department("HR")))
+                .build();
         deletedPersons.add(person1);
         deletedPersons.add(person2);
 

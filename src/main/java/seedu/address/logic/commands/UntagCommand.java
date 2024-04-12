@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -42,7 +41,7 @@ public class UntagCommand extends Command {
     public UntagCommand(Index index, Collection<Tag> tags, Optional<Department> department) {
         this.index = index;
         this.tags = new HashSet<>(tags);
-        this.department = department.isEmpty() ? Optional.of(new Department("EMPTYDEP")) : department;
+        this.department = department;
     }
 
     @Override
@@ -71,10 +70,10 @@ public class UntagCommand extends Command {
         validateAllTagsExist(personToUntag, personTags);
         personTags.removeAll(tags);
 
-        var dep = personToUntag.getDepartment();
-        if (!Objects.equals(department.get().tagName, "EMPTYDEP")) {
-            validateDepartmentExists(personToUntag, department.get());
-            dep = Optional.of(new Department("EMPTYDEP"));
+        Optional<Department> departmentToUntag = personToUntag.getDepartment();
+
+        if (department.isPresent()) {
+            departmentToUntag = department;
         }
 
         return new Person(
@@ -83,7 +82,7 @@ public class UntagCommand extends Command {
                 personToUntag.getEmail(),
                 personToUntag.getAddress(),
                 personTags,
-                dep);
+                departmentToUntag);
     }
 
     private void validateDepartmentExists(Person personToUntag, Department department) throws CommandException {

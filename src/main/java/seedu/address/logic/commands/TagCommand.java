@@ -73,17 +73,17 @@ public class TagCommand extends Command {
 
         String tagInfo = " ";
 
-        if (!tags.isEmpty() && (!department.isEmpty() && !department.get().tagName.equals("EMPTYDEP"))) {
+        if (!tags.isEmpty() && department.isPresent()) {
             tagInfo = String.format(MESSAGE_TAG_CONTACT_SUCCESS,
                     showIndices(targetIndices), showTags(tags) + ", " + department.get());
         }
 
-        if (!tags.isEmpty() && (department.isEmpty() || department.get().tagName.equals("EMPTYDEP"))) {
+        if (!tags.isEmpty() && department.isEmpty()) {
             tagInfo = String.format(MESSAGE_TAG_CONTACT_SUCCESS,
                     showIndices(targetIndices), showTags(tags));
         }
 
-        if (tags.isEmpty() && (!department.isEmpty() && !department.get().tagName.equals("EMPTYDEP"))) {
+        if (tags.isEmpty() && department.isPresent()) {
             tagInfo = String.format(MESSAGE_TAG_CONTACT_SUCCESS,
                     showIndices(targetIndices), department.get());
         }
@@ -113,10 +113,10 @@ public class TagCommand extends Command {
         Set<Tag> personTags = new HashSet<>(personToTag.getTags());
         personTags.addAll(tags);
 
-        Optional<Department> dep = department;
+        Optional<Department> departmentToTag = department;
 
-        if (dep.get().tagName.isEmpty() || dep.get().tagName.equals("EMPTYDEP")) {
-            dep = personToTag.getDepartment();
+        if (departmentToTag.isEmpty()) {
+            departmentToTag = personToTag.getDepartment();
         }
 
         return new Person(
@@ -125,7 +125,7 @@ public class TagCommand extends Command {
                 personToTag.getEmail(),
                 personToTag.getAddress(),
                 personTags,
-                dep);
+                departmentToTag);
     }
 
     @Override

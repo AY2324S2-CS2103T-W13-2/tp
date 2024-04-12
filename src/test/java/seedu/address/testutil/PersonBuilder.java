@@ -98,8 +98,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Department} of the {@code Person} that we are building.
      */
-    public PersonBuilder withDepartment(String department) {
-        this.department = Optional.of(new Department(department));
+    public PersonBuilder withDepartment(Optional<Department> department) {
+        this.department = department;
         return this;
     }
 

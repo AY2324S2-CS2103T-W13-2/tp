@@ -33,11 +33,17 @@ public class TagCommandParser implements Parser<TagCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DEPARTMENT);
 
         Collection<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Optional<Department> department = Optional.of(ParserUtil.parseDepartment(argMultimap
-                .getValue(PREFIX_DEPARTMENT)
-                .orElse("EMPTYDEP")));
+        Optional<Department> department;
+        Optional<String> stringDepartment = argMultimap.getValue(PREFIX_DEPARTMENT);
 
-        if (tags.isEmpty() && (department.get().tagName.isEmpty() || department.get().tagName.equals("EMPTYDEP"))) {
+        if (stringDepartment.isEmpty()) {
+            department = Optional.empty();
+        } else {
+            department = Optional.of(new Department(stringDepartment.get()));
+        }
+
+        // Check if there are any arguments
+        if (tags.isEmpty() && department.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
