@@ -1,0 +1,23 @@
+package seedu.officeharbor.logic.commands;
+
+import seedu.officeharbor.logic.CommandHistory;
+import seedu.officeharbor.model.Model;
+
+/**
+ * Terminates the program.
+ */
+public class ExitCommand extends Command {
+
+    public static final String COMMAND_WORD = "exit";
+
+    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Address Book as requested ..."
+            + "\n Parameters: Does not take in any parameter";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "\n: Exits OfficeHarbor";
+
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) {
+        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
+    }
+
+}
