@@ -1,0 +1,54 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR_T3
+
+Class FilterCommand
+
+package ComponentPredicate {
+Class "<<interface>>\nComponentPredicate" as PredicateInterface
+package String {
+Class "{abstract}\nComponentStringPredicate" as StringPredicate
+Class Is
+Class Isnt
+Class Has
+Class Hasnt
+Class StartsWith
+Class EndsWith
+Class Word
+Class NoWord
+}
+package Existence {
+Class "{abstract}\nComponentExistencePredicate" as ExistencePredicate
+Class None
+Class Some
+}
+}
+
+package Person {
+Class HiddenPerson #ffffff
+}
+
+FilterCommand --> "1..*" PredicateInterface
+
+PredicateInterface <|.. ExistencePredicate
+PredicateInterface <|.. StringPredicate
+
+StringPredicate <|-- Is
+StringPredicate <|-- Isnt
+StringPredicate <|-- Has
+StringPredicate <|-- Hasnt
+StringPredicate <|-- StartsWith
+StringPredicate <|-- EndsWith
+StringPredicate <|-- Word
+StringPredicate <|-- NoWord
+
+ExistencePredicate <|-- None
+ExistencePredicate <|-- Some
+
+Person <.left. PredicateInterface
+
+class "<<interface>>\nPredicate<Person>" as Predicate
+Predicate <|.up. PredicateInterface
+@enduml
