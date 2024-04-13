@@ -51,9 +51,7 @@ public class Messages {
         person.getTags().forEach(builder::append);
         builder.append("; Department: ");
 
-        if (person.getDepartment().isPresent()) {
-            builder.append(person.getDepartment().get());
-        }
+        person.getDepartment().ifPresent(builder::append);
 
         return builder.toString();
     }

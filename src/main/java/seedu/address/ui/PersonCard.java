@@ -56,10 +56,12 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        if (person.getDepartment().isPresent()) {
-            Label departmentLabel = new Label(person.getDepartment().get().tagName);
+
+        person.getDepartment().ifPresent(department -> {
+            Label departmentLabel = new Label(department.tagName);
             departmentLabel.setStyle("-fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-color: #0015ff;");
             tags.getChildren().add(departmentLabel);
-        }
+        });
+
     }
 }

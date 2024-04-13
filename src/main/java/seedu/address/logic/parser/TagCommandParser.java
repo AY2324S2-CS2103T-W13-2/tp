@@ -36,11 +36,7 @@ public class TagCommandParser implements Parser<TagCommand> {
         Optional<Department> department;
         Optional<String> stringDepartment = argMultimap.getValue(PREFIX_DEPARTMENT);
 
-        if (stringDepartment.isEmpty()) {
-            department = Optional.empty();
-        } else {
-            department = Optional.of(new Department(stringDepartment.get()));
-        }
+        department = stringDepartment.map(string -> new Department(string));
 
         // Check if there are any arguments
         if (tags.isEmpty() && department.isEmpty()) {
