@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -41,21 +42,16 @@ public class PhoneCommand extends Command {
         if (model.isFilteredPersonListEmpty()) {
             return new CommandResult(String.format(MESSAGE_PHONE_CONTACT_EMPTY));
         }
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < model.getFilteredPersonList().size(); i++) {
-            if (i == model.getFilteredPersonList().size() - 1) {
-                builder.append(model.getFilteredPersonList().get(i).getPhone());
-            } else {
-                builder.append(model.getFilteredPersonList().get(i).getPhone()).append(",");
-            }
-        }
+        String phoneList = model.getFilteredPersonList().stream()
+                .map(person -> person.getPhone().toString())
+                .collect(Collectors.joining(","));
 
-        StringSelection stringSelection = new StringSelection(builder.toString());
+        StringSelection stringSelection = new StringSelection(phoneList);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, null);
 
         return new CommandResult(
-                String.format(MESSAGE_PHONE_CONTACT_SUCCESS, builder));
+                String.format(MESSAGE_PHONE_CONTACT_SUCCESS, phoneList));
     }
 
     @Override

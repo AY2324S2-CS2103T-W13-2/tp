@@ -360,6 +360,14 @@ Example of mail command: `mail colleagues`
 ![mail.PNG](images/user-guide/mail.PNG)
 ![mail2.PNG](images/user-guide/mail2.PNG)
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+If the command does not do anything, it might be that you do not have a default mail app set up.
+
+Here is how to do so for Windows and Mac:
+https://www.lessannoyingcrm.com/help/setting-your-computers-default-email-program
+</div>
+
 
 ## 2.10 Copying phone numbers : `phone`
 
