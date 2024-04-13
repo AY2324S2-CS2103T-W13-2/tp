@@ -1,41 +1,39 @@
 package seedu.address.model.person.predicate;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
 /**
- * A component that filters based on the existence of a nullable component of {@link Person}
+ * A component that filters based on the existence of a nullable component of {@link Person}.
  */
 public abstract class ComponentExistencePredicate implements ComponentPredicate {
-    private final Component component;
+    private final Person.Component component;
 
     /**
-     * The type of nullable components in {@link Person}
+     * Checks whether the given component is empty or non-empty.
+     * @throws CommandException if the given component can never be non-empty.
      */
-    public enum Component {
-        Tags,
-        Department
-    }
-
-    public ComponentExistencePredicate(Component component) {
+    public ComponentExistencePredicate(Person.Component component) throws CommandException {
+        isValidExistenceComponent(component);
         this.component = component;
     }
 
-    protected boolean exists(Person person) {
-        switch (component) {
-        case Tags:
-            return !person.getTags().isEmpty();
-        case Department:
-            return person.getDepartment().isPresent();
-        default:
-            throw new IllegalStateException("Unexpected value: " + component);
+    private void isValidExistenceComponent(Person.Component component) throws CommandException {
+        if (component != Person.Component.TAG && component != Person.Component.DEPARTMENT) {
+            throw new CommandException("This filter predicate does not support the component: "
+                    + component.name().toLowerCase());
         }
+    }
+
+    protected boolean exists(Person person) {
+        return person.getComponent(component).findAny().isPresent();
     }
 
     /**
      * A predicate that checks whether the component is non-empty.
      */
     public static class Some extends ComponentExistencePredicate {
-        public Some(Component component) {
+        public Some(Person.Component component) throws CommandException {
             super(component);
         }
 
@@ -49,7 +47,7 @@ public abstract class ComponentExistencePredicate implements ComponentPredicate 
      * A predicate that checks whether the component is empty
      */
     public static class None extends ComponentExistencePredicate {
-        public None(Component component) {
+        public None(Person.Component component) throws CommandException {
             super(component);
         }
 

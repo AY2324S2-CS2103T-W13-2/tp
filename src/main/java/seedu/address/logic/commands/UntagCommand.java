@@ -48,13 +48,8 @@ public class UntagCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        var lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() > lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        var personToUntag = lastShownList.get(index.getZeroBased());
+        var personToUntag = model.getPersonInFilteredPersonList(index)
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX));
         var untaggedPerson = untag(personToUntag);
         model.setPerson(personToUntag, untaggedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);

@@ -57,14 +57,9 @@ public class TagCommand extends Command {
         requireNonNull(model);
         requireNonNull(history);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
-
         for (Index targetIndex : targetIndices) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-
-            Person personToTag = lastShownList.get(targetIndex.getZeroBased());
+            Person personToTag = model.getPersonInFilteredPersonList(targetIndex)
+                    .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX));
             Person taggedPerson = addTag(personToTag);
             model.setPerson(personToTag, taggedPerson);
         }
