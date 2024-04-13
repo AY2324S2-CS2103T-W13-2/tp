@@ -39,13 +39,30 @@ When reading through the guide, you can look for these icons for extra informati
 
 *The usage of these special icons is inspired by section 1.4 of the user guide of the app SweetRewards [link](https://ay2324s2-cs2103t-t13-4.github.io/tp/UserGuide.html#14-navigating-this-guide)*
 
+# Table of Contents
+1. [Getting Started](#1-getting-started)<br>
+2. [Features](#2-features)<br>
+   2.1 [Getting Help](#21-getting-help--help)<br>
+   2.2 [Adding A Person](#22-adding-a-person--add)<br>
+   2.3 [Listing All Contacts](#23-listing-all-contacts--list)<br>
+   2.4 [Deleting A Person](#24-deleting-a-person--delete)<br>
+   2.5 [Clearing All Contacts](#25-clearing-all-contacts--clear)<br>
+   2.6 [Tagging A Contact](#26-tagging-a-contact--tag)<br>
+   2.7 [Deleting A Tag](#27-deleting-a-tag--untag)<br>
+   2.8 [Filtering Contacts](#28-filtering-contacts--filter)<br>
+   2.9 [Mailing To A List Of People](#29-mailing-to-a-list-of-people--mail)<br>
+   2.10 [Copying Phone Numbers](#210-copying-phone-numbers--phone)<br>
+   2.11 [Undoing A Command](#211-undoing-a-command--undo)<br>
+   2.12 [Redoing A Command](#212-redoing-a-command--redo)<br>
+   2.13 [Exiting The Program](#213-exiting-the-program--exit)<br>
+   2.14 [Saving The Data](#214-saving-the-data)<br>
+3. [FAQ](#3-faq)<br>
+4. [Other Know Issues](#4-other-known-issues--warning-)<br>
+5. [Command Summary](#5-command-summary)<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
-* Table of Contents
-  {:toc}
-
-
-## Getting started
+# 1. Getting Started
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -82,7 +99,7 @@ When reading through the guide, you can look for these icons for extra informati
 6. Refer to the [Features](#2-features) below for details of each command.
 
 
-## Features
+# 2. Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -105,18 +122,18 @@ When reading through the guide, you can look for these icons for extra informati
 * The required component of a command can be in any order.<br>
   e.g. if the command needs `name:<name> phone:<phone number>`, `phone:<phone number> name:<name>` is also acceptable.
 
-* Extra parameters for commands that do not take in parameters (such as [`list`](#23-listing-all-persons--list), 
-  [`exit`](#213-exiting-the-program--exit) and [`clear`](#25-clearing-all-entries--clear)) will be ignored.<br>
+* Extra parameters for commands that do not take in parameters (such as [`list`](#23-listing-all-contacts--list), 
+  [`exit`](#213-exiting-the-program--exit) and [`clear`](#25-clearing-all-contacts--clear)) will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines 
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+## 2.1 Getting Help : `help`
 
 Shows either a general summary of the available command or a more detailed help message for the entered command if there is 
-any. All help window also has a url link to the user guide at the bottom.
+any. All help window also has an url link to the user guide at the bottom.
 
 Format: `help [command]`
 
@@ -133,7 +150,7 @@ Example of help command without input command
 Example of help command for `add` command
 ![HelpAdd.PNG](images/user-guide/help_add_output.png)
 
-### Adding a person: `add`
+## 2.2 Adding A Person: `add`
 
 Adds a contact with the input details to OH.
 
@@ -165,7 +182,7 @@ A new contact entry with the given user will be displayed in the list.
 
 ![Add.png](images/user-guide/Add.png)
 
-### Listing all persons : `list`
+## 2.3 Listing All Contacts : `list`
 
 Shows a list of all contacts in OH.
 
@@ -177,7 +194,7 @@ The contacts are listed in the order in which they are added.
 The message "Listed all contacts" is shown in the message box if there is any contact, or else the message is
 "The list is empty".
 
-### Deleting a person : `delete`
+## 2.4 Deleting A Person : `delete`
 
 Deletes the specified contact(s) from OH.
 
@@ -204,16 +221,16 @@ contact will be deleted, but there will be no output message, and you will not b
 
 ![Delete.png](images/user-guide/Delete.png)
 
-### Clearing all entries : `clear`
+## 2.5 Clearing All Contacts : `clear`
 
-Clears all entries from OH.
+Clears all contacts from OH.
 
 Format: `clear`
 
 Output:
 The message "Address book has been cleared!" will be shown.
 
-### Tagging a Contact : `tag`
+## 2.6 Tagging A Contact : `tag`
 
 Tags the specified contact with the input tag name and/or input department name.
 
@@ -235,14 +252,14 @@ Example:
 `tag 2 3 tag: colleagues`, `tag 2 3 department: FINANCE`, `tag 2 3 tag: colleagues department: FINANCE`
 
 Output:
-The message "Tagged Contacts: `contact index` with `tag name` and/or `department name`.” will be shown, 
+The message "Tagged Contacts: `contact index` with `tag name` and/or `department name`.”, 
 where contact index is the number representing where the current contact is
 on the currently displayed list.
 
 ![TagCommand.png](images/user-guide/TagCommand.png)
 ![TagCommand2.png](images/user-guide/TagCommand2.png)
 
-### Deleting a tag : `untag`
+## 2.7 Deleting A Tag : `untag`
 
 Deletes the specified tag from the specified contact
 
@@ -269,7 +286,7 @@ The list entry of the user with <id> will not have the tag anymore.
 
 ![untag.png](images/user-guide/untag.png)
 
-### Filtering contacts : `filter`
+## 2.8 Filtering Contacts : `filter`
 
 Filters the entire list of contacts.
 
@@ -278,7 +295,7 @@ Format: `filter <component>[.<modifier>]:<value> ...`
 `component` is one of `name`, `phone`, `email`, `department`, or `address` corresponding to the values in add:
 name, phone, email and address respectively.
 
-This command is case insensitive: it treats uppercase and lowercase letters the
+This command is case-insensitive: it treats uppercase and lowercase letters the
 same.
 
 There can be duplicate components. If there are multiple components, the
@@ -317,7 +334,7 @@ it is optional and defaults to `has`. The modifiers are
 - `word`: value has to match a distinct word in the component, a word is any
 sequence of letters and numbers surrounded by spaces
   Example: `filter name.word:will`
-  > Returns the contacts who has "will" as a word.
+  > Returns the contacts who have "will" as a word.
   > For example, names like "Will Pherell" but not ones containing "will"
   > somewhere in the middle of the word like "Fred Mcwilliams".
   
@@ -343,7 +360,7 @@ sequence of letters and numbers surrounded by spaces
 Output:
 If 10 contacts match the list, the output message is "10 persons listed"
 
-### Mailing to a list of people : `mail`
+## 2.9 Mailing To A List Of People : `mail`
 
 Composes an email to the people tagged with the selected tag.
 
@@ -361,7 +378,7 @@ Example of mail command: `mail colleagues`
 ![mail2.PNG](images/user-guide/mail2.PNG)
 
 
-## 2.10 Copying phone numbers : `phone`
+## 2.10 Copying Phone Numbers : `phone`
 
 Copies the phone numbers of people tagged with the selected tag to
 your clipboard for ease of messaging.
@@ -370,14 +387,13 @@ Format: `phone <tag>`
 
 Output: The message "Here is the list of phone numbers:
 `phone1`,`phone2`,`phone3`...
-
 They have been copied to your clipboard."
 
 Example of phone command: `phone colleague`
 ![phone.PNG](images/user-guide/phone.PNG)
 
 
-### Undoing a command : `undo`
+## 2.11 Undoing A Command : `undo`
 
 Resets the state of OH to before the execution of the latest command.
 However, the undo command does not work for exiting and then relaunching the app.
@@ -386,7 +402,7 @@ However, the undo command does not work for exiting and then relaunching the app
 
 **:warning: Warning:**<br>
 OfficeHarbor can undo up to 5 times, and only commands run from the command's
-startup. We recommend you to keep regular backups of your [data](#the-data-file) in case you want
+startup. We recommend you to keep regular backups of your [data](#214-saving-the-data) in case you want
 to change something you did beforehand.
 
 </div>
@@ -398,20 +414,19 @@ The message "Undo success!" will be shown.
 The list entry of the user will return to the state before the latest command.
 If no command has been run at all, an error message "No more commands to undo!" will be shown instead.
 
-Undo command supports add, delete, clear, tag, and untag commands.
-The undo command will basically not take into account any of the "unsupported" commands and will just undo
-the last command that was supported.
-Example: 
-1. delete 1
-2. list
-3. undo
-This will undo the delete command and the list will show the contact that was deleted.
-<div markdown="block" >
+<div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
 Undo command only supports [add](#22-adding-a-person--add), [delete](#24-deleting-a-person--delete), 
-[clear](#25-clearing-all-entries--clear), [tag](#26-tagging-a-contact--tag), and 
+[clear](#25-clearing-all-contacts--clear), [tag](#26-tagging-a-contact--tag), and 
 [untag](#27-deleting-a-tag--untag) commands.
+The undo command will basically not take into account any of the "unsupported" commands and will just undo
+the last command that was supported.
+Example:
+1. delete 1
+2. list
+3. undo
+   This will undo the delete command and the list will show the contact that was deleted.
 
 </div>
 
@@ -423,7 +438,7 @@ Contact after a delete command:
 Contact after the delete command is undone:
 ![undosuccess.PNG](images/user-guide/undosuccess.PNG)
 
-### Redoing a command : `redo`
+## 2.12 Redoing A Command : `redo`
 
 Resets the state of OH to before the latest undo command.
 However, the redo command does not work for closing and then relaunching the app.
@@ -436,7 +451,12 @@ The message "Redo success!" will be shown.
 The list entry of the user will return to the state before the latest undo command.
 If no undo command has been run at all, an error message "No more commands to redo!" will be shown instead.
 
-Redo command supports add, delete, clear, tag, and untag commands.
+<div markdown="block" class="alert alert-info" >
+
+**:information_source: Note:**<br>
+Just like [Undo](#211-undoing-a-command--undo), Redo command only supports [add](#22-adding-a-person--add), 
+[delete](#24-deleting-a-person--delete), [clear](#25-clearing-all-contacts--clear), 
+[tag](#26-tagging-a-contact--tag), and [untag](#27-deleting-a-tag--untag) commands.
 The redo command will basically not take into account any of the "unsupported" commands and will just undo
 the last command that was supported.
 Example:
@@ -445,35 +465,33 @@ Example:
 3. undo
 4. redo
 This will redo the delete command and will again delete the contact.
-<div markdown="block" >
-
-**:information_source: Note:**<br>
-Just like [Undo](#211-undoing-a-command--undo), Redo command only supports [add](#22-adding-a-person--add), 
-[delete](#24-deleting-a-person--delete), [clear](#25-clearing-all-entries--clear), 
-[tag](#26-tagging-a-contact--tag), and [untag](#27-deleting-a-tag--untag) commands.
 
 </div>
 
 Example of redoing the previous undo command:
 ![redosuccess.PNG](images/user-guide/redosuccess.PNG)
 
-### Exiting the program : `exit`
+## 2.13 Exiting The Program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+## 2.14 Saving The Data
 
 OfficeHarbor data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### The data file
+<div markdown="span" class="alert alert-info">
 
-OfficeHarbor data are saved automatically as a JSON file `[JAR file location]/dataddress:officeharbor.json`. Advanced users are welcome to update data directly by editing that data file.
+**:information_source: Notes about data file: <br>**
+The data are saved as a JSON file `[JAR file location]/dataddress:officeharbor.json`.
+Advanced users are welcome to update data directly by editing that data file.
+
+</div>
 
 <div markdown="span" class="alert alert-warning">
 
-**:warning: Caution:**
+**:warning: Caution: <br> **
 If your changes to the data file makes its format invalid, OfficeHarbor will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
@@ -481,20 +499,20 @@ Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected wa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous OfficeHarbor home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Other Known issues :warning:
+## 4. Other Known Issues :warning:
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 5. Command summary
 
 | Action         | Format, Examples                                                                                                                                                                                                                                           |
 |----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
