@@ -130,6 +130,7 @@ When reading through the guide, you can look for these icons for extra informati
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+
 ## 2.1 Getting Help : `help`
 
 Shows either a general summary of the available command or a more detailed help message for the entered command if there is 
@@ -156,10 +157,26 @@ Adds a contact with the input details to OH.
 
 Format: `add name:<name> phone:<phone number> email:<email address> address:<address> [tag:<tag>]... [department:<department>]`
 
+* `<name>` must only contain alphanumeric characters and space, no special character is allowed. 
+   It must also be **unique** for each contact.
+* `<phone>` must only contain numbers, and it should be at least 3 digits long.
+* `<email address>` must follow the **local-part@domain** format, where 
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+       The domain name must:
+        - end with a domain label at least 2 characters long
+        - have each domain label start and end with alphanumeric characters
+        - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* `address` can take in any character or value.
+* `tag` must only contain alphanumeric characters and no space or special character is allowed.
+* `deparatment` must only contain alphanumeric characters and no space or special character is allowed.
+
+
+
 <div markdown="block" class="alert alert-info">
 
 **:bulb: Tip:**<br>
-You can add the contact of a certain employee directly with tags and department with the `add` command.
+You can add the contact of a certain employee directly with tags and department with just one `add` command.
 
 </div>
 
@@ -177,7 +194,7 @@ Examples:
 * `add name:Virat Kohli phone:98765432 email:virat@gmail.com address:Altamount Road, block 10, #05-02`
 
 Output:
-The message “A new contact `<name>` has been added to the list. Name: `<name>`, Phone: `<phone number>`, Email: `<email>`, Address: `<address>`.” will be shown. 
+The message “A new contact `<name>` has been added to the list. Name: `<name>`, Phone: `<phone number>`, Email: `<email>`, Address: `<address>`.”  
 A new contact entry with the given user will be displayed in the list.
 
 ![Add.png](images/user-guide/Add.png)
@@ -189,10 +206,10 @@ Shows a list of all contacts in OH.
 Format: `list`
 
 Output:
-A list of added contacts if any in the form of a scrollable pane will be shown. 
+The message "Listed all contacts" if there is any contact, 
+or else the message is "The list is empty".
+A list of added contacts, if any, in the form of a scrollable pane will be shown. 
 The contacts are listed in the order in which they are added.
-The message "Listed all contacts" is shown in the message box if there is any contact, or else the message is
-"The list is empty".
 
 ## 2.4 Deleting A Person : `delete`
 
@@ -292,8 +309,8 @@ Filters the entire list of contacts.
 
 Format: `filter <component>[.<modifier>]:<value> ...`
 
-`component` is one of `name`, `phone`, `email`, `department`, or `address` corresponding to the values in add:
-name, phone, email and address respectively.
+`component` is one of `name`, `phone`, `email`, `address`, `tag`, or `department` corresponding to the values in [add](#22-adding-a-person--add):
+name, phone, email, address, tag and department respectively, all following the same input restriction.
 
 This command is case-insensitive: it treats uppercase and lowercase letters the
 same.
@@ -365,6 +382,7 @@ If 10 contacts match the list, the output message is "10 persons listed"
 Composes an email to the people tagged with the selected tag.
 
 Format: `mail <tag>`
+* `tag` must only contain alphanumeric characters and no space or special character is allowed.
 
 Output: The message "Here is the list of emails:
 `email1`,`email2`,`email3`..." will be shown, where `email1` is the
@@ -377,13 +395,13 @@ Example of mail command: `mail colleagues`
 ![mail.PNG](images/user-guide/mail.PNG)
 ![mail2.PNG](images/user-guide/mail2.PNG)
 
-
 ## 2.10 Copying Phone Numbers : `phone`
 
 Copies the phone numbers of people tagged with the selected tag to
 your clipboard for ease of messaging.
 
 Format: `phone <tag>`
+* `tag` must only contain alphanumeric characters and no space or special character is allowed.
 
 Output: The message "Here is the list of phone numbers:
 `phone1`,`phone2`,`phone3`...
