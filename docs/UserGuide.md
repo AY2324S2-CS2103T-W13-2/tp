@@ -299,7 +299,7 @@ Example of mail command: `mail colleagues`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
-You might want to set up a default mail app if the command does not do anything.
+If the command does not do anything, it might be that you do not have a default mail app set up.
 
 Here is how to do so for Windows and Mac:
 https://www.lessannoyingcrm.com/help/setting-your-computers-default-email-program
