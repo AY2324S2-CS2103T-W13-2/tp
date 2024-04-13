@@ -1,0 +1,79 @@
+@startuml
+!include Style.puml
+
+box Logic LOGIC_COLOR_T2
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MailCommandParser" as MailCommandParser LOGIC_COLOR
+participant ":MailCommand" as MailCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T2
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Desktop STORAGE_COLOR_T2
+participant ":Desktop" as Desktop STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("mail colleagues")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("mail colleagues")
+activate AddressBookParser
+
+create MailCommandParser
+AddressBookParser -> MailCommandParser
+activate MailCommandParser
+
+MailCommandParser --> AddressBookParser
+deactivate MailCommandParser
+
+AddressBookParser -> MailCommandParser : parse("colleagues")
+activate MailCommandParser
+
+create MailCommand
+MailCommandParser -> MailCommand
+activate MailCommand
+
+MailCommand --> MailCommandParser
+deactivate MailCommand
+
+MailCommandParser --> AddressBookParser
+destroy MailCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> MailCommand: execute(m)
+activate MailCommand
+
+MailCommand -> Model : updateFilteredPersonsList(predicate)
+activate Model
+
+Model --> MailCommand
+deactivate Model
+
+MailCommand --> Desktop : openMailApp(emailList)
+activate Desktop
+
+Desktop --> Desktop : desktop.mail(mailto)
+
+Desktop --> MailCommand
+deactivate Desktop
+
+create CommandResult
+MailCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MailCommand
+deactivate CommandResult
+
+MailCommand --> LogicManager
+deactivate MailCommand
+
+<-- LogicManager
+deactivate LogicManager
+
+@enduml
