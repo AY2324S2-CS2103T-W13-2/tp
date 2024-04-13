@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import seedu.address.model.person.predicate.ComponentStringPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * A prefix that marks the beginning of an argument in an arguments string.
@@ -48,9 +48,9 @@ public class Prefix {
      *
      * @return
      */
-    public ComponentStringPredicate.Component extractComponent() {
+    public Person.Component extractComponent() {
         String componentString = prefix.substring(0, prefix.length()).toUpperCase();
-        return ComponentStringPredicate.Component.valueOf(componentString);
+        return Person.Component.valueOf(componentString);
     }
 
     @Override

@@ -21,7 +21,7 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "\n: Filters all persons whose components contain any of "
-            + "the specified keywords (case-insensitive) according to the different modifiers and"
+            + "the specified keywords (case-insensitive) according to the different modifiers and "
             + "displays them as a list with index numbers.\n"
             + "Parameters: [component[.attribute]:<value>...]...\n"
             + "Where component is any one of: name, address, phone, tag, email "

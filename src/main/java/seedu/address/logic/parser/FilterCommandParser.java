@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.predicate.ComponentPredicate;
 import seedu.address.model.person.predicate.ComponentStringPredicate;
 
@@ -21,7 +22,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FilterCommand parse(String args) throws ParseException {
-        assert(args != null);
+        assert (args != null);
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -42,9 +43,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
 
     private static ArrayList<ComponentPredicate> getAllPredicates(ArgumentMultimap argMultimap) throws ParseException {
-        assert(argMultimap != null);
+        assert (argMultimap != null);
         ArrayList<ComponentPredicate> components = new ArrayList<>();
-        for (Prefix prefix: argMultimap.getPrefixes()) {
+        for (Prefix prefix : argMultimap.getPrefixes()) {
             if (prefix.getLength() == 0) {
                 continue;
             }
@@ -73,13 +74,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
 
     private static ComponentPredicate convertPredicate(Prefix prefix, String arg) throws ParseException {
-        assert(prefix != null && arg != null);
+        assert (prefix != null && arg != null);
         String trimmedArgs = arg.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
-        ComponentStringPredicate.Component component = prefix.extractComponent();
+        Person.Component component = prefix.extractComponent();
         Modifier modifier = prefix.getModifier();
         ComponentPredicate predicateResult;
         switch (modifier) {
@@ -90,10 +91,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             predicateResult = new ComponentStringPredicate.Isnt(arg, component);
             break;
         case HAS:
-            predicateResult = new ComponentStringPredicate.Has(arg, component);;
+            predicateResult = new ComponentStringPredicate.Has(arg, component);
+            ;
             break;
         case HASNT:
-            predicateResult = new ComponentStringPredicate.Hasnt(arg, component);;
+            predicateResult = new ComponentStringPredicate.Hasnt(arg, component);
+            ;
             break;
         case WORD:
             predicateResult = new ComponentStringPredicate.Word(arg, component);
