@@ -1,0 +1,48 @@
+@startuml
+!include Style.puml
+
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant ":FilterCommand" as FilterCommand LOGIC_COLOR
+
+
+[-> AddressBookParser : parseCommand("filter name.is: Alex")
+activate AddressBookParser
+
+create FilterCommandParser
+AddressBookParser -> FilterCommandParser: FilterCommandParser()
+activate FilterCommandParser
+
+AddressBookParser <-- FilterCommandParser
+deactivate FilterCommandParser
+
+AddressBookParser -> FilterCommandParser: parse("name.is: Alex")
+activate FilterCommandParser
+
+FilterCommandParser -> ArgumentTokenizer: filterTokenize("name.is: Alex")
+activate ArgumentTokenizer
+FilterCommandParser <-- ArgumentTokenizer: argMultiMap
+deactivate ArgumentTokenizer
+
+FilterCommandParser -> FilterCommandParser: getAllPredicates(argMultiMap)
+activate FilterCommandParser
+FilterCommandParser --> FilterCommandParser: components
+deactivate FilterCommandParser
+
+create FilterCommand
+FilterCommandParser -> FilterCommand: FilterCommand(components)
+activate FilterCommand
+FilterCommandParser <-- FilterCommand
+deactivate FilterCommand
+
+AddressBookParser <-- FilterCommandParser
+deactivate FilterCommandParser
+
+destroy FilterCommandParser
+
+<- AddressBookParser
+deactivate AddressBookParser
+
+
+@enduml
