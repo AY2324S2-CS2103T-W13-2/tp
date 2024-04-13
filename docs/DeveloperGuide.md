@@ -235,15 +235,23 @@ aggregate values like `tag` it extracts all the values out and returns them all 
 The filter command matches the `Person`s in `Model`'s currently filtered list according to the list of predicates given
 to it. A person passes if it matches any of the predicates. The predicates themselves also have to be disjunctive.
 
-By making all operations `or` by default, and providing `not` variations like `has` and `hasnt`, we can rely on
-the fact that subsequent `FilterCommand` operations is the same as an `and`. Therefore, we have full access to boolean
-logic.
+Currently the filter does not support any from of `and` matching, all operations
+`or` by default, and we have `not` variations like `has` and `hasnt`.
+
+A proposed implementation for `and` is that we can change the filter such that
+subsequent `FilterCommand` operations filter the preceding list, which same as
+an `and`. Therefore, we would have full access to boolean logic.
 
 This is done because making the parser support boolean operations and parenthesizing would take more time than possible.
 This does make the user interface a bit more confusing to use, but our time limitations don't allow for a better
 implementation.
 
-### \[Proposed\] Undo/redo feature
+<div markdown="span" class="alert alert-info">
+    :information_source: **Note:** ComponentExistencePredicate does not have a
+    way to call it in the frontend. It is planned for a future release.
+</div>
+
+### Undo/redo feature
 
 #### Proposed Implementation
 
@@ -373,7 +381,9 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Categorise people according to their department/origin, making it easier to assign tasks or get all the emails.
+**Value proposition**: Categorise people according to their department/origin
+and provide methods for efficient retrieval and manipulation of the information,
+making it easier to assign tasks or get all the emails.
 
 ### User stories
 
