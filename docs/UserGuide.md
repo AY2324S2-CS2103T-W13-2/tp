@@ -13,8 +13,8 @@ the interaction. If you can type fast, OH can get your contact management tasks 
 ## Purpose of this Guide
 
 The user guide is mainly intended for secretaries of a large tech firm. The program is managed almost entirely by commands from 
-keyboard, so a moderately fast typing speed is necessary to be efficient with it. Experience in a command based program is 
-not necessary and is explained in this document.
+keyboard, so a moderately fast typing speed is necessary to be efficient with it. You not need any experience in a command based program 
+and it will be explained in this document.
 
 The primary purpose of the user guide is to quickly help novice users to familiarize with the keyboard-based environment 
 and learn how to use the basic function of the app. The secondary purpose is to provide a fast way for the experienced users
@@ -37,7 +37,7 @@ Throughout the guide, there are also some icons which represents information out
 
 When reading through the guide, you can look for these icons for extra information.
 
-*The usage of these special icons is inspired by section 1.4 of the user guide of the app SweetRewards [link](https://ay2324s2-cs2103t-t13-4.github.io/tp/UserGuide.html#14-navigating-this-guide)*
+*Acknowledgement: The usage of these special icons is inspired by section 1.4 of the user guide of the app SweetRewards [link](https://ay2324s2-cs2103t-t13-4.github.io/tp/UserGuide.html#14-navigating-this-guide)*
 
 # Table of Contents
 1. [Getting Started](#1-getting-started)<br>
@@ -64,7 +64,8 @@ When reading through the guide, you can look for these icons for extra informati
 
 # 1. Getting Started
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. You can check out this [guide](https://becomegeeks.com/blog/java/how-to-install-java-11-on-windows-macos-and-linux/)
+   for the installation guide and how to go about verifying the installation. 
 
 2. Download the latest `OfficeHarbor.jar` from
    [here](https://github.com/AY2324S2-CS2103T-W13-2/tp/releases/latest).
@@ -98,7 +99,6 @@ When reading through the guide, you can look for these icons for extra informati
 
 6. Refer to the [Features](#2-features) below for details of each command.
 
-
 # 2. Features
 
 <div markdown="block" class="alert alert-info">
@@ -122,7 +122,7 @@ When reading through the guide, you can look for these icons for extra informati
 * The required component of a command can be in any order.<br>
   e.g. if the command needs `name:<name> phone:<phone number>`, `phone:<phone number> name:<name>` is also acceptable.
 
-* Extra parameters for commands that do not take in parameters (such as [`list`](#23-listing-all-contacts--list), 
+* Extra inputs for commands that do not take in any input (such as [`list`](#23-listing-all-contacts--list), 
   [`exit`](#213-exiting-the-program--exit) and [`clear`](#25-clearing-all-contacts--clear)) will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
@@ -130,11 +130,19 @@ When reading through the guide, you can look for these icons for extra informati
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-
 ## 2.1 Getting Help : `help`
 
 Shows either a general summary of the available command or a more detailed help message for the entered command if there is 
 any. All help window also has an url link to the user guide at the bottom.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note about help windows:**<br>
+If you have more than one help window opened when you are leaving the main app either through the [exit](#213-exiting-the-program--exit) 
+command or through clicking the close button on window, some help windows will still be opened, and you will have to
+close them individually by yourself.
+
+</div>
 
 Format: `help [command]`
 
