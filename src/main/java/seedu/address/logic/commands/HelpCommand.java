@@ -19,9 +19,9 @@ public class HelpCommand extends Command {
             + "6. tag: adds a tag/department to a contact \n 7. untag: removes a tag/department from a contact\n "
             + "8. undo: undo the latest command \n 9. redo: undo the latest undo \n 10. filter: filters the list with "
             + "specific criteria \n 11. mail: opens the mail app for the listed tags \n 12. help: displays program "
-            + "usage \n 13. exit: exits OfficeHarbor \n\n For more detail and format of a command, type 'help [command]'"
-            + ", where [command] can be replaced by the command you want know more about. \n For eg. 'help add' "
-            + "gives you the correct format more information and about the add command.";
+            + "usage \n 13. exit: exits OfficeHarbor \n\n For more detail and format of a command, "
+            + "type 'help [command]', where [command] can be replaced by the command you want know more about. "
+            + "\n For eg. 'help add' gives you the correct format and more information about the add command.";
 
     private String helpMessage;
 
