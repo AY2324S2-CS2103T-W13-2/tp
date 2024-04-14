@@ -191,7 +191,11 @@ Examples:
 * `delete 2 3` deletes the 2nd and 3rd person of the contact list from OH.
 
 Output:
-The message "Contact `name` has been deleted. Name: `name`, Phone: `phone number`, Email: `email`, Address: `address`.” will be shown.
+
+Deleted Person: `name`
+
+`name`, Phone: `phone number`, Email: `email`, Address: `address`. Tags: `tags`, Department: `department`” will be shown.
+
 The entry with the given id will disappear from the list.
 
 <div markdown="block" class="alert alert-warning">
