@@ -13,7 +13,7 @@ the interaction. If you can type fast, OH can get your contact management tasks 
 ## Purpose of this Guide
 
 The user guide is mainly intended for secretaries of a large tech firm. The program is managed almost entirely by commands from 
-keyboard, so a moderately fast typing speed is necessary to be efficient with it. You not need any experience in a command based program 
+keyboard, so a moderately fast typing speed is necessary to be efficient with it. You not need any experience in a command based program, 
 and it will be explained in this document.
 
 The primary purpose of the user guide is to quickly help novice users to familiarize with the keyboard-based environment 
@@ -49,13 +49,14 @@ When reading through the guide, you can look for these icons for extra informati
    2.5 [Clearing All Contacts](#25-clearing-all-contacts--clear)<br>
    2.6 [Tagging A Contact](#26-tagging-a-contact--tag)<br>
    2.7 [Deleting A Tag](#27-deleting-a-tag--untag)<br>
-   2.8 [Filtering Contacts](#28-filtering-contacts--filter)<br>
-   2.9 [Mailing To A List Of People](#29-mailing-to-a-list-of-people--mail)<br>
-   2.10 [Copying Phone Numbers](#210-copying-phone-numbers--phone)<br>
-   2.11 [Undoing A Command](#211-undoing-a-command--undo)<br>
-   2.12 [Redoing A Command](#212-redoing-a-command--redo)<br>
-   2.13 [Exiting The Program](#213-exiting-the-program--exit)<br>
-   2.14 [Saving The Data](#214-saving-the-data)<br>
+   2.8 [Editing A Contact](#28-editing-a-contact---edit)<br>
+   2.9 [Filtering Contacts](#29-filtering-contacts--filter)<br>
+   2.10 [Mailing To A List Of People](#210-mailing-to-a-list-of-people--mail)<br>
+   2.11 [Copying Phone Numbers](#211-copying-phone-numbers--phone)<br>
+   2.12 [Undoing A Command](#212-undoing-a-command--undo)<br>
+   2.13 [Redoing A Command](#213-redoing-a-command--redo)<br>
+   2.14 [Exiting The Program](#214-exiting-the-program--exit)<br>
+   2.15 [Saving The Data](#215-saving-the-data)<br>
 3. [FAQ](#3-faq)<br>
 4. [Other Know Issues](#4-other-known-issues--warning-)<br>
 5. [Command Summary](#5-command-summary)<br>
@@ -119,11 +120,11 @@ When reading through the guide, you can look for these icons for extra informati
 * Any component of a command with `...` after it means that it can be specified multiple times after the first one.
   e.g. In [`delete`](#24-deleting-a-person--delete), `<id>...` means that more ids can be entered after the first one.
 
-* The required component of a command can be in any order.<br>
+* The component of a command can be in any order.<br>
   e.g. if the command needs `name:<name> phone:<phone number>`, `phone:<phone number> name:<name>` is also acceptable.
 
 * Extra inputs for commands that do not take in any input (such as [`list`](#23-listing-all-contacts--list), 
-  [`exit`](#213-exiting-the-program--exit) and [`clear`](#25-clearing-all-contacts--clear)) will be ignored.<br>
+  [`exit`](#214-exiting-the-program--exit) and [`clear`](#25-clearing-all-contacts--clear)) will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines 
@@ -138,7 +139,7 @@ any. All help window also has an url link to the user guide at the bottom.
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note about help windows:**<br>
-If you have more than one help window opened when you are leaving the main app either through the [exit](#213-exiting-the-program--exit) 
+If you have more than one help window opened when you are leaving the main app either through the [exit](#214-exiting-the-program--exit) 
 command or through clicking the close button on window, some help windows will still be opened, and you will have to
 close them individually by yourself.
 
@@ -277,7 +278,7 @@ Example:
 `tag 2 3 tag: colleagues`, `tag 2 3 department: FINANCE`, `tag 2 3 tag: colleagues department: FINANCE`
 
 Output:
-The message "Tagged Contacts: `contact index` with `tag name` and/or `department name`.”, 
+The message "Tagged Contacts: `contact index` with `tag name` and/or `department name`.” will be shown,
 where contact index is the number representing where the current contact is
 on the currently displayed list.
 
@@ -311,7 +312,34 @@ The list entry of the user with <id> will not have the tag anymore.
 
 ![untag.png](images/user-guide/untag.png)
 
-## 2.8 Filtering Contacts : `filter`
+## 2.8 Editing A Contact: 'edit'
+
+Edits an existing person in the contact list.
+
+Format: `edit <id> [name:<name>] [phone:<phone number>] [email:<email address>] [address:<address>] [tag:<tag>]…​ [department: <department>]`
+
+* Edits the person at the specified contact `<id>`. The `<id>` **must be a positive integer** 1, 2, 3, …​
+* The other components follows the same format as the [`add`](#22-adding-a-person--add) command.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
+
+<div markdown="block" class="alert alert-info">
+
+**:bulb: TIp:**<br>
+You can remove all the person’s tags by typing `tag: ` without specifying any tags after it.
+
+</div>
+
+Output:
+The message: "Edited Person: `<name>`; Phone: `<phone>`; Email: `<email>`; Address: `<address>`; Tags: `<tag>`; Department: `<department>`" will be displayed.
+The specified component of the contact to be edited will also be changed to the new input.
+
+Examples:
+*  `edit 1 phone: 91234567 email: johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 name: Betsy Crower tag:` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+## 2.9 Filtering Contacts : `filter`
 
 Filters the entire list of contacts.
 
@@ -385,7 +413,7 @@ sequence of letters and numbers surrounded by spaces
 Output:
 If 10 contacts match the list, the output message is "10 persons listed"
 
-## 2.9 Mailing To A List Of People : `mail`
+## 2.10 Mailing To A List Of People : `mail`
 
 Composes an email to the people tagged with the selected tag.
 
@@ -403,7 +431,7 @@ Example of mail command: `mail colleagues`
 ![mail.PNG](images/user-guide/mail.PNG)
 ![mail2.PNG](images/user-guide/mail2.PNG)
 
-## 2.10 Copying Phone Numbers : `phone`
+## 2.11 Copying Phone Numbers : `phone`
 
 Copies the phone numbers of people tagged with the selected tag to
 your clipboard for ease of messaging.
@@ -419,7 +447,7 @@ Example of phone command: `phone colleague`
 ![phone.PNG](images/user-guide/phone.PNG)
 
 
-## 2.11 Undoing A Command : `undo`
+## 2.12 Undoing A Command : `undo`
 
 Resets the state of OH to before the execution of the latest command.
 However, the undo command does not work for exiting and then relaunching the app.
@@ -428,7 +456,7 @@ However, the undo command does not work for exiting and then relaunching the app
 
 **:warning: Warning:**<br>
 OfficeHarbor can undo up to 5 times, and only commands run from the command's
-startup. We recommend you to keep regular backups of your [data](#214-saving-the-data) in case you want
+startup. We recommend you to keep regular backups of your [data](#215-saving-the-data) in case you want
 to change something you did beforehand.
 
 </div>
@@ -464,7 +492,7 @@ Contact after a delete command:
 Contact after the delete command is undone:
 ![undosuccess.PNG](images/user-guide/undosuccess.PNG)
 
-## 2.12 Redoing A Command : `redo`
+## 2.13 Redoing A Command : `redo`
 
 Resets the state of OH to before the latest undo command.
 However, the redo command does not work for closing and then relaunching the app.
@@ -480,7 +508,7 @@ If no undo command has been run at all, an error message "No more commands to re
 <div markdown="block" class="alert alert-info" >
 
 **:information_source: Note:**<br>
-Just like [Undo](#211-undoing-a-command--undo), Redo command only supports [add](#22-adding-a-person--add), 
+Just like [Undo](#212-undoing-a-command--undo), Redo command only supports [add](#22-adding-a-person--add), 
 [delete](#24-deleting-a-person--delete), [clear](#25-clearing-all-contacts--clear), 
 [tag](#26-tagging-a-contact--tag), and [untag](#27-deleting-a-tag--untag) commands.
 The redo command will basically not take into account any of the "unsupported" commands and will just undo
@@ -497,13 +525,13 @@ This will redo the delete command and will again delete the contact.
 Example of redoing the previous undo command:
 ![redosuccess.PNG](images/user-guide/redosuccess.PNG)
 
-## 2.13 Exiting The Program : `exit`
+## 2.14 Exiting The Program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-## 2.14 Saving The Data
+## 2.15 Saving The Data
 
 OfficeHarbor data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
@@ -546,6 +574,7 @@ Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected wa
 | **Clear**      | `clear`                                                                                                                                                                                                                                                    |
 | **Delete**     | `delete <id>...`<br> e.g., `delete 3`                                                                                                                                                                                                                      |
 | **Delete Tag** | `untag <id> [tag:<tag>]... [department:<department>]` <br> e.g., `untag 2 tag:friends department:HR`                                                                                                                                                       |
+| **Edit**       | `edit <id> [name:<name>] [phone:<phone number>] [email:<email address>] [address:<address>] [tag:<tag>]…​ [department: <department>]` <br> e.g., `edit 1 name: Betsy Crower`                                                                               |
 | **Exit**       | `exit`                                                                                                                                                                                                                                                     |
 | **Filter**     | `filter <component>[.<modifier>]:<value>... ` <br> e.g., `filter name.has: Alex`                                                                                                                                                                           |
 | **Help**       | `help [<command>]`                                                                                                                                                                                                                                         |
