@@ -356,6 +356,33 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Mail
+
+The general outline of the mail commands architecture is as follows.
+![MailCommand.png](images/MailCommand.png)
+
+The `MailCommand` is a component of our application that enables users to seamlessly
+initiate email communication with contacts associated with specific tags.
+
+#### Functionality
+* **Purpose:** The primary purpose of the `MailCommand` is to streamline the process of initiating email communication 
+with contacts based on user-defined tags.
+* **Execution Logic:** Upon execution, the command accepts a tag parameter from the user, filters contacts associated
+with this tag, and constructs a list of email addresses from the filtered contacts.
+* **Error Handling:** The `MailCommand` includes error handling mechanisms to address potential
+issues during execution, such as catching exceptions and notifying users of any errors encountered.
+
+#### Design Considerations
+* **Command Parameters:** The `MailCommand` defines command parameters and a usage message to guide users on how to
+utilize the command effectively.
+* **Initialization:** Upon instantiation, the `MailCommand` initializes a `TagContainsKeywordsPredicate`, which
+encapsulates the tag-based filtering logic.
+* **Execution:** The command logic involves updating the filtered list of contacts in the model, constructing email
+address lists, and attempting to open the default email application using the Desktop class.
+* **Parser Implementation:** The `MailCommandParser` is responsible for parsing user input and generating
+`MailCommand` objects with appropriate tag predicates.
+* **Integration with Model:** It utilizes the `Model` interface to update the filtered list of contacts and
+ensure synchronization with the application state.
 
 --------------------------------------------------------------------------------------------------------------------
 
