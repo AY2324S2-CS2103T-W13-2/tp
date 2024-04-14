@@ -240,15 +240,23 @@ aggregate values like `tag` it extracts all the values out and returns them all 
 The filter command matches the `Person`s in `Model`'s currently filtered list according to the list of predicates given
 to it. A person passes if it matches any of the predicates. The predicates themselves also have to be disjunctive.
 
-By making all operations `or` by default, and providing `not` variations like `has` and `hasnt`, we can rely on
-the fact that subsequent `FilterCommand` operations is the same as an `and`. Therefore, we have full access to boolean
-logic.
+Currently the filter does not support any from of `and` matching, all operations
+`or` by default, and we have `not` variations like `has` and `hasnt`.
+
+A proposed implementation for `and` is that we can change the filter such that
+subsequent `FilterCommand` operations filter the preceding list, which same as
+an `and`. Therefore, we would have full access to boolean logic.
 
 This is done because making the parser support boolean operations and parenthesizing would take more time than possible.
 This does make the user interface a bit more confusing to use, but our time limitations don't allow for a better
 implementation.
 
-### \[Proposed\] Undo/redo feature
+<div markdown="span" class="alert alert-info">
+    :information_source: **Note:** ComponentExistencePredicate does not have a
+    way to call it in the frontend. It is planned for a future release.
+</div>
+
+### Undo/redo feature
 
 #### Proposed Implementation
 
@@ -353,6 +361,33 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Mail
+
+The general outline of the mail commands architecture is as follows.
+![MailCommand.png](images/MailCommand.png)
+
+The `MailCommand` is a component of our application that enables users to seamlessly
+initiate email communication with contacts associated with specific tags.
+
+#### Functionality
+* **Purpose:** The primary purpose of the `MailCommand` is to streamline the process of initiating email communication 
+with contacts based on user-defined tags.
+* **Execution Logic:** Upon execution, the command accepts a tag parameter from the user, filters contacts associated
+with this tag, and constructs a list of email addresses from the filtered contacts.
+* **Error Handling:** The `MailCommand` includes error handling mechanisms to address potential
+issues during execution, such as catching exceptions and notifying users of any errors encountered.
+
+#### Design Considerations
+* **Command Parameters:** The `MailCommand` defines command parameters and a usage message to guide users on how to
+utilize the command effectively.
+* **Initialization:** Upon instantiation, the `MailCommand` initializes a `TagContainsKeywordsPredicate`, which
+encapsulates the tag-based filtering logic.
+* **Execution:** The command logic involves updating the filtered list of contacts in the model, constructing email
+address lists, and attempting to open the default email application using the Desktop class.
+* **Parser Implementation:** The `MailCommandParser` is responsible for parsing user input and generating
+`MailCommand` objects with appropriate tag predicates.
+* **Integration with Model:** It utilizes the `Model` interface to update the filtered list of contacts and
+ensure synchronization with the application state.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -378,7 +413,9 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Categorise people according to their department/origin, making it easier to assign tasks or get all the emails.
+**Value proposition**: Categorise people according to their department/origin
+and provide methods for efficient retrieval and manipulation of the information,
+making it easier to assign tasks or get all the emails.
 
 ### User stories
 

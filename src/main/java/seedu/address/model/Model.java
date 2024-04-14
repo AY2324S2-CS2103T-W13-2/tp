@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 
 /**
@@ -78,6 +80,12 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns a person from the filtered person list */
+    Optional<Person> getPersonInFilteredPersonList(Index index);
+
+    /** Checks if the filtered person list is empty */
+    boolean isFilteredPersonListEmpty();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

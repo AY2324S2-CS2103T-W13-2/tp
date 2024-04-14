@@ -33,8 +33,6 @@ Throughout the guide, there are also some icons which represents information out
 
 * :warning: **Warning**: This icon alerts you about potential issues that you may face when using the app.
 
-* :star: **Benefit**: This icon signifies the benefits and relevance of an OH feature.
-
 When reading through the guide, you can look for these icons for extra information.
 
 *Acknowledgement: The usage of these special icons is inspired by section 1.4 of the user guide of the app SweetRewards [link](https://ay2324s2-cs2103t-t13-4.github.io/tp/UserGuide.html#14-navigating-this-guide)*
@@ -49,7 +47,7 @@ When reading through the guide, you can look for these icons for extra informati
    2.5 [Clearing All Contacts](#25-clearing-all-contacts--clear)<br>
    2.6 [Tagging A Contact](#26-tagging-a-contact--tag)<br>
    2.7 [Deleting A Tag](#27-deleting-a-tag--untag)<br>
-   2.8 [Editing A Contact](#28-editing-a-contact---edit)<br>
+   2.8 [Editing A Contact](#28-editing-a-contact--edit)<br>
    2.9 [Filtering Contacts](#29-filtering-contacts--filter)<br>
    2.10 [Mailing To A List Of People](#210-mailing-to-a-list-of-people--mail)<br>
    2.11 [Copying Phone Numbers](#211-copying-phone-numbers--phone)<br>
@@ -65,7 +63,7 @@ When reading through the guide, you can look for these icons for extra informati
 
 # 1. Getting Started
 
-1. Ensure you have Java `11` or above installed in your Computer. You can check out this [guide](https://becomegeeks.com/blog/java/how-to-install-java-11-on-windows-macos-and-linux/)
+1. Ensure you have Java `11` or above installed in your Computer. You can also check out this [guide](https://becomegeeks.com/blog/java/how-to-install-java-11-on-windows-macos-and-linux/)
    for the installation guide and how to go about verifying the installation. 
 
 2. Download the latest `OfficeHarbor.jar` from
@@ -203,7 +201,7 @@ Examples:
 * `add name:Virat Kohli phone:98765432 email:virat@gmail.com address:Altamount Road, block 10, #05-02`
 
 Output:
-The message “A new contact `<name>` has been added to the list. Name: `<name>`, Phone: `<phone number>`, Email: `<email>`, Address: `<address>`.”  
+The message “New person added: `<name>`; Phone: `<phone number>`; Email: `<email>`; Address: `<address>`; Tags: `<tag>...`; Department: `<department>`” will be shown.
 A new contact entry with the given user will be displayed in the list.
 
 ![Add.png](images/user-guide/Add.png)
@@ -233,8 +231,10 @@ Format: `delete <id>...`
 Examples:
 * `delete 2 3` deletes the 2nd and 3rd person of the contact list from OH.
 
-Output:
-The message "Contact `name` has been deleted. Name: `name`, Phone: `phone number`, Email: `email`, Address: `address`.” will be shown.
+Output: The message "Deleted Person: `name`
+
+`name`, Phone: `phone number`, Email: `email`, Address: `address`. Tags: `tags`, Department: `department`” will be shown.
+
 The entry with the given id will disappear from the list.
 
 <div markdown="block" class="alert alert-warning">
@@ -258,7 +258,8 @@ The message "Address book has been cleared!" will be shown.
 
 ## 2.6 Tagging A Contact : `tag`
 
-Tags the specified contact with the input tag name and/or input department name.
+Tags the specified contact with the input tag name and/or input department name. In case you want to add more tags
+to the contact.
 
 * Tags the person(s) at the specified `<id>...`.
 * The id refers to the index number(s) shown in the displayed person list.
@@ -272,7 +273,7 @@ cannot only have an id.
 
 </div>
 
-Format: `tag <id>... tag:<tag>... [tag:<tag>]... [department:<department>]`
+Format: `tag <id> tag:<tag>... [tag:<tag>]... [department:<department>]`
 
 Example:
 `tag 2 3 tag: colleagues`, `tag 2 3 department: FINANCE`, `tag 2 3 tag: colleagues department: FINANCE`
@@ -303,16 +304,16 @@ planned for a future release.
 
 </div>
 
-Format: `untag <id> [tag:<tag>]... [department:<department>]`
+Format: `untag <id> tag:<tag>... [tag:<tag>]... [department:<department>]`
 
 Output:
-The message "The tag `<tag>` has been removed from contact: `contact info`." will be shown,
+The message "Deleted tag `<tag>` from: `contact info`." will be shown,
 where contact info is all the information of the contact. 
 The list entry of the user with <id> will not have the tag anymore.
 
 ![untag.png](images/user-guide/untag.png)
 
-## 2.8 Editing A Contact: 'edit'
+## 2.8 Editing A Contact: `edit`
 
 Edits an existing person in the contact list.
 
@@ -431,7 +432,15 @@ Example of mail command: `mail colleagues`
 ![mail.PNG](images/user-guide/mail.PNG)
 ![mail2.PNG](images/user-guide/mail2.PNG)
 
-## 2.11 Copying Phone Numbers : `phone`
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+If the command does not do anything, it might be that you do not have a default mail app set up.
+
+Here is how to do so for Windows and Mac:
+https://www.lessannoyingcrm.com/help/setting-your-computers-default-email-program
+</div>
+
+## 2.11 Copying phone numbers : `phone`
 
 Copies the phone numbers of people tagged with the selected tag to
 your clipboard for ease of messaging.
@@ -530,6 +539,14 @@ Example of redoing the previous undo command:
 Exits the program.
 
 Format: `exit`
+
+<div markdown="span" class="alert alert-info">
+
+**:information_source: Note: <br>**
+The command only closes the window of the app and the latest help window(s), 
+if there are other windows for the [`help`](#21-getting-help--help) command, you will have to close them yourself.
+
+</div>
 
 ## 2.15 Saving The Data
 

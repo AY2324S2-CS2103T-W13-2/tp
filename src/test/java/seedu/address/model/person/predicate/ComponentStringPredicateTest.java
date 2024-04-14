@@ -17,8 +17,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Person.Component;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.predicate.ComponentStringPredicate.Component;
 import seedu.address.model.person.predicate.ComponentStringPredicate.EndsWith;
 import seedu.address.model.person.predicate.ComponentStringPredicate.Has;
 import seedu.address.model.person.predicate.ComponentStringPredicate.Hasnt;
@@ -31,7 +31,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.department.Department;
 
 class ComponentStringPredicateTest {
-    private static final Component STUBBED_COMPONENT = Component.ADDRESS;
+    private static final Person.Component STUBBED_COMPONENT = Person.Component.ADDRESS;
 
     /**
      * A Person stub that is used to check ComponentStringPredicate's general

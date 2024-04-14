@@ -37,10 +37,8 @@ public class DeleteCommand extends Command {
 
         List<Person> personsToDelete = new ArrayList<>();
         for (Index index : targetIndices) {
-            if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-            Person personToDelete = lastShownList.get(index.getZeroBased());
+            Person personToDelete = model.getPersonInFilteredPersonList(index)
+                    .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX));
             personsToDelete.add(personToDelete);
         }
 
