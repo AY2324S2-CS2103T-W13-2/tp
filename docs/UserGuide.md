@@ -160,7 +160,7 @@ Examples:
 * `add name:Virat Kohli phone:98765432 email:virat@gmail.com address:Altamount Road, block 10, #05-02`
 
 Output:
-The message “A new contact `<name>` has been added to the list. Name: `<name>`, Phone: `<phone number>`, Email: `<email>`, Address: `<address>`.” will be shown. 
+The message “New person added: `<name>`, Phone: `<phone number>`, Email: `<email>`, Address: `<address>`.” will be shown. 
 A new contact entry with the given user will be displayed in the list.
 
 ![Add.png](images/user-guide/Add.png)
@@ -190,9 +190,7 @@ Format: `delete <id>...`
 Examples:
 * `delete 2 3` deletes the 2nd and 3rd person of the contact list from OH.
 
-Output:
-
-Deleted Person: `name`
+Output: The message "Deleted Person: `name`
 
 `name`, Phone: `phone number`, Email: `email`, Address: `address`. Tags: `tags`, Department: `department`” will be shown.
 
@@ -219,7 +217,8 @@ The message "Address book has been cleared!" will be shown.
 
 ### Tagging a Contact : `tag`
 
-Tags the specified contact with the input tag name and/or input department name.
+Tags the specified contact with the input tag name and/or input department name. In case you want to add more tags
+to the contact.
 
 * Tags the person(s) at the specified `<id>...`.
 * The id refers to the index number(s) shown in the displayed person list.
@@ -233,7 +232,7 @@ cannot only have an id.
 
 </div>
 
-Format: `tag <id>... tag:<tag>... [tag:<tag>]... [department:<department>]`
+Format: `tag <id> tag:<tag>... [tag:<tag>]... [department:<department>]`
 
 Example:
 `tag 2 3 tag: colleagues`, `tag 2 3 department: FINANCE`, `tag 2 3 tag: colleagues department: FINANCE`
@@ -264,10 +263,10 @@ planned for a future release.
 
 </div>
 
-Format: `untag <id> [tag:<tag>]... [department:<department>]`
+Format: `untag <id> tag:<tag>... [tag:<tag>]... [department:<department>]`
 
 Output:
-The message "The tag `<tag>` has been removed from contact: `contact info`." will be shown,
+The message "Deleted tag `<tag>` from: `contact info`." will be shown,
 where contact info is all the information of the contact. 
 The list entry of the user with <id> will not have the tag anymore.
 
