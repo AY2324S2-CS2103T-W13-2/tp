@@ -158,7 +158,7 @@ Example of help command without input command
 Example of help command for `add` command
 ![HelpAdd.PNG](images/user-guide/help_add_output.png)
 
-## 2.2 Adding A Person: `add`
+## 2.2 Adding A Person : `add`
 
 Adds a contact with the input details to OH.
 
@@ -324,7 +324,7 @@ The list entry of the user with <id> will not have the tag anymore.
 
 ![untag.png](images/user-guide/untag.png)
 
-## 2.8 Editing A Contact: `edit`
+## 2.8 Editing A Contact : `edit`
 
 Edits an existing person in the contact list.
 
