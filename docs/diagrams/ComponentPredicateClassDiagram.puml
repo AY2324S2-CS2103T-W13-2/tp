@@ -27,7 +27,7 @@ Class Some
 }
 
 package Person {
-Class HiddenPerson #ffffff
+Class "<<enumeration>>\nComponent" as Component
 }
 
 FilterCommand --> "1..*" PredicateInterface
@@ -47,7 +47,7 @@ StringPredicate <|-- NoWord
 ExistencePredicate <|-- None
 ExistencePredicate <|-- Some
 
-Person <.left. PredicateInterface
+Component <.left. PredicateInterface
 
 class "<<interface>>\nPredicate<Person>" as Predicate
 Predicate <|.up. PredicateInterface
