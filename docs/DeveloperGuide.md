@@ -12,6 +12,8 @@ title: Developer Guide
 
 * Idea of filter syntax
   from [taskwarrior](https://github.com/GothenburgBitFactory/taskwarrior/blob/0c8edfc50e422b69abb4b78af70fc2243e227e9d/doc/man/task.1.in#L809)
+* Idea of UG navigation icons
+  from [SweetRewards User Guide](https://ay2324s2-cs2103t-t13-4.github.io/tp/UserGuide.html#14-navigating-this-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -398,6 +400,9 @@ Our TP has 5 members
 - Make `untag` delete department instead of renaming it
 - Undo/Redo compatibility for all commands
 - Help shows info for all commands (currently missing `phone`)
+- Make `delete` command handle duplicate input index correctly (currently, the action produces no output message and 
+  cannot be undone by the `undo` command)
+- Make `exit` command close all the windows related to OH (currently, only closes the app and the latest help window)
 
 --------------------------------------------------------------------------------------------------------------------
 

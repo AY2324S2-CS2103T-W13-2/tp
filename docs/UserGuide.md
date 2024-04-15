@@ -1,6 +1,6 @@
 ---
 layout: page
-title: User Guide
+title: OfficeHarbor User Guide
 ---
 
 # Welcome Message
@@ -290,11 +290,22 @@ on the currently displayed list.
 
 Deletes the specified tag from the specified contact
 
+Format: `untag <id> tag:<tag>... [tag:<tag>]... [department:<department>]`
+
 * Delete the specified tag of the person at the specified `<id>`.
 * The id refers to the index number shown in the displayed person list.
 * The id **must be a positive integer** 1, 2, 3, …
-* All the specified tags and the department (if specified) must match the ones
+* All the specified tags (if specified) must match the ones
   stored in the id.
+
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Warning about untagging department:**<br>
+`untag` currently doesn't support untagging department. Instead, it just changes the department to what you type in. 
+So unfortunately, if you want to remove a contact's department, you will have to delete the contact and add it back 
+without the department. The fix for this issue is planned for a future release.
+
+</div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -562,7 +573,7 @@ Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
 
-**:warning: Caution: <br> **
+**:warning: Caution: <br>** 
 If your changes to the data file makes its format invalid, OfficeHarbor will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the OfficeHarbor to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
