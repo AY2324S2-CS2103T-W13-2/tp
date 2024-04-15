@@ -64,7 +64,12 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        department = source.getDepartment().orElse(new Department("EmptyDep")).tagName;
+
+        if (source.getDepartment().isEmpty()) {
+            department = null;
+        } else {
+            department = source.getDepartment().get().tagName;
+        }
     }
 
     /**
@@ -112,16 +117,18 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        if (department == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Department.class.getSimpleName()));
-        }
-        if (!Department.isValidTagName(department)) {
-            throw new IllegalValueException(Department.MESSAGE_CONSTRAINTS);
-        }
-        final Department modelDepartment = new Department(department);
+        final Optional<Department> modelDepartment;
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, Optional.of(modelDepartment));
+        if (department == null) {
+            modelDepartment = Optional.empty();
+        } else {
+            if (!Department.isValidTagName(department)) {
+                throw new IllegalValueException(Department.MESSAGE_CONSTRAINTS);
+            }
+            modelDepartment = Optional.of(new Department(department));
+        }
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelDepartment);
     }
 
 }

@@ -33,7 +33,7 @@ public class UntagCommandParser implements Parser<UntagCommand> {
             department = Optional.empty();
         }
 
-        if (tags.isEmpty() && department.orElse(new Department("EMPTYDEP")).tagName.equals("EMPTYDEP")) {
+        if (tags.isEmpty() && department.isEmpty()) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
         }
