@@ -653,11 +653,10 @@ otherwise)
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should be able to handle private contact details securely.
-5. Should be able to handle a large number of contacts without consuming a large amount of memory.
-6. Should be able to handle a large number of contacts without slowing down the app.
-7. Should be able to handle a large number of contacts without losing the data.
-8. Should be able to handle a large number of contacts without losing the data even in the event of a system crash.
+5. Should be able to hold up to1000 contant details consuming a large amount of memory.
+6. Should be able to hold up to 1000 contacts without slowing down the app.
+7. Should be able to hold up to 1000 contacts without losing the data.
+8. Should be able to able to save contacts without losing the data even in the event of a system crash.
 
 ### Glossary
 

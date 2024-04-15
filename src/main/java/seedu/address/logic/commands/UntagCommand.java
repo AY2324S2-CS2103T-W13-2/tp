@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
@@ -39,6 +39,7 @@ public class UntagCommand extends Command {
      * Creates a command to delete a {@code tag} from the person at {@code index}.
      */
     public UntagCommand(Index index, Collection<Tag> tags, Optional<Department> department) {
+        requireAllNonNull(index, tags, department);
         this.index = index;
         this.tags = new HashSet<>(tags);
         this.department = department;
@@ -60,6 +61,7 @@ public class UntagCommand extends Command {
     }
 
     private Person untag(Person personToUntag) throws CommandException {
+        requireNonNull(personToUntag);
         var personTags = new HashSet<Tag>(personToUntag.getTags());
 
         validateAllTagsExist(personToUntag, personTags);
@@ -78,18 +80,6 @@ public class UntagCommand extends Command {
                 personToUntag.getAddress(),
                 personTags,
                 departmentToUntag);
-    }
-
-    private void validateDepartmentExists(Person personToUntag, Department department) throws CommandException {
-        if (!personToUntag.getDepartment().map(department::equals).orElse(false)) {
-            throw new CommandException(
-                    String.format(
-                            Messages.MESSAGE_MISSING_DEPARTMENT,
-                            personToUntag.getName(),
-                            department.tagName
-                    )
-            );
-        }
     }
 
     private void validateAllTagsExist(Person personToUntag, HashSet<Tag> personTags) throws CommandException {
