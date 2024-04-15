@@ -10,7 +10,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* Idea of filter syntax from [taskwarrior](https://github.com/GothenburgBitFactory/taskwarrior/blob/0c8edfc50e422b69abb4b78af70fc2243e227e9d/doc/man/task.1.in#L809)
+* Idea of filter syntax
+  from [taskwarrior](https://github.com/GothenburgBitFactory/taskwarrior/blob/0c8edfc50e422b69abb4b78af70fc2243e227e9d/doc/man/task.1.in#L809)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -149,7 +150,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
-Below is sequence diagram that illustrates how a `FilterCommandParser` words, taking 
+Below is sequence diagram that illustrates how a `FilterCommandParser` words, taking
 `filter name.is: Alex` call as an example.
 
 ![](images/FilterParserSequenceDiagram.png)
@@ -220,10 +221,12 @@ person when any of the predicates match.
 
 `ComponentPredicate` extracts the values of a specific component and runs its test on those values. The specific values
 it can extract and manipulate on its implementation.
+
 - `ComponentStringPredicate` can extract all values that can be treated as a string and run string matching operations.
 - `ComponentExistencePredicate` can extract all values that can be empty and check for existence (empty or not).
 
 #### Implementation of specific predicates
+
 As an example of implementation here's the `Is` class.
 
 ![Is class diagram](images/ComponentIs.png)
@@ -364,31 +367,34 @@ The `MailCommand` is a component of our application that enables users to seamle
 initiate email communication with contacts associated with specific tags.
 
 #### Functionality
-* **Purpose:** The primary purpose of the `MailCommand` is to streamline the process of initiating email communication 
-with contacts based on user-defined tags.
+
+* **Purpose:** The primary purpose of the `MailCommand` is to streamline the process of initiating email communication
+  with contacts based on user-defined tags.
 * **Execution Logic:** Upon execution, the command accepts a tag parameter from the user, filters contacts associated
-with this tag, and constructs a list of email addresses from the filtered contacts.
+  with this tag, and constructs a list of email addresses from the filtered contacts.
 * **Error Handling:** The `MailCommand` includes error handling mechanisms to address potential
-issues during execution, such as catching exceptions and notifying users of any errors encountered.
+  issues during execution, such as catching exceptions and notifying users of any errors encountered.
 
 #### Design Considerations
+
 * **Command Parameters:** The `MailCommand` defines command parameters and a usage message to guide users on how to
-utilize the command effectively.
+  utilize the command effectively.
 * **Initialization:** Upon instantiation, the `MailCommand` initializes a `TagContainsKeywordsPredicate`, which
-encapsulates the tag-based filtering logic.
+  encapsulates the tag-based filtering logic.
 * **Execution:** The command logic involves updating the filtered list of contacts in the model, constructing email
-address lists, and attempting to open the default email application using the Desktop class.
+  address lists, and attempting to open the default email application using the Desktop class.
 * **Parser Implementation:** The `MailCommandParser` is responsible for parsing user input and generating
-`MailCommand` objects with appropriate tag predicates.
+  `MailCommand` objects with appropriate tag predicates.
 * **Integration with Model:** It utilizes the `Model` interface to update the filtered list of contacts and
-ensure synchronization with the application state.
+  ensure synchronization with the application state.
 
 ## Planned Enhancements
+
 Our TP has 5 members
 
 - Logical and for filter
 - Making the command line interface uniform, i.e. having `mail` and `phone` take
-tags only prefixed with `tag:`
+  tags only prefixed with `tag:`
 - Make `untag` delete department instead of renaming it
 - Undo/Redo compatibility for all commands
 - Help shows info for all commands (currently missing `phone`)
@@ -430,6 +436,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | secretary | view the added contact list               | see the details of the added contact                   |
 | `* * *`  | secretary | add contacts to a list                    | record contact details                                 |
 | `* * *`  | secretary | remove contacts from a list               | clean up old/unused records                            |
+| `* * *`  | secretary | filter contacts from the list             | To find the pertinent information from the total data  |
 | `* *`    | secretary | tag individual contacts                   | organize the contact based on tags                     |
 | `* *`    | secretary | delete a tag of an individual contact     | make sure that the tag only is for the necessary users |
 | `*`      | secretary | mail to everyone in a department          | contact everyone in a certain department               |
@@ -437,11 +444,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user      | undo my command                           | save time on undoing the effects of a wrong command    |
 | `*`      | user      | redo my undo                              | save time on undoing the effects of a wrong undo       |
 | `*`      | user      | get help about available features quickly | get start on using the app quickly                     |
+
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is `OfficeHarbor` (OH) and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `OfficeHarbor` (OH) and the **Actor** is the `user`, unless specified
+otherwise)
 
 **UC01: View contacts**
 
@@ -464,10 +473,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a person along with details.
-2.  OH adds the person.
+1. User requests to add a person along with details.
+2. OH adds the person.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -503,22 +512,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User requests to add a tag to a specific contact in the list.
 3. OH adds the tag to the contact.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-
 * 2a. The given index is invalid.
 
-  * 2a1. OH shows an error message.
-    
-    Use case resumes at step 2.
+    * 2a1. OH shows an error message.
+
+      Use case resumes at step 2.
 
 * 2b. The given tag is empty or invalid.
 
-  * 2b. OH shows an error message.
+    * 2b. OH shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 **UC05: Deleting a tag**
 
@@ -556,10 +564,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. No command has been run since opening the app.
-  
-  * 2a1. OH shows an error message. 
 
-    Use case ends.
+    * 2a1. OH shows an error message.
+
+      Use case ends.
 
 **UC07: Redoing an Undo Command**
 
