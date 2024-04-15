@@ -355,12 +355,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ### Mail
 
 The general outline of the mail commands architecture is as follows.
@@ -388,6 +382,16 @@ address lists, and attempting to open the default email application using the De
 `MailCommand` objects with appropriate tag predicates.
 * **Integration with Model:** It utilizes the `Model` interface to update the filtered list of contacts and
 ensure synchronization with the application state.
+
+## Planned Enhancements
+Our TP has 5 members
+
+- Logical and for filter
+- Making the command line interface uniform, i.e. having `mail` and `phone` take
+tags only prefixed with `tag:`
+- Make `untag` delete department instead of renaming it
+- Undo/Redo compatibility for all commands
+- Help shows info for all commands (currently missing `phone`)
 
 --------------------------------------------------------------------------------------------------------------------
 
