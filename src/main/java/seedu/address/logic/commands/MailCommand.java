@@ -55,6 +55,7 @@ public class MailCommand extends Command {
     }
 
     private void openMailApp(String emailList) throws URISyntaxException, IOException {
+        // Cited from: https://stackoverflow.com/questions/2357895/java-open-default-mail-application-and-create-new-mail-and-populate-to-and-subj
         Desktop desktop;
         if (Desktop.isDesktopSupported()
                 && (desktop = Desktop.getDesktop()).isSupported(Desktop.Action.MAIL)) {

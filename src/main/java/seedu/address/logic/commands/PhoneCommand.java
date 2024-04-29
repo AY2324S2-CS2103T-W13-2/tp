@@ -45,7 +45,7 @@ public class PhoneCommand extends Command {
         String phoneList = model.getFilteredPersonList().stream()
                 .map(person -> person.getPhone().toString())
                 .collect(Collectors.joining(","));
-
+        // Cited from: https://stackoverflow.com/questions/6710350/copying-text-to-the-clipboard-using-java
         StringSelection stringSelection = new StringSelection(phoneList);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, null);
