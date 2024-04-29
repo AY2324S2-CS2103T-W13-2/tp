@@ -149,6 +149,11 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
+Below is sequence diagram that illustrates how a `FilterCommandParser` words, taking 
+`filter name.is: Alex` call as an example.
+
+![](images/FilterParserSequenceDiagram.png)
+
 ### Model component
 
 **API
@@ -416,17 +421,18 @@ making it easier to assign tasks or get all the emails.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​   | I want to …​                          | So that I can…​                                        |
-|----------|-----------|---------------------------------------|--------------------------------------------------------|
-| `* * *`  | secretary | view the added contact list           | see the details of the added contact                   |
-| `* * *`  | secretary | add contacts to a list                | record contact details                                 |
-| `* * *`  | secretary | remove contacts from a list           | clean up old/unused records                            |
-| `* *`    | secretary | tag individual contacts               | organize the contact based on tags                     |
-| `* *`    | secretary | delete a tag of an individual contact | make sure that the tag only is for the necessary users |
-| `*`      | user      | undo my command                       | save time on undoing the effects of a wrong command    |
-| `*`      | user      | redo my undo                          | save time on undoing the effects of a wrong undo       |
-| `*`      | user      | mail to everyone in a department      | contact everyone in a certain department               |
-| `*`      | user      | message everyone in a department      | contact everyone in a certain department               |
+| Priority | As a …​   | I want to …​                              | So that I can…​                                        |
+|----------|-----------|-------------------------------------------|--------------------------------------------------------|
+| `* * *`  | secretary | view the added contact list               | see the details of the added contact                   |
+| `* * *`  | secretary | add contacts to a list                    | record contact details                                 |
+| `* * *`  | secretary | remove contacts from a list               | clean up old/unused records                            |
+| `* *`    | secretary | tag individual contacts                   | organize the contact based on tags                     |
+| `* *`    | secretary | delete a tag of an individual contact     | make sure that the tag only is for the necessary users |
+| `*`      | secretary | mail to everyone in a department          | contact everyone in a certain department               |
+| `*`      | secretary | message everyone in a department          | contact everyone in a certain department               |
+| `*`      | user      | undo my command                           | save time on undoing the effects of a wrong command    |
+| `*`      | user      | redo my undo                              | save time on undoing the effects of a wrong undo       |
+| `*`      | user      | get help about available features quickly | get start on using the app quickly                     |
 *{More to be added}*
 
 ### Use cases
@@ -606,6 +612,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 *{More to be added}*
+
+**UC10: Getting help**
+
+**MSS**
+
+1. User requests for a general help.
+2. OH shows a quick summary of all the available features.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User requests for a specific help on a feature.
+
+    * 1a1. OH shows detailed information about the specified feature.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
